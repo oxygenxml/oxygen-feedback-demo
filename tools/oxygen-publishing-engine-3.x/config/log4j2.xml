@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+  <Appenders>
+    <Console name="CONSOLE" target="SYSTEM_OUT">
+      <!--<PatternLayout pattern="%-4r %-5p [%t] %37c %3x -%m%n"/>-->
+      <PatternLayout pattern="[%p] %m%n"/>
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="org.apache.fop.fonts.truetype.TTFFile" level="warn"/>
+    <Logger name="org.apache.fop.apps.FOUserAgent" level="error"/>
+    <Logger name="org.apache.fop.complexscripts.fonts.GlyphCoverageTable" level="warn"/>
+    <Logger name="org.apache.fop.apps.FopFactoryConfigurator" level="warn"/>
+    
+    <Root level="info">
+      <AppenderRef ref="CONSOLE"/>
+    </Root>
+  </Loggers>
+</Configuration>

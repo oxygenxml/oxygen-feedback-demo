@@ -1,0 +1,120 @@
+// main: material.less
+/* Font */
+@fontFamily: "Roboto";
+@availableFontWeights: "300,400,700";
+@fontUrl: "https://fonts.googleapis.com/css?family=@{fontFamily}:@{availableFontWeights}";
+
+/* Theme colors */
+@themeColor: #4E86D3;
+@themeLightColor: #99D7F6;
+@contentColor: #4D4F5C;
+@linkColor: lighten(@themeColor, 10%);
+@contentBgr: #f0f0f7;
+@headerColor: @contentColor;
+@headerBgr: #ffffff;
+@textBgr: #ffffff;
+
+
+@publicationTitleColor: @headerColor;
+
+/* Footer */
+@footerBgr: @contentColor;
+@footerColor: @contentBgr;
+@footerLinkColor: @linkColor;
+
+/* Menus */
+@menuBgr: @headerBgr;
+@menuColor: @themeColor;
+@hoveredMenuBgr: @contentBgr;
+@hoveredMenuColor: @themeColor;
+
+@submenuBgr: @headerBgr;
+@submenuColor: @contentColor;
+@hoveredSubmenuColor: @themeColor;
+@hoveredSubmenuBgr: @textBgr;
+
+@mobileMenuToggleColor: @themeColor;
+@mobileMenuToggleBgr: @themeLightColor;
+
+/* Indexterms link */
+@indextermsLinkCol: @headerColor;
+
+/* Main page content area */
+
+@mainPageContentColor: @themeColor;
+@mainPageContentBgr: transparent;
+
+.mainPageBgr {
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.mainPageContentAreaBgr {
+  background-color: @mainPageContentBgr;
+}
+
+/* Search area */
+@searchBgr: transparent;
+
+
+@searchFieldBorderColor: @themeLightColor;
+@searchFieldColor: @contentColor;
+@searchFieldBgr: transparent;
+@searchFieldBorderRadius: 4px;
+@searchButtonHoverColor: transparent;
+@searchRelativePathColor: #666;
+
+/* Tiles */
+@tileTitleColor: @mainPageContentColor;
+@tileShortDescColor: @linkColor;
+
+/* TOC */
+@tocEntryBgr: @mainPageContentBgr;
+@tocEntryColor: @mainPageContentColor;
+@tocShortDescColor: @linkColor;
+
+@tocEntryHoverColor: @themeColor;
+@tocEntryHoverBgr: @themeLightColor;
+
+@tocBorderColor: @themeLightColor;
+
+/* Breadcrumb */
+@breadcrumbColor: @contentColor;
+@breadcrumbActiveLinkColor: @linkColor;
+@breadcrumbBorderColor: @themeLightColor;
+@breadcrumbBgr: @textBgr;
+
+
+/* Publication TOC */
+@sideTocBorderColor: @themeLightColor;
+@sideTocBgr: @textBgr;
+@sideTocColor: @linkColor;
+
+/* Tooltip */
+@tooltipBgr: @contentColor;
+@tooltipColor: @themeLightColor;
+
+/* Topic content */
+
+@titleColor: @contentColor;
+@subtitleColor: lighten(@titleColor, 30%);
+@subTitleBorderColor: @themeLightColor;
+@topicContentColor: @contentColor;
+@topicContentBgr: @textBgr;
+
+/* Related links & child links*/
+@relLinksBgr: transparent;
+@relLinksBorderColor: @themeLightColor;
+
+/* Search results */
+@searchExpressionColor: @themeColor;
+@searchResultLinkColor: @linkColor;
+@searchTermHighlightBgr: @themeColor;
+@searchTermHighlightColor: @themeLightColor;
+
+/* Index terms */
+@indexTermFirstLetterColor: @themeColor;
+@indexTermColor: @contentColor;
+@indexTermGroupBorderColor: @themeLightColor;
+@indexTermGroupBgr: @themeLightColor;

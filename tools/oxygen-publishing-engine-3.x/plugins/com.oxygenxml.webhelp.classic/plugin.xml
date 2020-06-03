@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Oxygen WebHelp Plugin for DITA-OT 2.0 or newer.
+
+Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+
+-->
+<!DOCTYPE plugin[
+ <!ENTITY commons SYSTEM 'plugin_commons.xml'>
+]>
+<plugin id="com.oxygenxml.webhelp.classic">
+  <require plugin="org.dita.html5"/>
+  <require plugin="com.oxygenxml.common"/>
+  
+  &commons;
+  <feature extension="com.oxygenxml.classic.main.target.dependencies" value="build-init, 
+    check-license, 
+    check-webhelp-feedback-parameters,
+    dita.map.webhelp.init, 
+    preprocess,
+    html5.init,
+    html5.image-metadata,
+    dita.out.map.webhelp.toc,
+    dita.webhelp.sitemap.xml,
+    copy-webhelp-resources,
+    html5.css, 
+    dita.topics.html.common, 
+    webhelp-indexterms, 	                       
+    dita.inner.topics.webhelp,
+    create-main-files,
+    copy-webhelp-feedback-localization,
+    webhelp-index" type="text"/>
+</plugin>

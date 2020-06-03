@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  
+  Generated file! 
+  
+  This file contains the targets that are marked with <?convert_2x?> from the 
+  main build_dita_template.xml file.
+  
+  For DITA OT 3.x the XSLT task calls are wrapped in a "pipeline" element. 
+  Using this element in DITA OT 2.x makes the Dost XsltModule implementation throw 
+  a NPE when using @in and @out attributes.
+  
+  This file contains the rewritten targets: the XSLT task withuot the "pipeline" 
+  element around them, adds attributes like @processor, @force, @classpath, and 
+  the "factory" element.   
+  
+  
+  --><project name="webhelp.classic.integrator.2x" default="dita2webhelp" basedir=".">
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="process.reviews.2x" unless="dot3x">
+		
+	    <echo>Transforming Oxygen PIs into elements.</echo>
+		<xslt basedir="${dita.temp.dir}" destdir="${dita.temp.dir}.1" includesfile="${dita.temp.dir}/${fullditatopicfile}" style="${dita.plugin.com.oxygenxml.webhelp.classic.dir}/xsl/review/review-pis-to-elements.xsl" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax" classpathref="dost.class.path">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if:set="resourceonlyfile"/>
+<includesfile name="${dita.temp.dir}/${chunkedtopicfile}" if:set="chunkedtopicfile"/>
+<param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
+<xmlcatalog refid="dita.catalog"/>
+<mapper type="identity"/>
+</xslt>	    
+
+	    <echo>Grouping comments into threads.</echo>
+		<xslt basedir="${dita.temp.dir}.1" destdir="${dita.temp.dir}" includesfile="${dita.temp.dir}/${fullditatopicfile}" style="${dita.plugin.com.oxygenxml.webhelp.classic.dir}/xsl/review/review-group-replies.xsl" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax" classpathref="dost.class.path">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if:set="resourceonlyfile"/>
+<includesfile name="${dita.temp.dir}/${chunkedtopicfile}" if:set="chunkedtopicfile"/>
+<param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
+<xmlcatalog refid="dita.catalog"/>
+<mapper type="identity"/>
+</xslt>  
+	</target>
+    
+    
+    </project>

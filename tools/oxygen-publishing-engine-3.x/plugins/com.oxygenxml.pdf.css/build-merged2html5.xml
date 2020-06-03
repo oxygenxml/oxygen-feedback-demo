@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+
+Applies the XSL transformation to get html5 from the merged map.
+
+--><project xmlns:if="ant:if" basedir=".">
+
+	<target name="pdf-css.merged-to-html5">
+		<!-- Figure title placement. May come as argument. -->
+		<property name="figure.title.placement" value="top"/>
+		<!-- Table title placement. May come as argument. -->
+		<property name="table.title.placement" value="top"/>
+		<!-- Table title repeat. May come as argument. -->
+		<property name="table.title.repeat" value="yes"/>
+		<antcall target="pdf-css.merged-to-html5.x"/>
+		<copy file="${mh5.html.file}" tofile="${dita.map.output.dir}/${outputFile.base}.merged.html" force="true"/>
+	</target>
+
+	<target name="pdf-css.merged-to-html5.x" depends="pdf-css.merged-to-html5.2x, pdf-css.merged-to-html5.3x"/>
+
+	<target name="pdf-css.merged-to-html5.2x" unless="dot3x">
+		<!-- Should be the same as for 3x. -->
+		<xslt in="${mh5.dita.file}" out="${mh5.html.file}" style="${mh5.xsl.file}">
+			<xmlcatalog>
+				<catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+				<catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+			</xmlcatalog>
+			<param name="DRAFT" expression="${args.draft}" if:set="args.draft"/>
+			<param name="html5.css.links" expression="${html5.css.links}"/>
+			<param name="figure.title.placement" expression="${figure.title.placement}"/>
+			<param name="table.title.placement" expression="${table.title.placement}"/>
+			<param name="table.title.repeat" expression="${table.title.repeat}"/>
+			<param name="GENERATE-TASK-LABELS" expression="${args.gen.task.lbl}" if:set="args.gen.task.lbl"/>
+			
+    <param xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" name="com.oxygenxml.xhtml.linkToMediaResources" expression="${com.oxygenxml.xhtml.linkToMediaResources}" if:set="com.oxygenxml.xhtml.linkToMediaResources"/>
+    <param name="ditaTempDir" expression="${dita.temp.dir}"/>
+
+		</xslt>
+	</target>
+
+	<target name="pdf-css.merged-to-html5.3x" if="dot3x">
+		<!-- Should be the same as for 2x. -->
+		<pipeline message="Process the merged map to html5" taskname="m2h">
+			<xslt in="${mh5.dita.file}" out="${mh5.html.file}" style="${mh5.xsl.file}">
+				<xmlcatalog>
+					<catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+                    <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+				</xmlcatalog>
+				<param name="DRAFT" expression="${args.draft}" if:set="args.draft"/>
+				<param name="html5.css.links" expression="${html5.css.links}"/>
+				<param name="figure.title.placement" expression="${figure.title.placement}"/>
+				<param name="table.title.placement" expression="${table.title.placement}"/>
+				<param name="table.title.repeat" expression="${table.title.repeat}"/>
+				<param name="GENERATE-TASK-LABELS" expression="${args.gen.task.lbl}" if:set="args.gen.task.lbl"/>
+				
+    <param xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" name="com.oxygenxml.xhtml.linkToMediaResources" expression="${com.oxygenxml.xhtml.linkToMediaResources}" if:set="com.oxygenxml.xhtml.linkToMediaResources"/>
+    <param name="ditaTempDir" expression="${dita.temp.dir}"/>
+
+			</xslt>
+		</pipeline>
+	</target>
+
+</project>

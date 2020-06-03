@@ -1,0 +1,72 @@
+/*
+ * =====================================================
+ * 
+ * Defines the images resolution, scaling, size.
+ * 
+ * =====================================================
+ */
+
+
+*[class ~= "topic/image"] {
+    prince-image-resolution: 120dpi;
+    -ah-image-resolution: 120dpi;
+    image-resolution: 120dpi;
+    max-width: 100%;         
+}
+
+/*
+ The units are optional (default is pixels). 
+*/
+*[class~="topic/image"][width]  { width:  attr(width, px);  }    
+*[class~="topic/image"][width*='pc'],
+*[class~="topic/image"][width*='pt'],
+*[class~="topic/image"][width*='px'],
+*[class~="topic/image"][width*='mm'],
+*[class~="topic/image"][width*='cm'],
+*[class~="topic/image"][width*='in'],
+*[class~="topic/image"][width*='em'] { 
+	width:  attr(width);  
+}
+
+*[class~="topic/image"][height]  { height:  attr(height, px);  }    
+*[class~="topic/image"][height*='pc'],
+*[class~="topic/image"][height*='pt'],
+*[class~="topic/image"][height*='px'],
+*[class~="topic/image"][height*='mm'],
+*[class~="topic/image"][height*='cm'],
+*[class~="topic/image"][height*='in'],
+*[class~="topic/image"][height*='em'] { 
+	height:  attr(height);  
+}
+
+*[class~="topic/fig"] {
+  counter-increment: figcount;
+}
+
+
+/*
+ Keep the figure caption on the same page with the image, for HTML5 output, for the images
+ with placement break.
+*/
+
+/* figure title placement top */
+figure > figcaption + br {
+	page-break-before:avoid;
+}
+figure > figcaption + br + img[placement='break']{
+	page-break-before:avoid;
+}
+
+
+/* figure title placement bottom */
+figure > br + img[placement='break'] + br {
+	page-break-before:avoid;
+}
+figure > br + img[placement='break'] + br + figcaption {
+	page-break-before:avoid;
+}
+
+img[placement='break'] {
+	display:block;
+}
+

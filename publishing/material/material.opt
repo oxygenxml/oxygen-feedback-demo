@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<publishing-template>
+    <name>Material</name>
+    
+    <webhelp>
+        <tags>
+            <tag type="layout">tiles</tag>
+            <tag type="color">light</tag>
+        </tags>
+        <preview-image file="preview.png"/>
+        <resources>
+            <!-- Main CSS file -->
+            <css file="material.css"/>
+            <!-- Images -->
+            <logo file="resources/logo.png"/>
+            <favicon file="resources/favicon.png"/>
+            <fileset>
+                <include name="resources/**/*"/>
+                <exclude name="resources/**/*.svn"/>
+                <exclude name="resources/**/*.git"/>
+            </fileset>
+        </resources>
+        <html-fragments>
+            <fragment file="feedback-fragment.xml" placeholder="webhelp.fragment.feedback"/>
+        </html-fragments>
+        <xslt>
+            <extension file="xsl/move-search-in-header.xsl" id="com.oxygenxml.webhelp.xsl.createMainPage"/>
+            <extension file="xsl/move-search-in-header.xsl" id="com.oxygenxml.webhelp.xsl.dita2webhelp"/>
+            <extension file="xsl/move-search-in-header.xsl" id="com.oxygenxml.webhelp.xsl.createSearchPage"/>
+            <extension file="xsl/move-search-in-header.xsl" id="com.oxygenxml.webhelp.xsl.createIndexTermsPage"/>
+        </xslt>
+        <parameters>
+            <parameter name="webhelp.show.main.page.tiles" value="yes"/>
+            <parameter name="webhelp.show.main.page.toc" value="no"/>
+            <parameter name="webhelp.top.menu.depth" value="3"/>
+        </parameters>
+    </webhelp>
+</publishing-template>

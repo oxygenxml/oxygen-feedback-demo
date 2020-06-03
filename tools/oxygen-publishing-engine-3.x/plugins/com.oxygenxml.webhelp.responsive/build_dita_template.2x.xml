@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+  
+  Generated file! 
+  
+  This file contains the targets that are marked with <?convert_2x?> from the 
+  main build_dita_template.xml file.
+  
+  For DITA OT 3.x the XSLT task calls are wrapped in a "pipeline" element. 
+  Using this element in DITA OT 2.x makes the Dost XsltModule implementation throw 
+  a NPE when using @in and @out attributes.
+  
+  This file contains the rewritten targets: the XSLT task withuot the "pipeline" 
+  element around them, adds attributes like @processor, @force, @classpath, and 
+  the "factory" element.   
+  
+  
+  --><project name="webhelp.responsive.integrator.2x" default="dita2webhelp-responsive" basedir=".">
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-create-props-file.2x" unless="dot3x">
+   	
+    <touch file="${webhelp.responsive.parameters.file}" mkdirs="true"/>
+    <echoproperties destfile="${webhelp.responsive.parameters.file}" format="xml"/>
+    
+    <!-- URL to the XML file that lists all the available properties -->
+    <makeurl property="webhelp.responsive.parameters.file.url" file="${webhelp.responsive.parameters.file}"/>
+    
+    <!-- Convert the properties XML file to JSON -->
+    <property name="properties.json.file" value="${output.dir}/oxygen-webhelp/app/options/properties.js"/>
+  	<xslt in="${webhelp.responsive.parameters.file}" out="${properties.json.file}" style="${webhelp.responsive.dir}/xsl/options/jsonProperties.xsl" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax" classpathref="dost.class.path">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-collect-indexterms.2x" description="Build list of index terms" unless="dot3x">
+   	
+    <property name="args.extract.indexterms.xsl" value="${webhelp.responsive.dir}/xsl/indexterms/extractIndexterms.xsl"/>
+    <makeurl property="dita.temp.dir.url" file="${dita.temp.dir}"/>
+  	<xslt basedir="${dita.temp.dir}" destdir="${dita.temp.dir}" includesfile="${dita.temp.dir}/${fullditatopicfile}" excludesfile="${dita.temp.dir}/${resourceonlyfile}" style="${args.extract.indexterms.xsl}" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="TEMPFOLDER" expression="${dita.temp.dir.url}"/>
+<param name="OUT_EXT" expression="${out.ext}"/>
+<mapper type="regexp" from="^(.*?)$$" to="\1.indexterms"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>   
+    
+  	<xslt in="${dita.temp.dir}/${user.input.file}" out="${output.dir}/index.xml" style="${webhelp.responsive.dir}/xsl/indexterms/collectIndexterms.xsl" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="TEMPFOLDER" expression="${dita.temp.dir}"/>
+<param name="FILELIST" expression="${dita.temp.dir}/${fullditatopicfile}"/>
+<param name="FILELIST_TO_EXCLUDE" expression="${dita.temp.dir}/${resourceonlyfile}"/>
+<param name="FILELIST_ENCODING" expression="${file.encoding}"/>
+<param name="INDEXTERMS_PROPERTIES_URL" expression="${indexterms.properties.url}"/>
+<param name="WEBHELP_PARAMETERS_URL" expression="${webhelp.responsive.parameters.file.url}"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+    
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-process-reviews.2x" unless="dot3x">
+	
+    <echo>Transforming Oxygen PIs into elements.</echo>
+
+  	<xslt basedir="${dita.temp.dir}" destdir="${dita.temp.dir}.1" includesfile="${dita.temp.dir}/${fullditatopicfile}" style="${dita.plugin.com.oxygenxml.webhelp.responsive.dir}/xsl/review/review-pis-to-elements.xsl" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax" classpathref="dost.class.path">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if:set="resourceonlyfile"/>
+<includesfile name="${dita.temp.dir}/${chunkedtopicfile}" if:set="chunkedtopicfile"/>
+<param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+<mapper type="identity"/>
+</xslt>
+
+
+    <echo>Grouping comments into threads.</echo>
+
+  	<xslt basedir="${dita.temp.dir}.1" destdir="${dita.temp.dir}" includesfile="${dita.temp.dir}/${fullditatopicfile}" style="${dita.plugin.com.oxygenxml.webhelp.responsive.dir}/xsl/review/review-group-replies.xsl" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax" classpathref="dost.class.path">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if:set="resourceonlyfile"/>
+<includesfile name="${dita.temp.dir}/${chunkedtopicfile}" if:set="chunkedtopicfile"/>
+<param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+<mapper type="identity"/>
+</xslt>
+  	
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-create-main-page.2x" unless="dot3x">
+	
+    <property name="args.whr.create.main.page.xsl" value="${webhelp.responsive.dir}/xsl/mainFiles/createMainPage.xsl"/>
+	<xslt in="${webhelp.template.index.file}" out="${output.dir}/index${out.ext}" style="${args.whr.create.main.page.xsl}" classpathref="dost.class.path" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="TOC_XML_FILEPATH" expression="${output.dir}/toc.xml"/>
+<param name="XHTML_FOLDER" expression="${output.dir}"/>
+<param name="OUTPUTDIR" expression="${output.dir}"/>
+<param name="BASEDIR" expression="${webhelp.responsive.dir}"/>
+<param name="OUTEXT" expression="${out.ext}" if:set="out.ext"/>
+<param name="DEFAULTLANG" expression="${webhelp.language}" if:set="webhelp.language"/>
+<param name="CSS" expression="${args.css.file}" if:set="args.css.file"/>
+<param name="CSSPATH" expression="${user.csspath}" if:set="user.csspath"/>
+<param name="WEBHELP_LOGO_IMAGE" expression="${webhelp.logo.image.output}" if:set="webhelp.logo.image.output"/>
+<param name="WEBHELP_LOGO_IMAGE_TARGET_URL" expression="${webhelp.logo.image.target.url}" if:set="webhelp.logo.image.target.url"/>
+<param name="WEBHELP_FAVICON" expression="${webhelp.favicon.relpath}" if:set="webhelp.favicon.relpath"/>
+<param name="WEBHELP_SEARCH_RANKING" expression="${webhelp.search.ranking}" if:set="webhelp.search.ranking"/>
+<param name="WEBHELP_SEARCH_SCRIPT" expression="${webhelp.google.search.script.url}" if:set="webhelp.google.search.script.url"/>
+<param name="WEBHELP_SEARCH_RESULT" expression="${webhelp.google.search.results.url}" if:set="webhelp.google.search.results.url"/>
+<param name="WEBHELP_VERSION" expression="${webhelp.version}" if:set="webhelp.version"/>
+<param name="WEBHELP_BUILD_NUMBER" expression="${webhelp.build.number}" if:set="webhelp.build.number"/>
+<param name="WEBHELP_TRIAL_LICENSE" expression="${webhelp.trial.license}" if:set="webhelp.trial.license"/>
+<param name="WEBHELP_DITAMAP_URL" expression="${org.dita-ot.html.map.url}"/>
+<param name="WEBHELP_PARAMETERS_URL" expression="${webhelp.responsive.parameters.file.url}"/>
+<param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
+<param name="WEBHELP_TOP_MENU_TEMP_FILE_URL" expression="${webhelp.top.menu.temp.file.url}"/>
+<dita:extension id="com.oxygenxml.webhelp.xsl.createMainPage.param" behavior="org.dita.dost.platform.InsertAction"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+		
+    <replaceregexp file="${output.dir}/index${out.ext}" match="&lt;\?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;\?&gt;" replace="" encoding="UTF-8"/>
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-create-search-page.2x" unless="dot3x">    
+  	
+    <property name="args.whr.create.search.page.xsl" value="${webhelp.responsive.dir}/xsl/mainFiles/createSearchPage.xsl"/>
+    <xslt in="${webhelp.template.search.file}" out="${output.dir}/search${out.ext}" style="${args.whr.create.search.page.xsl}" classpathref="dost.class.path" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="TOC_XML_FILEPATH" expression="${output.dir}/toc.xml"/>
+<param name="INDEX_XML_FILEPATH" expression="${output.dir}/index.xml"/>
+<param name="XHTML_FOLDER" expression="${output.dir}"/>
+<param name="OUTPUTDIR" expression="${output.dir}"/>
+<param name="BASEDIR" expression="${webhelp.responsive.dir}"/>
+<param name="OUTEXT" expression="${out.ext}" if:set="out.ext"/>
+<param name="DEFAULTLANG" expression="${webhelp.language}" if:set="webhelp.language"/>
+<param name="CSS" expression="${args.css.file}" if:set="args.css.file"/>
+<param name="CSSPATH" expression="${user.csspath}" if:set="user.csspath"/>
+<param name="WEBHELP_LOGO_IMAGE" expression="${webhelp.logo.image.output}" if:set="webhelp.logo.image.output"/>
+<param name="WEBHELP_LOGO_IMAGE_TARGET_URL" expression="${webhelp.logo.image.target.url}" if:set="webhelp.logo.image.target.url"/>
+<param name="WEBHELP_FAVICON" expression="${webhelp.favicon.relpath}" if:set="webhelp.favicon.relpath"/>
+<param name="WEBHELP_SEARCH_RANKING" expression="${webhelp.search.ranking}" if:set="webhelp.search.ranking"/>
+<param name="WEBHELP_SEARCH_SCRIPT" expression="${webhelp.google.search.script.url}" if:set="webhelp.google.search.script.url"/>
+<param name="WEBHELP_SEARCH_RESULT" expression="${webhelp.google.search.results.url}" if:set="webhelp.google.search.results.url"/>
+<param name="WEBHELP_VERSION" expression="${webhelp.version}" if:set="webhelp.version"/>
+<param name="WEBHELP_BUILD_NUMBER" expression="${webhelp.build.number}" if:set="webhelp.build.number"/>
+<param name="WEBHELP_TRIAL_LICENSE" expression="${webhelp.trial.license}" if:set="webhelp.trial.license"/>
+<param name="WEBHELP_DITAMAP_URL" expression="${org.dita-ot.html.map.url}"/>
+<param name="WEBHELP_PARAMETERS_URL" expression="${webhelp.responsive.parameters.file.url}"/>
+<param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
+<param name="WEBHELP_TOP_MENU_TEMP_FILE_URL" expression="${webhelp.top.menu.temp.file.url}"/>
+<dita:extension id="com.oxygenxml.webhelp.xsl.createSearchPage.param" behavior="org.dita.dost.platform.InsertAction"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-create-indexterms-page.2x" unless="dot3x">
+	
+    <property name="args.whr.create.indexterms.page.xsl" value="${webhelp.responsive.dir}/xsl/mainFiles/createIndextermsPage.xsl"/>
+  	<xslt in="${webhelp.template.index.terms.file}" out="${output.dir}/indexTerms${out.ext}" style="${args.whr.create.indexterms.page.xsl}" force="yes" processor="trax" classpathref="dost.class.path">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="TOC_XML_FILEPATH" expression="${output.dir}/toc.xml"/>
+<param name="INDEX_XML_FILEPATH" expression="${output.dir}/index.xml"/>
+<param name="XHTML_FOLDER" expression="${output.dir}"/>
+<param name="OUTPUTDIR" expression="${output.dir}"/>
+<param name="BASEDIR" expression="${webhelp.responsive.dir}"/>
+<param name="OUTEXT" expression="${out.ext}" if:set="out.ext"/>
+<param name="DEFAULTLANG" expression="${webhelp.language}" if:set="webhelp.language"/>
+<param name="CSS" expression="${args.css.file}" if:set="args.css.file"/>
+<param name="CSSPATH" expression="${user.csspath}" if:set="user.csspath"/>
+<param name="WEBHELP_LOGO_IMAGE" expression="${webhelp.logo.image.output}" if:set="webhelp.logo.image.output"/>
+<param name="WEBHELP_LOGO_IMAGE_TARGET_URL" expression="${webhelp.logo.image.target.url}" if:set="webhelp.logo.image.target.url"/>
+<param name="WEBHELP_FAVICON" expression="${webhelp.favicon.relpath}" if:set="webhelp.favicon.relpath"/>
+<param name="WEBHELP_SEARCH_RANKING" expression="${webhelp.search.ranking}" if:set="webhelp.search.ranking"/>
+<param name="WEBHELP_SEARCH_SCRIPT" expression="${webhelp.google.search.script.url}" if:set="webhelp.google.search.script.url"/>
+<param name="WEBHELP_SEARCH_RESULT" expression="${webhelp.google.search.results.url}" if:set="webhelp.google.search.results.url"/>
+<param name="WEBHELP_VERSION" expression="${webhelp.version}" if:set="webhelp.version"/>
+<param name="WEBHELP_BUILD_NUMBER" expression="${webhelp.build.number}" if:set="webhelp.build.number"/>
+<param name="WEBHELP_TRIAL_LICENSE" expression="${webhelp.trial.license}" if:set="webhelp.trial.license"/>
+<param name="WEBHELP_DITAMAP_URL" expression="${org.dita-ot.html.map.url}"/>
+<param name="WEBHELP_PARAMETERS_URL" expression="${webhelp.responsive.parameters.file.url}"/>
+<param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
+<param name="WEBHELP_TOP_MENU_TEMP_FILE_URL" expression="${webhelp.top.menu.temp.file.url}"/>
+<dita:extension id="com.oxygenxml.webhelp.xsl.createIndexTermsPage.param" behavior="org.dita.dost.platform.InsertAction"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+    
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-create-localization-files.2x" unless="dot3x">    
+	    
+    <property name="strings.list.file" value="${webhelp.responsive.dir}/oxygen-webhelp/resources/localization/strings.xml"/>
+    <available file="${dita.dir}/resources/plugins.xml" property="DITA_OT_PLUGINS_FILE_PATH" value="${dita.dir}/resources/plugins.xml"/>
+    <available file="${dita.dir}/config/plugins.xml" property="DITA_OT_PLUGINS_FILE_PATH" value="${dita.dir}/config/plugins.xml"/>
+	<xslt in="${strings.list.file}" style="${webhelp.responsive.dir}/xsl/mainFiles/createLocalizationFiles.xsl" out="${dita.temp.dir}/dummy.html" classpathref="dost.class.path" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="TOC_XML_FILEPATH" expression="${output.dir}/toc.xml"/>
+<param name="INDEX_XML_FILEPATH" expression="${output.dir}/index.xml"/>
+<param name="XHTML_FOLDER" expression="${output.dir}"/>
+<param name="OUTPUTDIR" expression="${output.dir}"/>
+<param name="BASEDIR" expression="${webhelp.responsive.dir}"/>
+<param name="OUTEXT" expression="${out.ext}" if:set="out.ext"/>
+<param name="DEFAULTLANG" expression="${webhelp.language}" if:set="webhelp.language"/>
+<param name="CSS" expression="${args.css.file}" if:set="args.css.file"/>
+<param name="CSSPATH" expression="${user.csspath}" if:set="user.csspath"/>
+<param name="DITA_OT_PLUGINS_FILE_PATH" expression="${DITA_OT_PLUGINS_FILE_PATH}"/>
+<param name="WEBHELP_LOGO_IMAGE" expression="${webhelp.logo.image.output}" if:set="webhelp.logo.image.output"/>
+<param name="WEBHELP_LOGO_IMAGE_TARGET_URL" expression="${webhelp.logo.image.target.url}" if:set="webhelp.logo.image.target.url"/>
+<param name="WEBHELP_FAVICON" expression="${webhelp.favicon.relpath}" if:set="webhelp.favicon.relpath"/>
+<param name="WEBHELP_SEARCH_RANKING" expression="${webhelp.search.ranking}" if:set="webhelp.search.ranking"/>
+<param name="WEBHELP_SEARCH_SCRIPT" expression="${webhelp.google.search.script.url}" if:set="webhelp.google.search.script.url"/>
+<param name="WEBHELP_SEARCH_RESULT" expression="${webhelp.google.search.results.url}" if:set="webhelp.google.search.results.url"/>
+<param name="WEBHELP_VERSION" expression="${webhelp.version}" if:set="webhelp.version"/>
+<param name="WEBHELP_BUILD_NUMBER" expression="${webhelp.build.number}" if:set="webhelp.build.number"/>
+<param name="WEBHELP_TRIAL_LICENSE" expression="${webhelp.trial.license}" if:set="webhelp.trial.license"/>
+<param name="WEBHELP_FEEDBACK_ENABLED" expression="${webhelp.feedback.enabled}" if:set="webhelp.feedback.enabled"/>
+<param name="WEBHELP_DITAMAP_URL" expression="${org.dita-ot.html.map.url}"/>
+<param name="WEBHELP_PARAMETERS_URL" expression="${webhelp.responsive.parameters.file.url}"/>
+<param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
+<dita:extension id="com.oxygenxml.webhelp.xsl.createMainFiles.param" behavior="org.dita.dost.platform.InsertAction"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+		
+    <delete dir="${dita.temp.dir}">
+      <include name="dummy.html"/>
+    </delete>
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-context-help-map.2x" unless="dot3x">
+   	
+    <!-- Create context-help-map.xml -->
+   	<xslt in="${dita.temp.dir}/${user.input.file}" out="${output.dir}/context-help-map.xml" style="${webhelp.responsive.dir}/xsl/contextHelp/contextHelpMapDita.xsl" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="OUT_EXT" expression="${out.ext}"/>
+<param name="WEBHELP_PRODUCT_ID" expression="${webhelp.product.id}" if:set="webhelp.product.id"/>
+<param name="WEBHELP_PRODUCT_VERSION" expression="${webhelp.product.version}" if:set="webhelp.product.version"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+    
+    <!-- Create context-help-map.js -->
+   	<xslt in="${output.dir}/context-help-map.xml" out="${output.dir}/oxygen-webhelp/app/context-help/context-help-map.js" style="${webhelp.responsive.dir}/xsl/contextHelp/contextHelpMapDitaJS.xsl" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+    
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-toc-xml.2x" unless="dot3x">
+	
+    <makeurl file="${dita.input.valfile}" property="dita.input.valfile.url" validate="no"/>
+
+    <makeurl file="${dita.temp.dir}" property="dita.temp.dir.url"/>
+
+    <property name="args.whr.createTocXML.xsl" value="${webhelp.responsive.dir}/xsl/navLinks/tocDita.xsl"/>
+  	<xslt in="${dita.temp.dir}/${user.input.file}" out="${output.dir}/toc.xml" style="${args.whr.createTocXML.xsl}" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="OUT_EXT" expression="${out.ext}"/>
+<param name="FILTERFILE" expression="${dita.input.valfile.url}" if:set="dita.input.valfile"/>
+<param name="WEBHELP_PARAMETERS_URL" expression="${webhelp.responsive.parameters.file.url}"/>
+<param name="TEMP_DIR_URL" expression="${dita.temp.dir.url}"/>
+<dita:extension id="com.oxygenxml.webhelp.xsl.createTocXML.param" behavior="org.dita.dost.platform.InsertAction"/>
+<outputproperty name="method" value="xhtml"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-nav-links.2x" unless="dot3x">
+  	
+    <makeurl file="${dita.temp.dir}" property="dita.temp.dir.url"/>
+    
+    <property name="nav.json.out.dir" value="${output.dir}/oxygen-webhelp/app/nav-links/json"/>
+    <makeurl property="nav.json.out.dir.url" file="${nav.json.out.dir}" validate="false"/>
+    
+  	<xslt in="${output.dir}/toc.xml" out="${dita.temp.dir}/navlinks-dummy.html" style="${webhelp.responsive.dir}/xsl/navLinks/navLinks.xsl" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="TEMP_DIR_URL" expression="${dita.temp.dir.url}"/>
+<param name="WEBHELP_SIDE_TOC_LINKS" expression="${webhelp.side.toc.links}" if:set="webhelp.side.toc.links"/>
+<param name="WEBHELP_PUBLICATION_TOC_LINKS" expression="${webhelp.publication.toc.links}"/>
+<param name="WEBHELP_PUBLICATION_TOC_HIDE_CHUNKED_TOPICS" expression="${webhelp.publication.toc.hide.chunked.topics}"/>
+<param name="MENU_TEMP_FILE_URI" expression="${webhelp.top.menu.temp.file.url}"/>
+<param name="WEBHELP_TOP_MENU_DEPTH" expression="${webhelp.top.menu.depth}"/>
+<param name="JSON_OUTPUT_DIR_URI" expression="${nav.json.out.dir.url}"/>
+<dita:extension id="com.oxygenxml.webhelp.xsl.createNavLinks.param" behavior="org.dita.dost.platform.InsertAction"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+    <delete file="${dita.temp.dir}/navlinks-dummy.html"/>
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-sitemap.2x" unless="dot3x">
+  	
+    <tstamp>
+      <format property="webhelp.sitemap.date" pattern="yyyy-MM-dd"/>
+    </tstamp>
+	<xslt in="${dita.temp.dir}/${user.input.file}" out="${output.dir}/sitemap.xml" style="${webhelp.responsive.dir}/xsl/search/sitemapDita.xsl" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<param name="OUT_EXT" expression="${out.ext}"/>
+<param name="WEBHELP_BASE_URL" expression="${webhelp.sitemap.base.url}" if:set="webhelp.sitemap.base.url"/>
+<param name="WEBHELP_LAST_MODIFIED" expression="${webhelp.sitemap.date}"/>
+<param name="WEBHELP_CHANGE_FREQUENCY" expression="${webhelp.sitemap.change.frequency}" if:set="webhelp.sitemap.change.frequency"/>
+<param name="WEBHELP_PRIORITY" expression="${webhelp.sitemap.priority}" if:set="webhelp.sitemap.priority"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+  </target>
+    
+    
+    
+    
+    
+    <target xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="whr-search-index-preprocess.2x" unless="dot3x">
+  	
+    <!-- Collect the topics marked with @search="no" in order to exclude them from search indexer -->
+    <property name="create.search.excludes.xsl" value="${webhelp.responsive.dir}/xsl/search/createSearchExcludesFile.xsl"/>
+    <property name="search.excludes.file" value="${dita.temp.dir}/search-excludes.txt"/>
+  	<xslt in="${dita.temp.dir}/${user.input.file}" out="${search.excludes.file}" style="${create.search.excludes.xsl}" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}" force="yes" processor="trax">
+<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+<outputproperty name="method" value="text"/>
+<outputproperty name="omit-xml-declaration" value="yes"/>
+<param name="OUT_EXTENSION" expression="${out.ext}"/>
+<xmlcatalog>
+        <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
+        <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
+      </xmlcatalog>
+</xslt>
+    <available file="${search.excludes.file}" property="search.excludes.file.exists"/>
+  </target>
+    
+    
+    </project>

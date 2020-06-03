@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    
+Oxygen WebHelp Plugin
+Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+
+-->
+<div id="wh_feedback" xmlns="http://www.w3.org/1999/xhtml">
+    <div id="cmts"><!----></div>
+    <script>
+        var webHelpType = "responsive";
+    </script>   
+</div>
