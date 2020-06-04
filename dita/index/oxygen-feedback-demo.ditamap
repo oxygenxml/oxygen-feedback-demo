@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd">
+<map>
+    <title>Oxygen Feedback Demo</title>
+    <topicref href="garage/1.0/index.html" scope="peer" format="html">
+        <topicmeta>
+            <navtitle>Garage 1.0</navtitle>
+        </topicmeta>
+    </topicref>
+    <topicref href="flowers/1.0/index.html" scope="peer" format="html">
+        <topicmeta>
+            <navtitle>Flowers 1.0</navtitle>
+        </topicmeta>
+    </topicref>
+    <topicref href="space-videos/1.0/index.html" scope="peer" format="html">
+        <topicmeta>
+            <navtitle>Space Videos 1.0</navtitle>
+        </topicmeta>
+    </topicref>
+</map>
