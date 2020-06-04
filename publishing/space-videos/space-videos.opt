@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<publishing-template>
+    <name>space-videos</name>
+    <description>Template for the space-videos DITA map.</description>
+    <webhelp>
+        <preview-image file="ashes-tiles.png"/>
+        <parameters>
+            <parameter name="webhelp.show.main.page.tiles" value="yes"/>
+            <parameter name="webhelp.show.main.page.toc" value="no"/>
+            <parameter name="webhelp.top.menu.depth" value="3"/>
+            <parameter name="args.figurelink.style" value="TITLE"/>
+            <parameter name="args.tablelink.style" value="TITLE"/>
+            <parameter name="force-unique" value="true"/>
+        </parameters>
+        <resources>
+            <css file="ashes.css"/>
+        </resources>
+        <online-preview-url>https://www.oxygenxml.com/samples/DITA-WebHelp-Responsive/tiles/ashes/</online-preview-url>
+        <tags>
+            <tag type="layout">tiles</tag>
+            <tag type="color">dark</tag>
+        </tags>
+        <html-fragments>
+            <fragment file="feedback-fragment.xml" placeholder="webhelp.fragment.feedback"/>
+        </html-fragments>
+    </webhelp>
+</publishing-template>

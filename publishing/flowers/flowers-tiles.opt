@@ -20,7 +20,9 @@
                 <exclude name="resources/**/*.git"/>
             </fileset>
         </resources>
-        
+        <html-fragments>
+            <fragment file="feedback-fragment.xml" placeholder="webhelp.fragment.feedback"/>
+        </html-fragments>
         <parameters>
             <parameter name="webhelp.show.main.page.tiles" value="yes"/>
             <parameter name="webhelp.show.main.page.toc" value="no"/>
