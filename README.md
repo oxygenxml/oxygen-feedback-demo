@@ -1,4 +1,4 @@
-# oxygen-feedback-demo
+# Oxygen Feedback demo
 
 DITA sources & published output to be used to demonstrate the features of Oxygen Feedback. 
 
