@@ -1,6 +1,10 @@
 /* Use the WebHelp main CSS */
 @import "material.css";
 
+@page front-page {
+  background-color: #99D7F6;;
+}
+
 /* Now specific rules for the print output. */
 @page :left, :right, table-of-contents:left, table-of-contents:right, chapter:left, chapter:right{
 	font-size: 10pt;
