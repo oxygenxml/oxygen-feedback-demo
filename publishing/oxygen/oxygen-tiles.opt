@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <publishing-template>
-    <name>Material</name>
+    <name>Oxygen</name>
+    
     <webhelp>
         <tags>
             <tag type="layout">tiles</tag>
+            <tag type="color">blue</tag>
             <tag type="color">light</tag>
         </tags>
-        <preview-image file="preview.png"/>
+        <preview-image file="oxygen-tiles.png"/>
+        <online-preview-url>https://www.oxygenxml.com/samples/DITA-WebHelp-Responsive/tiles/oxygen/</online-preview-url>
+        <!-- Resources like CSS, favicon, logo and others -->
         <resources>
             <!-- Main CSS file -->
-            <css file="material.css"/>
+            <css file="oxygen.css"/>
             <!-- Images -->
-            <logo file="resources/logo.png"/>
-            <favicon file="resources/favicon.png"/>
             <fileset>
                 <include name="resources/**/*"/>
                 <exclude name="resources/**/*.svn"/>
                 <exclude name="resources/**/*.git"/>
             </fileset>
         </resources>
-        <html-fragments>
-            <fragment file="feedback-fragment.xml" placeholder="webhelp.fragment.feedback"/>
-        </html-fragments>
-        <xslt>
-            <extension file="xsl/move-search-in-header.xsl" id="com.oxygenxml.webhelp.xsl.createMainPage"/>
-            <extension file="xsl/move-search-in-header.xsl" id="com.oxygenxml.webhelp.xsl.dita2webhelp"/>
-            <extension file="xsl/move-search-in-header.xsl" id="com.oxygenxml.webhelp.xsl.createSearchPage"/>
-            <extension file="xsl/move-search-in-header.xsl" id="com.oxygenxml.webhelp.xsl.createIndexTermsPage"/>
-        </xslt>
+        
         <parameters>
             <parameter name="webhelp.show.main.page.tiles" value="yes"/>
             <parameter name="webhelp.show.main.page.toc" value="no"/>
@@ -35,14 +29,14 @@
         </parameters>
     </webhelp>
     <pdf>
-        <preview-image file="preview.png"/>
-        <tags>
+    	<preview-image file="oxygen-tiles.png"/>
+    	<tags>
             <tag type="layout">tiles</tag>
             <tag type="color">blue</tag>
             <tag type="color">light</tag>
         </tags>
         <resources>
-            <css file="material-print.css"/>
+            <css file="oxygen-print.css"/>
         </resources>
     </pdf>
 </publishing-template>
