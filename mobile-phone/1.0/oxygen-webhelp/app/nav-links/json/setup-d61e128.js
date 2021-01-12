@@ -1,1 +1,0 @@
-define({"topics" : [{"title":"E-mail","shortdesc":"<p class=\"shortdesc\">Setting up your e-mail account.</p>","href":"topics\/email.html","attributes": {"data-id":"email",},"menu": {"hasChildren":true,},"tocID":"email-d61e139","next":"email-d61e139",}]});
