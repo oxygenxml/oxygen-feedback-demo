@@ -22,8 +22,8 @@ Bootstrap v4.4.1 (https://getbootstrap.com/)                                    
   - oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css 
   - oxygen-webhelp/lib/bootstrap/js/bootstrap.bundle.min.js
   
-jQuery v3.1.1 (https://jquery.org)                                              MIT License (https://jquery.org/license/)
-  - oxygen-webhelp/lib/jquery/jquery-3.4.1.min.js
+jQuery v3.5.1 (https://jquery.org)                                              MIT License (https://jquery.org/license/)
+  - oxygen-webhelp/lib/jquery/jquery-3.5.1.min.js
   
 bootpag v1.07 (http://botmonster.com/jquery-bootpag/)                           MIT License (http://www.opensource.org/licenses/mit-license.php)
   - oxygen-webhelp/lib/jquery-bootpag/jquery.bootpag.min.js
@@ -87,8 +87,8 @@ Bootstrap v4.4.1 (https://getbootstrap.com/)                                    
   - oxygen-webhelp/feedback/resources/bootstrap/css/bootstrap.min.css
   - oxygen-webhelp/feedback/resources/bootstrap/js/bootstrap.min.js
 
-jQuery v3.4.1 (https://jquery.org)                                              MIT License (https://jquery.org/license/)
-  - oxygen-webhelp/feedback/resources/js/jquery-3.4.1.min.js                 
+jQuery v3.5.1 (https://jquery.org)                                              MIT License (https://jquery.org/license/)
+  - oxygen-webhelp/feedback/resources/js/jquery-3.5.1.min.js                 
 
 Additional Third Party Code in Oxygen WebHelp Plug-In (inside Oxygen XML) distribution:
 
@@ -107,17 +107,16 @@ xsl/dita/original/relpath_util.xsl                             					Apache-2.0 (
 Additional Third Party Code in standalone Oxygen WebHelp distribution:
 
 ../com.oxygenxml.common/lib/ant-contrib-1.0b3.jar              					Apache-2.0 (see ../com.oxygenxml.common/lib/ant.LICENSE.txt)
-../com.oxygenxml.common/lib/log4j-core-2.13.0.jar                   					Apache-2.0 (see ../com.oxygenxml.common/lib/log4j.LICENSE.txt)
-../com.oxygenxml.common/lib/log4j-1.2-api-2.13.0.jar                   					Apache-2.0 (see ../com.oxygenxml.common/lib/log4j.LICENSE.txt) 
+../com.oxygenxml.common/lib/log4j-core-2.14.0.jar                   					Apache-2.0 (see ../com.oxygenxml.common/lib/log4j.LICENSE.txt)
+../com.oxygenxml.common/lib/log4j-1.2-api-2.14.0.jar                   					Apache-2.0 (see ../com.oxygenxml.common/lib/log4j.LICENSE.txt) 
 ../com.oxygenxml.common/lib/lucene-analyzers-common-4.7.2.jar   					Apache-2.0  with additional 3rd party licenses (see ../com.oxygenxml.common/lib/lucene.LICENSE.txt)     
 ../com.oxygenxml.common/lib/lucene-analyzers-kuromoji-4.7.2.jar					Apache-2.0  with additional 3rd party licenses (see ../com.oxygenxml.common/lib/lucene.LICENSE.txt)
 ../com.oxygenxml.common/lib/lucene-core-4.7.2.jar              					Apache-2.0  with additional 3rd party license (see ../com.oxygenxml.common/lib/lucene.LICENSE.txt)     
 ../com.oxygenxml.highlight/lib/xslthl-2.1.1.jar                					zlib/libpng License (see ../com.oxygenxml.highlight/lib/xslthl.LICENSE.txt)
-../com.oxygenxml.common/lib/activation-1.1.1.jar 								CDDL 1.0 (see: ../com.oxygenxml.common/lib/activation-1.1.1.jar\META-INF\LICENSE.txt)
-../com.oxygenxml.common/lib/jaxb-impl-2.3.0.1.jar 								CDDL 1.1 (see: https://javaee.github.io/glassfish/LICENSE)
-../com.oxygenxml.common/lib/jaxb-api-2.3.0.jar 									CDDL 1.1 (see: ../com.oxygenxml.common/lib/jaxb-api-2.3.0.jar\META-INF\LICENSE.txt)
-../com.oxygenxml.common/lib/jaxb-core-2.3.0.1.jar 								CDDL 1.1 (see https://javaee.github.io/glassfish/LICENSE)
-
+../com.oxygenxml.common/lib/jakarta.activation-1.2.2.jar 						EDL 1.0 (see: ../com.oxygenxml.common/lib/jakarta.activation-1.2.2.jar/META-INF/LICENSE.md)
+../com.oxygenxml.common/lib/jaxb-impl-2.3.3.jar 								EDL 1.0 (see: ../com.oxygenxml.common/lib/jaxb-impl-2.3.3/META-INF/LICENSE.md)
+../com.oxygenxml.common/lib/jakarta.xml.bind-api-2.3.3.jar 						EDL 1.1 (see: ../com.oxygenxml.common/lib/jakarta.xml.bind-api-2.3.3.jar/META-INF/LICENSE.md)
+../com.oxygenxml.common/lib/htmlcleaner-2.10.jar								BSD License (http://htmlcleaner.sourceforge.net/license.php)
 
 ========================= W3C ==================================================
 

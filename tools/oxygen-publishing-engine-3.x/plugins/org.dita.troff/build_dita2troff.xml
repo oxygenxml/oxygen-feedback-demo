@@ -6,7 +6,7 @@ Copyright 2006 IBM Corporation
 
 See the accompanying LICENSE file for applicable license.
 -->
-<project name="dita2troff">
+<project name="dita2troff" xmlns:if="ant:if">
 
   <target name="dita2troff-ast.init">
     <property name="troff-ast.xsl" location="${dita.plugin.org.dita.troff.dir}/xsl/dita2troff-ast-shell.xsl"/>
@@ -22,16 +22,16 @@ See the accompanying LICENSE file for applicable license.
 
   <target name="dita.topic.troff-ast" unless="noTopic" depends="dita2troff-ast.init"
     description="Build Troff-specific AST output from dita topics.">
+  	<pipeline>
     <xslt basedir="${dita.temp.dir}"
-      destdir="${dita.temp.dir}" includesfile="${dita.temp.dir}${file.separator}${fullditatopicfile}"
-      extension=".dita"
-      classpathref="dost.class.path"
+      destdir="${dita.temp.dir}"
       style="${troff-ast.xsl}">
-      <excludesfile name="${dita.temp.dir}${file.separator}${resourceonlyfile}" if="resourceonlyfile"/>
-        <param name="defaultLanguage" expression="${default.language}"/>
+    <ditafileset format="dita" processingRole="normal"/>
+      <param name="defaultLanguage" expression="${default.language}"/>
       <mapper type="glob" from="*" to="*.ast" />
       <xmlcatalog refid="dita.catalog"/>
     </xslt>
+   </pipeline>
     <move todir="${dita.temp.dir}">
       <fileset dir="${dita.temp.dir}" includes="**/*.ast" />
       <mapper type="glob" from="*.ast" to="*" />
@@ -40,16 +40,17 @@ See the accompanying LICENSE file for applicable license.
 
   <target name="dita.topic.troff" unless="noTopic" if="old.transform"
     description="Build troff output from dita inner and outer topics,which will adjust the directory.">
-    <xslt basedir="${dita.temp.dir}" destdir="${dita.output.dir}"
-      includesfile="${dita.temp.dir}${file.separator}${fullditatopicfile}" extension="${out.ext}"
+    <pipeline>
+    <xslt basedir="${dita.temp.dir}" destdir="${dita.output.dir}" extension="${out.ext}"
       classpathref="dost.class.path"
       style="${troff.step2.xsl}">
-      <excludesfile name="${dita.temp.dir}${file.separator}${resourceonlyfile}" if="resourceonlyfile"/>
-      <param name="OUTFORMAT" expression="${troff.outformat}" if="troff.outformat"/>
+      	 <ditafileset format="dita" processingRole="normal"/>
+      <param name="OUTFORMAT" expression="${troff.outformat}" if:set="troff.outformat"/>
       <param name="defaultLanguage" expression="${default.language}"/>
       <mapper classname="org.dita.dost.ant.types.JobMapper" to="${out.ext}"/>
       <xmlcatalog refid="dita.catalog"/>
     </xslt>
+   </pipeline>
   </target>
   
   <!--The new solution which divides the whole process into the inner and outer steps  -->
@@ -57,15 +58,15 @@ See the accompanying LICENSE file for applicable license.
     description="Build troff output from inner dita topics">
   <echo level="info">the ditmapoutputdir is ${dita.map.output.dir}</echo>
     <!-- step 2 -->
-    <xslt basedir="${dita.temp.dir}" destdir="${dita.output.dir}"
-      includesfile="${dita.temp.dir}${file.separator}${fullditatopicfile}" extension="${out.ext}"
-      classpathref="dost.class.path"
+   <pipeline>
+    <xslt basedir="${dita.temp.dir}" destdir="${dita.output.dir}" extension="${out.ext}"
       style="${troff.step2.xsl}">
-      <excludesfile name="${dita.temp.dir}${file.separator}${resourceonlyfile}" if="resourceonlyfile"/>
-      <param name="OUTFORMAT" expression="${troff.outformat}" if="troff.outformat"/>
+      <ditafileset format="dita" processingRole="normal"/>
+      <param name="OUTFORMAT" expression="${troff.outformat}" if:set="troff.outformat"/>
       <mapper classname="org.dita.dost.ant.types.JobMapper" to="${out.ext}"/>
       <xmlcatalog refid="dita.catalog"/>
     </xslt>
+   	</pipeline>
   </target>
 
 </project>

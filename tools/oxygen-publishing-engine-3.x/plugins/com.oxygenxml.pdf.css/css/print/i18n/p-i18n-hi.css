@@ -76,8 +76,8 @@ I18N file for hi
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(hi):after,
-*[class ~= "topic/link"][href]:lang(hi):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(hi):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(hi):after {
   content: " (पेज पर " target-counter(attr(href), page) ")";
 }
 

@@ -33,7 +33,7 @@ See the accompanying LICENSE file for applicable license.
   <path id="dost.class.path">
     <pathelement location="${dita.dir}/lib/dost.jar"/>
     <pathelement location="${dita.dir}/lib/dost-configuration.jar"/>
-    <pathelement location="${dita.dir}/lib/commons-io-2.4.jar"/>
+    <pathelement location="${dita.dir}/lib/commons-io-2.8.0.jar"/>
   </path>
   
   <taskdef name="integrate" classname="org.dita.dost.ant.IntegratorTask">

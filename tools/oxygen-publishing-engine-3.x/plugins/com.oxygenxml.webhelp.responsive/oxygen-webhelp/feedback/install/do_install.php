@@ -3,7 +3,7 @@
 /*
     
 Oxygen WebHelp Plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 */
 -->
@@ -508,7 +508,7 @@ if ($showBtBack) {
 ?>
 </div>
 
-<script src="../resources/js/jquery-3.4.1.min.js"></script>
+<script src="../resources/js/jquery-3.5.1.min.js"></script>
 <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 
 </body>

@@ -7,7 +7,7 @@ See the accompanying LICENSE file for applicable license.
 --><project xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="dita2htmlhelp">
 
   <target name="dita2htmlhelp" unless="noMap" depends="dita2htmlhelp.init,                    build-init,                    use-init.envhhcdir,                    use-init.hhcdir,                    preprocess,                    htmlhelp.topics,                    htmlhelp.copy-image,                    copy-css">
-    <antcall target="dita.map.htmlhelp"/>
+    <antcall target="dita.map.htmlhelp" inheritrefs="true"/>
   </target>
 
   <target name="dita2htmlhelp.init">

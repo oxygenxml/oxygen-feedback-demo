@@ -2,7 +2,7 @@
 <!--
     
 Oxygen Webhelp plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
@@ -225,7 +225,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
                             <!-- Copy attributes -->
                             <xsl:copy-of select="@* except @class"/>
                             <!-- There might be multiple .related-links nodes, but only some of the will have children -->
-                            <xsl:copy-of select="$relatedLinksContent/*[count(child::*) > 0]"/>
+                            <xsl:apply-templates select="$relatedLinksContent/*[count(child::*) > 0]" mode="related-links-accessibility"/>
                         </div>
                     </xsl:if>
                 </xsl:when>
@@ -234,6 +234,19 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="nav | *[@role='navigation']" mode="related-links-accessibility">
+        <xsl:copy>
+            <xsl:attribute name="aria-label">Related Links</xsl:attribute>
+            <xsl:apply-templates select="node() | @*" mode="related-links-accessibility"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="node() | @*" mode="related-links-accessibility">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*" mode="related-links-accessibility"/>
+        </xsl:copy>
     </xsl:template>
     
     <!-- EXM-36705: Merge & group related links from nested topics (chunk='to-content')-->
@@ -289,7 +302,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
                             <!-- Copy attributes -->
                             <xsl:copy-of select="@* except @class"/>
                             <!-- There might be multiple .related-links nodes, but only some of the will have children -->
-                            <xsl:copy-of select="$childLinksContent/*[count(child::*) > 0]"/>
+                            <xsl:apply-templates select="$childLinksContent/*[count(child::*) > 0]" mode="child-links-accessibility"/>
                         </div>
                     </xsl:if>
                 </xsl:when>
@@ -299,6 +312,20 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
             </xsl:choose>
         </xsl:if>
     </xsl:template>
+    
+    <xsl:template match="nav | *[@role='navigation']" mode="child-links-accessibility">
+        <xsl:copy>
+            <xsl:attribute name="aria-label">Child Links</xsl:attribute>
+            <xsl:apply-templates select="node() | @*" mode="child-links-accessibility"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="node() | @*" mode="child-links-accessibility">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*" mode="child-links-accessibility"/>
+        </xsl:copy>
+    </xsl:template>
+    
     
     <!-- Expand 'webhelp_publication_toc' place holder. -->
     <xsl:template match="whc:webhelp_publication_toc" mode="copy_template">

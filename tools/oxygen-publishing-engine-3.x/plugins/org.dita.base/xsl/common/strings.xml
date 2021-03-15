@@ -76,6 +76,7 @@ See the accompanying LICENSE file for applicable license.
   <lang xml:lang="nl-nl" filename="strings-nl-nl.xml"/>
   <lang xml:lang="no" filename="strings-no-no.xml"/>
   <lang xml:lang="no-no" filename="strings-no-no.xml"/>
+  <lang xml:lang="nb-no" filename="strings-no-no.xml"/>
   <lang xml:lang="pl" filename="strings-pl-pl.xml"/>
   <lang xml:lang="pl-pl" filename="strings-pl-pl.xml"/>
   <lang xml:lang="pt" filename="strings-pt-pt.xml"/>
@@ -143,6 +144,7 @@ See the accompanying LICENSE file for applicable license.
   <lang filename="../../../org.dita.pdf2/cfg/common/vars/ms.xml" xml:lang="ms"/>
   <lang filename="../../../org.dita.pdf2/cfg/common/vars/nl.xml" xml:lang="nl"/>
   <lang filename="../../../org.dita.pdf2/cfg/common/vars/no.xml" xml:lang="no"/>
+  <lang filename="../../../org.dita.pdf2/cfg/common/vars/no.xml" xml:lang="nb-no"/>
   <lang filename="../../../org.dita.pdf2/cfg/common/vars/pl.xml" xml:lang="pl"/>
   <lang filename="../../../org.dita.pdf2/cfg/common/vars/pt.xml" xml:lang="pt"/>
   <lang filename="../../../org.dita.pdf2/cfg/common/vars/pt_BR.xml" xml:lang="pt-br"/>
@@ -178,23 +180,6 @@ See the accompanying LICENSE file for applicable license.
     <lang xml:lang="ja-jp" filename="../../../com.oxygenxml.pdf.css/resources/localization/strings-ja-jp.xml"/>
     <lang xml:lang="zh" filename="../../../com.oxygenxml.pdf.css/resources/localization/strings-zh-cn.xml"/>
     <lang xml:lang="zh-cn" filename="../../../com.oxygenxml.pdf.css/resources/localization/strings-zh-cn.xml"/>
-
-    <lang xml:lang="en" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-en-us.xml"/>
-    <lang xml:lang="en-ca" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-en-us.xml"/>
-    <lang xml:lang="en-gb" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-en-us.xml"/>
-    <lang xml:lang="en-us" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-en-us.xml"/>
-    <lang xml:lang="fr" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-fr-fr.xml"/>
-    <lang xml:lang="fr-fr" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-fr-fr.xml"/>
-    <lang xml:lang="fr-be" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-fr-fr.xml"/>
-    <lang xml:lang="fr-ca" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-fr-ca.xml"/>
-    <lang xml:lang="fr-ch" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-fr-fr.xml"/>
-    <lang xml:lang="de" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-de-de.xml"/>
-    <lang xml:lang="de-ch" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-de-de.xml"/>
-    <lang xml:lang="de-de" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-de-de.xml"/>
-    <lang xml:lang="ja" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-ja-jp.xml"/>
-    <lang xml:lang="ja-jp" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-ja-jp.xml"/>
-    <lang xml:lang="zh-cn" filename="../../../com.oxygenxml.webhelp.classic/oxygen-webhelp/resources/localization/strings-zh-cn.xml"/>
-    
 
     <lang xml:lang="en" filename="../../../com.oxygenxml.webhelp.responsive/oxygen-webhelp/resources/localization/strings-en-us.xml"/>
     <lang xml:lang="en-ca" filename="../../../com.oxygenxml.webhelp.responsive/oxygen-webhelp/resources/localization/strings-en-us.xml"/>

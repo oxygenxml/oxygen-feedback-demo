@@ -76,8 +76,8 @@ I18N file for sv
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(sv):after,
-*[class ~= "topic/link"][href]:lang(sv):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(sv):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(sv):after {
   content: " ( " target-counter(attr(href), page) ")";
 }
 

@@ -76,8 +76,8 @@ I18N file for ur
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(ur):after,
-*[class ~= "topic/link"][href]:lang(ur):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(ur):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(ur):after {
   content: " (صفحہ پر " target-counter(attr(href), page) ")";
 }
 

@@ -19,7 +19,7 @@ REM
 REM Build the classpath. The first should be the chemistry jar, then the oxygen SDK, then others
 REM
 SET CLASSPATH=%~dp0lib\oxygen-pdf-chemistry.jar;%~dp0classes
-FOR /R "%~dp0lib" %%a in (oxygen*.jar) DO CALL :add-to-path %%a
+FOR /R "%~dp0lib" %%a in (oxygen*.jar) DO CALL :add-to-path "%%a"
 SET CLASSPATH=%CLASSPATH%;%~dp0lib\*
 
 
@@ -61,7 +61,7 @@ REM
 REM A procedure to append a value to the classpath
 REM
 :add-to-path
-	SET CLASSPATH=%CLASSPATH%;%1
+	SET CLASSPATH=%CLASSPATH%;%~1
 GOTO :EOF
 
 

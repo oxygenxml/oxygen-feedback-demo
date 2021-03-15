@@ -76,8 +76,8 @@ I18N file for pl
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(pl):after,
-*[class ~= "topic/link"][href]:lang(pl):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(pl):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(pl):after {
   content: " (na stronie " target-counter(attr(href), page) ")";
 }
 

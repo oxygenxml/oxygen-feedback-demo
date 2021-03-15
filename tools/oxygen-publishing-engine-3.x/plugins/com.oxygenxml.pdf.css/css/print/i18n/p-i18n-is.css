@@ -76,8 +76,8 @@ I18N file for is
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(is):after,
-*[class ~= "topic/link"][href]:lang(is):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(is):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(is):after {
   content: " (á blaðsíðu " target-counter(attr(href), page) ")";
 }
 

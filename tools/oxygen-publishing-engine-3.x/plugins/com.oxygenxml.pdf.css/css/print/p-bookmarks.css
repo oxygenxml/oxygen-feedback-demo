@@ -64,7 +64,8 @@
   These pseudo elements contain the chapter numbering.
   The label uses the navtitle if available.
 */
-*[class~="topic/topic"] > *[class~="topic/title"] {
+*[class~="topic/topic"] > *[class~="topic/title"],
+*[class~="topic/section"] > *[class~="topic/title"]{
   bookmark-label: content(before) content(text);  
   -ah-bookmark-label:content(before) content(); 
 }
@@ -114,35 +115,41 @@
   -ah-bookmark-level: 1;
   bookmark-level: 1;  
 }
-*[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"] {
+*[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"],
+*[class~="topic/topic"] *[class~="topic/section"] > *[class~="topic/title"] {
   prince-bookmark-level: 2;
   -ah-bookmark-level: 2;
   bookmark-level: 2;
   bookmark-state:closed; 
 }
-*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"] {
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"],
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/section"] > *[class~="topic/title"] {
   prince-bookmark-level: 3;
   -ah-bookmark-level: 3;
   bookmark-level: 3;
 }
-*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"] {
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"],
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/section"] > *[class~="topic/title"] {
   prince-bookmark-level: 4;
   -ah-bookmark-level: 4;
   bookmark-level: 4;
 }
-*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"] {
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"],
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/section"] > *[class~="topic/title"] {
   prince-bookmark-level: 5;
   -ah-bookmark-level: 5;
   bookmark-level: 5;
 
 }
-*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"] {
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"],
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/section"] > *[class~="topic/title"] {
   prince-bookmark-level: 6;
   -ah-bookmark-level: 6;
   bookmark-level: 6;
 
 }
-*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"] {
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] > *[class~="topic/title"],
+*[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/topic"] *[class~="topic/section"] > *[class~="topic/title"] {
   prince-bookmark-level: 7;
   -ah-bookmark-level: 7;
   bookmark-level: 7;

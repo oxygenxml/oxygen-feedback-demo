@@ -76,8 +76,8 @@ I18N file for el
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(el):after,
-*[class ~= "topic/link"][href]:lang(el):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(el):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(el):after {
   content: " (στη σελίδα " target-counter(attr(href), page) ")";
 }
 

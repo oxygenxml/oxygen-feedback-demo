@@ -131,9 +131,13 @@ See the accompanying LICENSE file for applicable license.
         <xsl:when test="*[contains(@class,' task/step ')] and not(*[contains(@class,' task/step ')][2])">
           <!-- Single step. Process any stepsection before the step (cannot appear after). -->
           <xsl:apply-templates select="*[contains(@class,' task/stepsection ')]"/>
-          <xsl:apply-templates select="*[contains(@class,' task/step ')]" mode="onestep">
-            <xsl:with-param name="step_expand" select="$step_expand"/>
-          </xsl:apply-templates>
+          <div>
+            <xsl:call-template name="commonattributes"/>
+            <xsl:call-template name="setid"/>
+            <xsl:apply-templates select="*[contains(@class,' task/step ')]" mode="onestep">
+              <xsl:with-param name="step_expand" select="$step_expand"/>
+            </xsl:apply-templates>            
+          </div>
         </xsl:when>
         <xsl:when test="not(*[contains(@class,' task/stepsection ')])">
           <xsl:apply-templates select="." mode="step-elements-with-no-stepsection">
@@ -432,7 +436,7 @@ See the accompanying LICENSE file for applicable license.
     <thead>
       <tr>
         <xsl:call-template name="commonattributes"/>
-        <xsl:apply-templates select="*[contains(@class,' ditaot-d/ditaval-startprop ')]/@outputclass" mode="add-ditaval-style"/>
+        <xsl:apply-templates select="*[contains(@class,' ditaot-d/ditaval-startprop ')]/@style" mode="add-ditaval-style"/>
         <xsl:apply-templates select="*[contains(@class,' task/choptionhd ')]"/>
         <xsl:apply-templates select="*[contains(@class,' task/chdeschd ')]"/>
       </tr>
@@ -673,12 +677,16 @@ See the accompanying LICENSE file for applicable license.
     <xsl:sequence select="2"/>
   </xsl:template>
   
+  <xsl:attribute-set name="linklist-task">
+    <xsl:attribute name="outputclass">reltasks</xsl:attribute>
+  </xsl:attribute-set>
+  
   <!-- Task wrapper for HTML: "Related tasks" in <div>. -->
   <xsl:template match="*[contains(@class, ' topic/link ')][@type='task']" mode="related-links:result-group"
                 name="related-links:result.task" as="element()">
     <xsl:param name="links" as="node()*"/>
     <xsl:if test="normalize-space(string-join($links, ''))">
-      <linklist class="- topic/linklist " outputclass="relinfo reltasks">
+      <linklist class="- topic/linklist " xsl:use-attribute-sets="linklist linklist-task">
         <xsl:copy-of select="ancestor-or-self::*[@xml:lang][1]/@xml:lang"/>
         <title class="- topic/title ">
           <xsl:call-template name="getVariable">

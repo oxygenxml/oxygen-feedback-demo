@@ -76,8 +76,8 @@ I18N file for sk
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(sk):after,
-*[class ~= "topic/link"][href]:lang(sk):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(sk):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(sk):after {
   content: " (na strane " target-counter(attr(href), page) ")";
 }
 

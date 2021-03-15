@@ -51,4 +51,11 @@
     </xsl:copy>
   </xsl:template>
   
+  <!-- Created using template from: org.dita.html5/xsl/task.xsl -->
+  <!-- Process task/steptroubleshooting as other task sub-elements -->
+  <!-- Maybe to be removed if DITA-OT update includes this template -->
+  <xsl:template match="*[contains(@class,' task/steptroubleshooting ')]" name="topic.task.steptroubleshooting">
+    <xsl:call-template name="generateItemGroupTaskElement"/>
+  </xsl:template>
+  
 </xsl:stylesheet>

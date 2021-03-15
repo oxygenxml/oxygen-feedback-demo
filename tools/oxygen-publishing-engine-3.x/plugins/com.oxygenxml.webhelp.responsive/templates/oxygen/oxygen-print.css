@@ -7,6 +7,10 @@
 	font-family: Roboto, sans-serif;
 }
 
+*[class ~= "front-page/front-page-title"] {
+    font-family: Roboto, sans-serif;
+}
+
 body {
 	font-size: 10pt;
 }

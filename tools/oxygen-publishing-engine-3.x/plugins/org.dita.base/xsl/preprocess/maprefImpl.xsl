@@ -16,8 +16,6 @@ See the accompanying LICENSE file for applicable license.
 
   <xsl:import href="plugin:org.dita.base:xsl/common/dita-utilities.xsl"/>
   <xsl:import href="plugin:org.dita.base:xsl/common/output-message.xsl"/>
-  <!-- Deprecated since 2.3 -->
-  <xsl:variable name="msgprefix">DOTX</xsl:variable>
 
   <xsl:param name="file-being-processed" as="xs:string"/>
   <xsl:param name="child-topicref-warning" as="xs:string" select="'true'"/>
@@ -174,7 +172,17 @@ See the accompanying LICENSE file for applicable license.
             <!-- retain key definition as a separate element -->
             <xsl:if test="@keys">
               <keydef class="+ map/topicref mapgroup-d/keydef ditaot-d/keydef " processing-role="resource-only">
-                <xsl:apply-templates select="@* except (@class | @processing-role)"/>
+                <xsl:apply-templates select="@* except (@class | @processing-role | @href)"/>
+                <xsl:if test="@href">
+                  <xsl:choose>
+                    <xsl:when test="$relative-path != '#none#'">
+                      <xsl:attribute name="href" select="concat($relative-path, @href)"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:apply-templates select="@href"/>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </xsl:if>
                 <xsl:apply-templates select="*[contains(@class, ' map/topicmeta ')]"/>
               </keydef>
             </xsl:if>
@@ -263,7 +271,7 @@ See the accompanying LICENSE file for applicable license.
       <xsl:for-each select="@href | @copy-to">
         <xsl:choose>
           <xsl:when test=". = ''"/>
-          <xsl:when test="$relative-path = '#none#' or contains(.,'://')">
+          <xsl:when test="$relative-path = '#none#' or dita-ot:is-external(.)">
             <xsl:attribute name="{name()}">
               <xsl:value-of select="."/>
             </xsl:attribute>
@@ -405,6 +413,7 @@ See the accompanying LICENSE file for applicable license.
         <xsl:variable name="update-id-path" select="($mapref-id-path, generate-id(.))"/>
         <xsl:variable name="href" select="@href" as="xs:string?"/>
         <xsl:apply-templates select="document($href, /)/*[contains(@class,' map/map ')]" mode="mapref">
+          <xsl:with-param name="parentMaprefKeyscope" select="@keyscope" tunnel="yes"/>
           <xsl:with-param name="relative-path">
             <xsl:choose>
               <xsl:when test="not($relative-path = '#none#' or $relative-path='')">
@@ -429,8 +438,11 @@ See the accompanying LICENSE file for applicable license.
   <xsl:template match="*[contains(@class,' map/map ')]" mode="mapref">
     <xsl:param name="relative-path" as="xs:string">#none#</xsl:param>
     <xsl:param name="mapref-id-path" as="xs:string*"/>
+    <xsl:param name="parentMaprefKeyscope" tunnel="yes" as="attribute()?"/>
+    <xsl:variable name="mapID" select="@id"/>
     <xsl:apply-templates select="*[contains(@class,' map/reltable ')]" mode="reltable-copy">
       <xsl:with-param name="relative-path" select="$relative-path" tunnel="yes"/>
+      <xsl:with-param name="keyscope" select="string-join((@keyscope, $parentMaprefKeyscope), ' ')"/>
     </xsl:apply-templates>
     <!--xsl:copy-of select="*[contains(@class,' map/reltable ')]"/-->
     <xsl:call-template name="gen-reltable">
@@ -458,6 +470,16 @@ See the accompanying LICENSE file for applicable license.
     </submap-topicmeta-container>
   </xsl:template>
 
+  <xsl:template match="*" mode="reltable-copy" priority="10">
+    <xsl:param name="keyscope" as="xs:string?"/>
+    <xsl:copy>
+      <xsl:if test="$keyscope">
+        <xsl:attribute name="keyscope" select="$keyscope"/>
+      </xsl:if>
+      <xsl:apply-templates select="@* | node()" mode="reltable-copy"/>
+    </xsl:copy>
+  </xsl:template>
+
   <xsl:template match="@* | node()" mode="reltable-copy">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()" mode="reltable-copy"/>
@@ -468,11 +490,11 @@ See the accompanying LICENSE file for applicable license.
     <xsl:param name="relative-path" as="xs:string" tunnel="yes">#none#</xsl:param>
     <xsl:attribute name="{name()}">
       <xsl:choose>
-        <xsl:when test="not(contains(.,'://') or ../@scope = 'external' or $relative-path = ('#none#', ''))">
-          <xsl:value-of select="dita-ot:normalize-uri(concat($relative-path, .))"/>
+        <xsl:when test="dita-ot:is-external(.) or $relative-path = ('#none#', '')">
+          <xsl:value-of select="."/>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:value-of select="."/>
+          <xsl:value-of select="dita-ot:normalize-uri(concat($relative-path, .))"/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:attribute>

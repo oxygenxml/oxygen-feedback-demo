@@ -7,7 +7,7 @@
             <xmlcatalog>
                 <catalogpath>
                     <pathelement location="${dita.dir}/catalog-dita.xml"/>
-                    <pathelement location="${dita.plugin.com.oxygenxml.webhelp.classic.dir}/dtd/xhtmlcatalog.xml"/>
+                    <pathelement location="${dita.plugin.org.dita.eclipsehelp.dir}/xhtml-dtd/xhtmlcatalog.xml"/>
                 </catalogpath>
             </xmlcatalog>
         </xslt>

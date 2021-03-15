@@ -8,6 +8,6 @@ See the accompanying LICENSE file for applicable license.
   <xsl:import href="plugin:org.dita.base:xsl/preprocess/topicpullImpl.xsl"/>
   <xsl:import href="plugin:org.dita.base:xsl/preprocess/topicpull-task.xsl"/>
   <xsl:import href="plugin:org.dita.base:xsl/preprocess/topicpull-pr-d.xsl"/>
-  
-  <xsl:output xmlns:dita="http://dita-ot.sourceforge.net" method="xml" encoding="utf-8" indent="no"/>
+  <xsl:import xmlns:dita="http://dita-ot.sourceforge.net" href="plugin:com.oxygenxml.pdf.css:xsl/preprocess/topicpull.xsl"/>
+  <xsl:output method="xml" encoding="utf-8" indent="no"/>
 </xsl:stylesheet>

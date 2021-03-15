@@ -474,6 +474,7 @@ a:hover {
 .wh_print_link button,
 .webhelp_expand_collapse_sections,
 .wh_hide_highlight,
+.oxy-icon-pdf-link,
 .wh_navigation_links a,
 .wh_navigation_links a:hover,
 .wh_navigation_links a:active,
@@ -730,3 +731,15 @@ a:hover {
 .wh_index_terms #indexList {
   padding: 0;
 }
+
+
+div.note,
+div.note[dir='ltr'],
+*[dir='ltr'] div.note,
+*[dir] *[dir='ltr'] div.note,
+*[dir] *[dir] *[dir='ltr'] div.note,
+*[dir] *[dir] *[dir] *[dir='ltr'] div.note,
+*[dir] *[dir] *[dir] *[dir] *[dir='ltr'] div.note{
+  padding-top: 0.25em;
+}
+

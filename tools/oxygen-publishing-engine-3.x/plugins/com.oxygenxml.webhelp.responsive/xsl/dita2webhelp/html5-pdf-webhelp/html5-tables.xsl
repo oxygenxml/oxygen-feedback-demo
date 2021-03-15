@@ -48,17 +48,39 @@
   <!-- DCP-263 The number from the table label is wrapped in a span, so it can be styled from CSS. -->
   <xsl:template match="*[contains(@class, ' topic/table ')]/*[contains(@class, ' topic/title ')]" mode="title-number">
     <xsl:param name="number" as="xs:integer"/>
-    <xsl:value-of select="dita-ot:get-variable(., 'Table')"/>
-    <span class="table--title-label-number">
-      <xsl:text> </xsl:text>
-      <xsl:sequence select="$number"/>
-    </span>
-    <span class="table--title-label-punctuation">
-      <xsl:text>. </xsl:text>
-    </span>
+    
+    <xsl:variable name="ancestorlang">
+      <xsl:call-template name="getLowerCaseLang"/>
+    </xsl:variable>
+    
+    <!-- 
+      DCP-414 Hungarian table titles should be under the form "1. Táblázat"
+      Extract from org.dita.html5/xsl/tables.xsl "place-tbl-lbl"
+    -->
+    <xsl:choose>
+      <xsl:when test="$ancestorlang = ('hu', 'hu-hu')">
+        <span class="table--title-label-number">
+          <xsl:sequence select="$number"/>
+        </span>
+        <span class="table--title-label-punctuation">
+          <xsl:text>. </xsl:text>
+        </span>
+        <xsl:value-of select="dita-ot:get-variable(., 'Table')"/>
+        <xsl:text> </xsl:text>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="dita-ot:get-variable(., 'Table')"/>
+        <span class="table--title-label-number">
+          <xsl:text> </xsl:text>
+          <xsl:sequence select="$number"/>
+        </span>
+        <span class="table--title-label-punctuation">
+          <xsl:text>. </xsl:text>
+        </span>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
 
-  
   <!-- 
     WH-1485: Add a wrapper for simple tables, in order to avoid
     wide tables overflowing the topic content area. 
@@ -68,4 +90,91 @@
       <xsl:next-match/>
     </div>
   </xsl:template>
+  
+  <!--
+  	 DCP-448: Replace 'table:get-entry-colsep' from org.dita.html5/xsl/functions.xsl
+  	 To be removed after DITA-OT fix.
+   -->
+  <xsl:function name="table:get-entry-colsep" as="attribute(colsep)?">
+    <xsl:param name="el" as="element()"/>
+
+    <xsl:variable name="colsep-attr" select="
+      ($el/@colsep,
+       table:get-entry-colspec($el)/@colsep,
+       table:get-current-table($el)/@colsep,
+       table:get-current-tgroup($el)/@colsep)[1]
+    "/>
+
+    <xsl:variable name="colsep">    
+      <xsl:for-each select="$el">
+        
+        <xsl:variable name="x-end">
+          <xsl:choose>
+            <xsl:when test="@dita-ot:morecols">
+              <xsl:value-of select="@dita-ot:x + @dita-ot:morecols"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@dita-ot:x"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:variable name="nb-cols" select="ancestor::*[contains(@class, ' topic/tgroup ')][1]/@cols"/>
+        
+        <xsl:choose>
+          <xsl:when test="number($colsep-attr) = 1 and $x-end &lt; $nb-cols">
+            <xsl:sequence>1</xsl:sequence>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:sequence>0</xsl:sequence>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each>
+    </xsl:variable>
+    
+    <xsl:attribute name="colsep" select="$colsep"/>
+  </xsl:function>
+  
+  <!--
+  	 DCP-448: Replace 'table:get-entry-rowsep' from org.dita.html5/xsl/functions.xsl
+  	 To be removed after DITA-OT fix.
+   -->
+  <xsl:function name="table:get-entry-rowsep" as="attribute(rowsep)?">
+    <xsl:param name="el" as="element()"/>
+    
+    <xsl:variable name="rowsep-attr" select="
+      ($el/@rowsep,
+      table:get-entry-colspec($el)/@rowsep,
+      table:get-current-table($el)/@rowsep,
+      table:get-current-tgroup($el)/@rowsep)[1]
+      "/>
+    
+    <xsl:variable name="rowsep">    
+      <xsl:for-each select="$el">
+        <xsl:variable name="y-end">
+          <xsl:choose>
+            <xsl:when test="@morerows">
+              <xsl:value-of select="@dita-ot:y + @morerows"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="@dita-ot:y"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:variable name="nb-rows" select="count(../ancestor::node()[contains(@class, ' topic/tgroup ')]//*[contains(@class, ' topic/row ')])"/>
+          
+        <xsl:choose>
+          <xsl:when test="number($rowsep-attr) = 1 and $y-end &lt; $nb-rows">
+            <xsl:sequence>1</xsl:sequence>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:sequence>0</xsl:sequence>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each>
+    </xsl:variable>
+    
+    <xsl:attribute name="rowsep" select="$rowsep"/>
+  </xsl:function>
 </xsl:stylesheet>

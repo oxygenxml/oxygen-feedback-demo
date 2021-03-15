@@ -8,30 +8,56 @@
         <whc:page_libraries page="search"/>
         <!-- Skin resources -->
         <whc:webhelp_skin_resources/>
-        <!-- EXM-36950 - Expand the args.hdf parameter here -->
-        <whc:include_html href="${args.hdf}"/>
+        <whc:include_html href="${args.hdf}">
+            <!-- @Deprecated: use webhelp.fragment.head -->
+            <!-- EXM-36950 - Expand the args.hdf parameter here -->
+        </whc:include_html>
         <whc:include_html href="${webhelp.fragment.head}"/>
+        <whc:include_html href="${webhelp.fragment.head.search.page}"/>
     </head>
     <body class="wh_search_page">
-        <a href="#results" class="sr-only sr-only-focusable"><whc:macro value="${i18n(jump.to.results)}" /></a>
-        <!-- EXM-36950 - Expand the args.hdr parameter here -->
-        <whc:include_html href="${args.hdr}"/>
+        <a href="#results" class="sr-only sr-only-focusable">
+            <whc:macro value="${i18n(jump.to.results)}" />
+        </a>
+        <whc:include_html href="${args.hdr}">
+            <!-- @Deprecated: use webhelp.fragment.before.body -->
+            <!-- EXM-36950 - Expand the args.hdr parameter here -->
+        </whc:include_html>
         <whc:include_html href="${webhelp.fragment.before.body}"/>
+        <whc:include_html href="${webhelp.fragment.before.body.search.page}"/>
         
         <whc:include_html href="${webhelp.fragment.header}"/>
         
+        <whc:include_html href="${webhelp.fragment.after.header}"/>
+        <whc:include_html href="${webhelp.fragment.after.header.search.page}"/> 
+        
         <!-- Search form -->
-        <whc:webhelp_search_input class="navbar-form search" role="form"/>
+        <whc:webhelp_search_input class="navbar-form wh_search_page_search search" role="form">
+            <whc:include_html href="${webhelp.fragment.before.search.input}"/>
+            <whc:include_html href="${webhelp.fragment.before.search.input.search.page}"/>
+            
+            <whc:component_content/>
+            
+            <whc:include_html href="${webhelp.fragment.after.search.input}"/>
+            <whc:include_html href="${webhelp.fragment.after.search.input.search.page}"/>
+        </whc:webhelp_search_input>
+        
+        <whc:include_html href="${webhelp.fragment.before.main.content.area}"/>
+        <whc:include_html href="${webhelp.fragment.before.main.content.area.search.page}"/>
+        
         <div class="container-fluid wh_content_area" id="results">
             <div class="row">
-                <whc:webhelp_search_results class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="searchResults"/>
-                <div id="wh-search-pagination" class="wh-search-pagination col-xs-12 col-sm-12 col-md-12 col-lg-12"></div>
+                <whc:webhelp_search_results />
             </div>
         </div>
+        
+        <whc:include_html href="${webhelp.fragment.after.main.content.area}"/>
+        <whc:include_html href="${webhelp.fragment.after.main.content.area.search.page}"/>
         
         <whc:include_html href="footer.xml"/>
         
         <whc:include_html href="${webhelp.fragment.after.body}"/>
+        <whc:include_html href="${webhelp.fragment.after.body.search.page}"/>
     </body>
     <whc:include_html href="${webhelp.google.search.script}"/> 
 </html>

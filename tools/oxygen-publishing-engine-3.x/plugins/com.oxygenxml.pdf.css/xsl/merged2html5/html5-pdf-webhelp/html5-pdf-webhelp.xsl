@@ -17,5 +17,6 @@
   <xsl:include href="html5-tm.xsl"/>
   <xsl:include href="html5-hi-domain.xsl"/>
   <xsl:include href="html5-steps.xsl"/>
+  <xsl:include href="html5-hazard.xsl"/>
 
 </xsl:stylesheet>

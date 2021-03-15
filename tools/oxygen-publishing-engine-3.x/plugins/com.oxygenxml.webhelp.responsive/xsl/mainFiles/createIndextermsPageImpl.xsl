@@ -2,7 +2,7 @@
 <!--
     
 Oxygen Webhelp plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 -->
 
@@ -49,8 +49,8 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
     select="'&#12354;&#12363;&#12373;&#12383;&#12394;&#12399;&#12414;&#12420;&#12425;&#12431;&#12356;&#12365;&#12375;&#12385;&#12395;&#12402;&#12415;&#12426;&#12432;&#12358;&#12367;&#12377;&#12388;&#12396;&#12405;&#12416;&#12422;&#12427;&#12360;&#12369;&#12379;&#12390;&#12397;&#12408;&#12417;&#12428;&#12433;&#12362;&#12371;&#12381;&#12392;&#12398;&#12411;&#12418;&#12424;&#12429;&#12434;'"/>  
   
   <!-- Loads the additional XML documents. -->
-  <xsl:variable name="index" select="document(oxygen:makeURL($INDEX_XML_FILEPATH))/index:index"/>    
-  <xsl:variable name="toc" select="document(oxygen:makeURL($TOC_XML_FILEPATH))/toc:toc"/>
+  <xsl:variable name="index" select="document(oxygen:makeURL($INDEX_XML_FILEPATH), .)/index:index"/>    
+  <xsl:variable name="toc" select="document(oxygen:makeURL($TOC_XML_FILEPATH), .)/toc:toc"/>
   
   <!--
     A temporary node used to keep @lang and @dir attributes.

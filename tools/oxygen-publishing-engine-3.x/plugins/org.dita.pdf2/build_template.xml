@@ -130,7 +130,7 @@ with those set forth herein.
   </target>
 
   <target name="topic2pdf2" if="noMap">
-    <antcall target="preview.topic.pdf"/>
+    <antcall target="preview.topic.pdf" inheritRefs="true"/>
   </target>
 
   <target name="preview.topic.pdf"
@@ -155,7 +155,7 @@ with those set forth herein.
         <param name="style" location="${dita.plugin.org.dita.pdf2.dir}/xsl/common/topicmerge.xsl"/>
       </module>
     </pipeline>
-    <antcall target="publish.map.pdf"/>
+    <antcall target="publish.map.pdf" inheritRefs="true"/>
   </target>
 
   <target name="publish.map.pdf"
@@ -243,12 +243,14 @@ with those set forth herein.
     <property name="args.tablelink.style" value="NUMTITLE"/>
   </target>
 
+  <!-- Deprecated since 3.4 -->
   <target name="transform.topic2fo.index.init">
     <condition property="_pdf2.index.skip" value="true">
       <istrue value="${pdf2.index.skip}"/>
     </condition>
   </target>
 
+  <!-- Deprecated since 3.4 -->
   <target name="transform.topic2fo.index"
           depends="transform.topic2fo.index.init"
           unless="_pdf2.index.skip">
@@ -286,7 +288,7 @@ with those set forth herein.
                       indexConfig="${index.config.file}" locale="${document.locale}"
                       draft="${args.draft}">
       <xmlcatalog refid="xml.catalog"/>
-    </index-preprocess> 
+    </index-preprocess>
   </target>
   
   <target name="transform.topic2fo.main">
@@ -295,7 +297,7 @@ with those set forth herein.
     <copy file="${inputFile}" tofile="${dita.temp.dir}/stage1.xml" unless:set="_stage1.exists"/>
 
     <!--makeurl seems to output file:/C: style instead of file:///C:, but xep, fop, and ah all accept it.-->
-    <makeurl property="artworkPrefixUrl" file="${artworkPrefix}"/>
+    <makeurl property="artworkPrefixUrl" file="${artworkPrefix}" validate="no"/>
     <makeurl property="dita.map.output.dir.url" file="${pdf2.temp.dir}" validate="no"/>
     <makeurl property="work.dir.url" file="${dita.temp.dir}" validate="no"/>
     <makeurl property="customization.dir.url" file="${customization.dir}" validate="no"/>

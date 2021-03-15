@@ -146,22 +146,30 @@
 *[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/topic"]  > *[class ~= "topic/topic"] {
     counter-increment:section3 chapter-and-sections;
     counter-reset:section4;
+}
+
+/* The default for very deep topics is to reset the counter for topics and sections. */
+*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/topic"]  > *[class ~= "topic/topic"] *[class ~= "topic/topic"] {
+    counter-increment: chapter-and-sections;
+} 
+
+/* 
+ * Increment the counters for sections, match the sections that are not specialized.
+ */
+*[class ~= "map/map"][numbering^='deep'] *[class $= "topic/section "]:has(*[class ~= "topic/title"]),
+*[class ~= "map/map"][numbering^='deep'] *[class $= "topic/section section"]:has(*[class ~= "topic/title"]){
+    counter-increment:chapter-and-sections;
 } 
  
- 
-*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/title"]  + *{
-	counter-reset:chapter-and-sections;
-} 
-*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/title"]  + *{
-    counter-reset:chapter-and-sections;
-}
-*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/topic"] > *[class ~= "topic/title"]  + *{
-    counter-reset:chapter-and-sections;
-}
-*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/topic"]  > *[class ~= "topic/topic"] > *[class ~= "topic/title"]  + *{
+*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/title"]  + *,
+*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part])  *[class ~= "topic/topic"] > *[class ~= "topic/title"]  + *{
     counter-reset:chapter-and-sections;
 }
 
+*[class ~= "map/map"][numbering^='deep'] *[class $= "topic/section "] > *[class ~= "topic/title"] + *,
+*[class ~= "map/map"][numbering^='deep'] *[class $= "topic/section section"] > *[class ~= "topic/title"] + *{
+    counter-reset:chapter-and-sections;
+}
 
 /* 
 	Front Matter and Back Matter and
@@ -184,10 +192,15 @@
  * Alter the string sets that are shown in the header of the page.
  */
 *[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-part] > *[class ~= "topic/title"] {
-    string-set: parttitle " | " counter(part, upper-roman) " - " content(), chaptertitle  ""; /* Avoid propagating a past chapter title on a new part */
+    string-set: parttitle " | " counter(part, upper-roman) " - " content(),
+                parttitle-no-prefix " " counter(part, upper-roman) " - " content(),
+                chaptertitle  "",
+                chaptertitle-no-prefix ""; /* Avoid propagating a past chapter title on a new part */
 }
 *[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/title"] {
-    string-set: chaptertitle " | " counters(chapter-and-sections, "." ) " - " content(), sectiontitle "";
+    string-set: chaptertitle " | " counters(chapter-and-sections, "." ) " - " content(),
+                chaptertitle-no-prefix " " counters(chapter-and-sections, "." ) " - " content(),
+                sectiontitle ""; /* Avoid propagating a past section title on a new chapter */
 }
 *[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/title"] {
     string-set: sectiontitle " | " counters(chapter-and-sections, ".") " - " content();
@@ -204,7 +217,7 @@
 *[class ~= "map/map"][numbering^='deep'] *[class ~= "bookmap/backmatter"] *[class ~= "topic/topic"] > *[class ~= "topic/title"],
 *[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-part] ~ *[class ~= "topic/topic"]:not([is-part]) > *[class ~= "topic/title"],
 *[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-part] ~ *[class ~= "topic/topic"]:not([is-part]) *[class ~= "topic/topic"] > *[class ~= "topic/title"]{
-   string-set: parttitle "", chaptertitle "", sectiontitle "";
+   string-set: parttitle "", parttitle-no-prefix "", chaptertitle "", chaptertitle-no-prefix "", sectiontitle "";
 }
 
 
@@ -215,9 +228,15 @@
         content: counter(part, upper-roman) ". ";
 }
 *[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/title"]:before,
-*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/title"]:before,
-*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/topic"] > *[class ~= "topic/title"]:before,
-*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) > *[class ~= "topic/topic"] > *[class ~= "topic/topic"] > *[class ~= "topic/topic"] > *[class ~= "topic/title"]:before{
+*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"][is-chapter]:not([is-part]) *[class ~= "topic/topic"] > *[class ~= "topic/title"]:before {
+        content: counters(chapter-and-sections, ".") ". ";
+}
+
+/* 
+ * Use the numbers in front of sections titles in the content.
+ */
+*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"]:not([is-frontmatter]):not([is-backmatter]) *[class $= "topic/section "] > *[class ~= "topic/title"]:before,
+*[class ~= "map/map"][numbering^='deep'] *[class ~= "topic/topic"]:not([is-frontmatter]):not([is-backmatter]) *[class $= "topic/section section"] > *[class ~= "topic/title"]:before{
         content: counters(chapter-and-sections, ".") ". ";
 }
 

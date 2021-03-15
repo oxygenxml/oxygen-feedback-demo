@@ -76,8 +76,8 @@ I18N file for ms
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(ms):after,
-*[class ~= "topic/link"][href]:lang(ms):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(ms):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(ms):after {
   content: " (pada halaman " target-counter(attr(href), page) ")";
 }
 

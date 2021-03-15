@@ -76,8 +76,8 @@ I18N file for ca
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(ca):after,
-*[class ~= "topic/link"][href]:lang(ca):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(ca):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(ca):after {
   content: " (a la pàgina " target-counter(attr(href), page) ")";
 }
 

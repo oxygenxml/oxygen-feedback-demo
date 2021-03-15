@@ -13,6 +13,8 @@
         <resources>
             <!-- Main CSS file -->
             <css file="ashes.css"/>
+            <!-- CSS for notes -->
+            <css file="notes.css"/>
         </resources>
         
         <parameters>
@@ -22,13 +24,14 @@
         </parameters>
     </webhelp>
     <pdf>
-    	<preview-image file="ashes-tiles.png"/>
+    	<preview-image file="ashes.png"/>
     	 <tags>
-            <tag type="layout">tiles</tag>
             <tag type="color">dark</tag>
         </tags>
         <resources>
             <css file="ashes-print.css"/>
+            <!-- CSS for notes -->
+            <css file="notes.css"/>
         </resources>
     </pdf>
 </publishing-template>

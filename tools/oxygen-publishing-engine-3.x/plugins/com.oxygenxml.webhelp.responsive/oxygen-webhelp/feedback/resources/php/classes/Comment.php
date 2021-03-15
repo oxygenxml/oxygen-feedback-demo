@@ -3,7 +3,7 @@
 /*
 
 Oxygen WebHelp Plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 */
 
@@ -328,7 +328,7 @@ class Comment
                     if ($state == 'approved') {
                         if ($db1->Open($query)) {
                             $drill = true;
-                            $toReturn .= "<span class=\"minus\" id=\"toggle_$parent\" onclick='toggleReply($parent);'/>";
+                            $toReturn .= "<span class=\"minus\" id=\"toggle_$parent\"></span>";
                         }
                     }
 

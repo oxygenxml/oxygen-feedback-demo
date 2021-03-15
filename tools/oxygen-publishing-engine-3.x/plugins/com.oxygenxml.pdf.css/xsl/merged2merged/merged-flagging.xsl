@@ -12,7 +12,7 @@
         Copy attributes from ditaval-startprop/prop and ditaval-startprop/revprop elements
     -->
     <xsl:template
-        match="*[ditaval-startprop[position() = 1]][ditaval-endprop[position() = last()]]" priority="5">
+        match="*[ditaval-startprop[position() = 1]][ditaval-endprop[position() = last()]]" priority="6">
         
         <xsl:variable name="result">
           <xsl:next-match/>

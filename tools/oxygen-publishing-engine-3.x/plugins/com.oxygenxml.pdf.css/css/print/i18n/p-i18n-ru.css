@@ -76,8 +76,8 @@ I18N file for ru
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(ru):after,
-*[class ~= "topic/link"][href]:lang(ru):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(ru):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(ru):after {
   content: " ( " target-counter(attr(href), page) ")";
 }
 

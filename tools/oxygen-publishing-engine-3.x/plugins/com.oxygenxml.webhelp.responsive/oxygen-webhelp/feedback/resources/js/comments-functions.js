@@ -1,7 +1,7 @@
 /*
 
  Oxygen WebHelp Plugin
- Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
  */
 
@@ -68,6 +68,16 @@ define(["jquery", "whf_config", "init", "localization", "debug", "base64", "boot
         $('#loginData').off('shown.bs.modal');
         $('#loginResponse').html('');
         showLoggInDialog();
+    });
+
+    $whFeedback.on('click', ".minus", function () {
+        var id = $(this).attr("id").replace("toggle_", "");
+        toggleReply(id);
+    });
+
+    $whFeedback.on('click', ".plus", function () {
+        var id = $(this).attr("id").replace("toggle_", "");
+        toggleReply(id);
     });
 
     if (checkConfig()) {

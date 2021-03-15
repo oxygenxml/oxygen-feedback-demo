@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
-    <xsl:import href="../util/jsonUtil.xsl"></xsl:import>
-
-    <xsl:output method="text" use-character-maps="json" omit-xml-declaration="yes"></xsl:output>
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:fn="http://www.w3.org/2005/xpath-functions"
+    exclude-result-prefixes="xs" version="2.0">
+    <xsl:output method="text" omit-xml-declaration="yes"></xsl:output>
 
     <xsl:variable name="allowed-webhelp-options"
         select="(
@@ -28,6 +28,7 @@
             'webhelp.publication.toc.tooltip.position',
             'webhelp.search.enable.pagination',
             'webhelp.search.page.numberOfItems',
+            'webhelp.custom.search.engine.enabled',
             'webhelp.default.collection.type.sequence',
             'args.hide.parent.link',
             'use.stemming',
@@ -48,18 +49,19 @@
             )"/>
 
     <xsl:template match="/properties">
-        <xsl:text disable-output-escaping="yes">define({</xsl:text>
-        <xsl:apply-templates select="property" mode="properties"></xsl:apply-templates>
-        <xsl:text disable-output-escaping="yes">});</xsl:text>
+        <xsl:variable name="jsonXml">
+            <xsl:apply-templates mode="jsonXml" select="."/>
+        </xsl:variable>
+        <xsl:variable name="json" select="fn:xml-to-json($jsonXml, map{'indent':true()})"/>
+        <xsl:value-of select="fn:concat('define(', $json, ');')"/>
     </xsl:template>
-
-    <xsl:template match="property[@name = $allowed-webhelp-options]"
-        mode="properties">
-        <xsl:call-template name="string-property">
-            <xsl:with-param name="name" select="@name"></xsl:with-param>
-            <xsl:with-param name="value" select="@value"></xsl:with-param>
-        </xsl:call-template>
+    <xsl:template match="properties" mode="jsonXml">
+        <fn:map>
+            <xsl:apply-templates mode="#current"/>
+        </fn:map>
     </xsl:template>
-
+    <xsl:template match="property[@name = $allowed-webhelp-options]" mode="jsonXml">
+        <fn:string key="{@name}"><xsl:value-of select="@value"/></fn:string>
+    </xsl:template>
     <xsl:template match="text()" mode="properties"></xsl:template>
 </xsl:stylesheet>

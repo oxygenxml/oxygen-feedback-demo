@@ -235,16 +235,16 @@
                     </xsl:otherwise>
                 </xsl:choose>
             </xsl:attribute>
+            <xsl:apply-templates select="@*" mode="toc-accessibility"/>
             <xsl:if test="$isRoot">
                 <xsl:attribute name="aria-label">Table of Contents</xsl:attribute>
+                <span class="expand-button-action-labels">
+                    <span id="{$expandActionID}" aria-label="Expand"/>
+                    <span id="{$collapseActionID}" aria-label="Collapse"/>
+                    <span id="{$pendingActionID}" aria-label="Pending"/>
+                </span>
             </xsl:if>
             
-            <xsl:apply-templates select="@*" mode="toc-accessibility"/>
-            <span class="expand-button-action-labels">
-                <span id="{$expandActionID}" aria-label="Expand"/>
-                <span id="{$collapseActionID}" aria-label="Collapse"/>
-                <span id="{$pendingActionID}" aria-label="Pending"/>
-            </span>
             <xsl:apply-templates select="node()" mode="toc-accessibility"/>
         </xsl:copy>
     </xsl:template>

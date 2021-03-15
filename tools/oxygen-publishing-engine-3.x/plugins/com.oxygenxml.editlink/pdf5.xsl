@@ -16,9 +16,18 @@
     <xsl:param name="editlink.ditamap.edit.url"/>
     <xsl:param name="editlink.additional.query.parameters"/>
 
-    <xsl:template match="*[contains(@class, ' topic/topic ')]/*[contains(@class, ' topic/title ')]">
-        
-        <xsl:variable name="content">
+  <xsl:function name="editlink:should-add-edit-link" as="xs:boolean">
+    <xsl:param name="titleEl"/>
+    <xsl:sequence 
+      select="$titleEl/@xtrf
+      and (string-length($editlink.remote.ditamap.url) > 0
+           or string-length($editlink.ditamap.edit.url) > 0)"/>
+  </xsl:function>
+
+  <xsl:template match="*[contains(@class, ' topic/topic ')]/*[contains(@class, ' topic/title ')]">
+    <xsl:choose>
+      <xsl:when test="editlink:should-add-edit-link(.)">
+          <xsl:variable name="content">
             <xsl:next-match/>
         </xsl:variable>
         
@@ -38,6 +47,11 @@
                 </xsl:attribute>
                 Edit online
             </fo:basic-link>
-        </fo:inline>
-    </xsl:template>
+          </fo:inline>
+      </xsl:when>  
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
 </xsl:stylesheet>

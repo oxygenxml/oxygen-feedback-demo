@@ -34,15 +34,13 @@ See the accompanying LICENSE file for applicable license.
   </xsl:template>
   
     <xsl:template match="*[contains(@class,' hi-d/tt ')]" name="topic.hi-d.tt">
-      <span style="font-family: monospace">
+      <span>
         <xsl:call-template name="commonattributes"/>
-        <xsl:if test="*[contains(@class,' ditaot-d/ditaval-startprop ')]/@outputclass">
           <!-- Combine TT style with style from ditaval, if present -->
           <xsl:attribute name="style">
             <xsl:text>font-family: monospace; </xsl:text>
-            <xsl:value-of select="*[contains(@class,' ditaot-d/ditaval-startprop ')]/@outputclass"/>
+            <xsl:value-of select="*[contains(@class,' ditaot-d/ditaval-startprop ')]/@style"/>
           </xsl:attribute>
-        </xsl:if>
         <xsl:call-template name="setidaname"/>
         <xsl:apply-templates/>
       </span>
@@ -65,7 +63,7 @@ See the accompanying LICENSE file for applicable license.
   </xsl:template>
 
   <xsl:template match="*[contains(@class,' hi-d/line-through ')]" name="topic.hi-d.line-through">
-    <span style="text-decoration:line-through">
+    <span>
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="setidaname"/>
       <xsl:apply-templates/>
@@ -73,7 +71,7 @@ See the accompanying LICENSE file for applicable license.
   </xsl:template>
 
   <xsl:template match="*[contains(@class,' hi-d/overline ')]" name="topic.hi-d.overline">
-    <span style="text-decoration:overline">
+    <span>
       <xsl:call-template name="commonattributes"/>
       <xsl:call-template name="setidaname"/>
       <xsl:apply-templates/>

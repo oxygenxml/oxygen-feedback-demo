@@ -76,8 +76,8 @@ I18N file for mk
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(mk):after,
-*[class ~= "topic/link"][href]:lang(mk):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(mk):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(mk):after {
   content: " (на страна " target-counter(attr(href), page) ")";
 }
 

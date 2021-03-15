@@ -176,16 +176,16 @@ map > *[class~="topic/title"], /* opentopic namespace - merged map */
 }
 
 /* EXM-45283 Allow navigation*/ 
-@media oxygen and (platform:"standalone"), oxygen and (platform:"eclipse") {
-*[class~="map/topicref"][keyref]:before(1020) {
-     -oxy-link: oxy_concat("", attr(keyref, keyref));
-     -oxy-link-activation-trigger:modifier-click;
-  }
-  
-*[class~="map/topicref"][href]:before(1020) {
-    -oxy-link: attr(href);
-    -oxy-link-activation-trigger:modifier-click;
-  }
+*[class~="map/topicref"][keyref]:before(1020),
+*[class~="map/topicref"][keyref]:before(1030) {
+   -oxy-link: oxy_concat("", attr(keyref, keyref));
+   -oxy-link-activation-trigger:modifier-click;
+}
+
+*[class~="map/topicref"][href]:before(1020),
+*[class~="map/topicref"][href]:before(1030) {
+  -oxy-link: attr(href);
+  -oxy-link-activation-trigger:modifier-click;
 }
 
 @media oxygen AND (platform:webapp) {
@@ -236,6 +236,9 @@ map > *[class~="topic/title"], /* opentopic namespace - merged map */
  * Render the key name and other attributes only for key defitions in Web Author.
  */
 @media oxygen AND (platform:webapp) {
+	*[class~="map/topicref"][keyscope]:before(1010) {
+        content:  "keyscope = " attr(keyscope); 
+    }
     *[class~="mapgroup-d/keydef"][href]:before(1010) {
         content: oxy_replace(oxy_unescapeURLValue(oxy_attributes()), 'href="(.*?)"', "", true);
         /*See -colors.css */
@@ -264,7 +267,6 @@ references direct children of a topicref. It just clutters the
 document. To open a reference one could click the topicref icon.*/
 *[class~="map/topicref"] > oxy|reference {
   background-color: inherit !important;
-  border-top: 1pt dashed;
 }
 *[class~="map/topicref"] > oxy|reference:before {
   content: none !important;

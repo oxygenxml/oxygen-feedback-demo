@@ -76,8 +76,8 @@ I18N file for zh-tw
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(zh-tw):after,
-*[class ~= "topic/link"][href]:lang(zh-tw):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(zh-tw):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(zh-tw):after {
   content: " (頁 " target-counter(attr(href), page) ")";
 }
 

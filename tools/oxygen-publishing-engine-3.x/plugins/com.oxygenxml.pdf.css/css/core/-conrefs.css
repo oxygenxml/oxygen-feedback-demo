@@ -245,12 +245,10 @@ oxy|reference,
 }
 
 /* EXM-44118 - Allow keyref navigation for xref and link elements*/
-@media oxygen and (platform:"standalone"), oxygen and (platform:"eclipse") {
-    *[class~="topic/link"][keyref],
-    *[class~="topic/xref"][keyref] {
-        link: oxy_concat("", attr(keyref, keyref));
-        -oxy-link-activation-trigger:modifier-click;
-    }
+*[class~="topic/link"][keyref],
+*[class~="topic/xref"][keyref] {
+    link: oxy_concat("", attr(keyref, keyref));
+    -oxy-link-activation-trigger:modifier-click;
 }
 
 @media oxygen AND (platform:webapp) {

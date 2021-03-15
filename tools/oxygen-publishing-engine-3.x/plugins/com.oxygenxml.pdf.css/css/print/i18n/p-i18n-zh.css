@@ -76,8 +76,8 @@ I18N file for zh
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(zh):after,
-*[class ~= "topic/link"][href]:lang(zh):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(zh):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(zh):after {
   content: " (on page " target-counter(attr(href), page) ")";
 }
 

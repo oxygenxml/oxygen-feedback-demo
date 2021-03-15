@@ -8,7 +8,6 @@
 *[class~="placeholder/tablelist"], *[class~="placeholder/figurelist"] {
   page: table-of-contents;
   page-break-before: always;
-  page-break-after: always;
 }
 
 /* As big as the first level topic titles from ../core/-topic-basic.css */

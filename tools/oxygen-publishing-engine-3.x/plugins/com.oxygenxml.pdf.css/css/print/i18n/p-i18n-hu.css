@@ -76,8 +76,8 @@ I18N file for hu
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(hu):after,
-*[class ~= "topic/link"][href]:lang(hu):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(hu):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(hu):after {
   content: " (oldalszám: " target-counter(attr(href), page) ")";
 }
 

@@ -88,13 +88,25 @@ html *[class~="topic/table"] {
      caption-side: attr(caption-side);
 }
 
+/* The @is-repeated attribute is set by the 'table.title.repeat' transformation parameter */
 *[class~="topic/table"] > *[class~="topic/title"][is-repeated] {
     -oxy-caption-repeat-on-next-pages: yes;
 }
-
+/* This is the -continued label */
 *[class~="topic/table"] > *[class~="topic/title"][is-repeated]:after(2) {
     -oxy-show-only-when-caption-repeated-on-next-pages: yes;
 }
+
+/* 
+ * Avoid repeating the titles when the table is inside a list item, or inside another table, 
+ * it may trigger some issues in Chemistry (are fixed now, but is better on the safe side) 
+ */
+*[class~="topic/table"] *[class~="topic/table"] > *[class~="topic/title"][is-repeated],
+*[class~="topic/ul"]    *[class~="topic/table"] > *[class~="topic/title"][is-repeated],
+*[class~="topic/ol"]    *[class~="topic/table"] > *[class~="topic/title"][is-repeated] {
+	-oxy-caption-repeat-on-next-pages: no;
+}
+
  
 /*
  * Prince uses the width set on the colspec "style" attribute, added by a post processing step in the DITA-CSS plugin.
@@ -134,15 +146,6 @@ html *[class~="topic/table"] {
 *[class~="topic/row"][colsep = '1'] > *[class~="topic/entry"]:not([colsep]):not(:last-child),
 *[class~="topic/entry"][colsep = '1']:not(:last-child){     
    border-right:1px solid;
-}
-
-.colsep-1:not([scope='row']):last-of-type {
-	border-right: 0;
-}
-
-*[class~="topic/strow"]:last-of-type .rowsep-1,
-*[class~="topic/tbody"] *[class~="topic/row"]:last-of-type .rowsep-1 {
-	border-bottom: 0;
 }
 
 @page portrait-page {

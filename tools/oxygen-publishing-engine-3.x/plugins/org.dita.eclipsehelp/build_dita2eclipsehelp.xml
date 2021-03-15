@@ -28,7 +28,7 @@ See the accompanying LICENSE file for applicable license.
   </target>
 
   <target name="dita.map.eclipse.init" if="eclipse.plugin" depends="dita.map.eclipse.plugin.init">
-                  <antcall target="dita.map.eclipse.generate.plugin"/>
+                  <antcall target="dita.map.eclipse.generate.plugin" inheritrefs="true"/>
   </target>
 
     <target name="dita.map.eclipse.plugin.init" description="Init properties for EclipseHelp">
@@ -223,7 +223,7 @@ See the accompanying LICENSE file for applicable license.
     <property name="fragment.dirname.init" value="nl"/>
     <property name="fragment.dirname" value="${fragment.dirname.init}${file.separator}${args.eclipsehelp.language}"/>
     <property name="fragment.property.name" value="${args.eclipsehelp.language}"/>
-    <antcall target="dita.map.eclipse.genetrate.fragment"/>
+    <antcall target="dita.map.eclipse.genetrate.fragment" inheritrefs="true"/>
   </target>
   
   <target name="dita.map.eclipse.fragment.language.country.init" if="eclipse.fragment.country" depends="dita.map.eclipse.plugin.init">

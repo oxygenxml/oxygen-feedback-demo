@@ -2,7 +2,7 @@
 <!--
     
 Oxygen Webhelp plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 -->
 
@@ -72,7 +72,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
             </xsl:matching-substring>
             <xsl:non-matching-substring>
                 <xsl:choose>
-                    <xsl:when test="$contextNode instance of attribute()">
+                    <xsl:when test="not($contextNode) or $contextNode instance of attribute()">
                         <xsl:value-of select="."/>
                     </xsl:when>
                     <xsl:otherwise>
@@ -136,12 +136,16 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
             <xsl:when test="'param' eq $name">
                 <xsl:call-template name="wh-macro-param">
                     <xsl:with-param name="params" select="$params"/>
+                    <xsl:with-param name="contextNode" select="$contextNode"/>
+                    <xsl:with-param name="i18n_context" select="$i18n_context"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="starts-with($name, 'webhelp.fragment') or $name = ('args.hdr', 'args.hdf', 'webhelp.google.search.script')">
                 <!-- Backwards compatibility: in older versions of the templates files we used parameters names as macros (e.g.: ${args.hdf})  -->
                 <xsl:call-template name="wh-macro-param">
                     <xsl:with-param name="params" select="$name"/>
+                    <xsl:with-param name="contextNode" select="$contextNode"/>
+                    <xsl:with-param name="i18n_context" select="$i18n_context"/>
                 </xsl:call-template>
             </xsl:when>
             <xsl:when test="$name = 'oxygen-webhelp-build-number'">
@@ -166,7 +170,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
         <xsl:param name="matchedString"/>
         
         <xsl:choose>
-            <xsl:when test="$contextNode instance of attribute()">
+            <xsl:when test="not($contextNode) or $contextNode instance of attribute()">
                 <xsl:value-of select="$matchedString"/>
             </xsl:when>
             <xsl:otherwise>
@@ -179,8 +183,29 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
     <!-- Expands a 'param' macro. -->
     <xsl:template name="wh-macro-param">
         <xsl:param name="params"/>
+        <xsl:param name="i18n_context" as="element()*"/>
+        <xsl:param name="contextNode"/>
+        
         <xsl:variable name="paramName" select="$params[1]"/>
-        <xsl:value-of select="oxygen:getParameter($paramName)"/>
+        
+        <xsl:variable name="paramValue" select="oxygen:getParameter($paramName)"/>
+        <xsl:choose>
+            <xsl:when test="contains($paramValue, '${')">
+                <!-- The parameter value may contain macros -> let's expand them -->
+                <xsl:call-template name="expand-macros">
+                    <xsl:with-param name="value" select="$paramValue"/>
+                    <xsl:with-param name="i18n_context" select="$i18n_context"/>
+                    <!-- 
+                        Do not forward $contextNode, otherwise <whc:macro ...> won't be expanded and it will be copied as is
+                        -> see expand-macros non matching substring processing 
+                    -->
+                </xsl:call-template>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:value-of select="$paramValue"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
 
     <!-- Expands an 'env' macro. Returns the value of the environment variable specified as the macro's first parameter. -->

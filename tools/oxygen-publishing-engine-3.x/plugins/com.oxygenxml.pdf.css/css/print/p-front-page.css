@@ -12,6 +12,13 @@
     page: front-page;
 }
 
+/* Prevents the front-page title margin collapsing */
+*[class~="front-page/front-page"]::before(1000) {
+    display:block;
+    content:"";
+    height:0.1px;
+}
+
 *[class~="front-page/front-page-title"] {
     display:block;
     text-align:center;

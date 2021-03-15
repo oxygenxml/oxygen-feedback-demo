@@ -76,8 +76,8 @@ I18N file for hr
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(hr):after,
-*[class ~= "topic/link"][href]:lang(hr):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(hr):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(hr):after {
   content: " (na stranici " target-counter(attr(href), page) ")";
 }
 

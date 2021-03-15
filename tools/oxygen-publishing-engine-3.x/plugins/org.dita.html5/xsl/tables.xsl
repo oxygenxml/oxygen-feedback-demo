@@ -431,6 +431,11 @@ See the accompanying LICENSE file for applicable license.
     <xsl:apply-templates/>
   </xsl:template>
   <xsl:template match="*[contains(@class, ' topic/table ')]/*[contains(@class, ' topic/desc ')]" mode="get-output-class">tabledesc</xsl:template>
+  
+  <xsl:template match="*[contains(@class, ' topic/table ') ]" mode="table:common">
+    <xsl:apply-templates select="." mode="generate-table-summary-attribute"/>
+    <xsl:next-match/>
+  </xsl:template>
 
   <xsl:template match="*" mode="table:common">
     <xsl:call-template name="commonattributes"/>
@@ -469,7 +474,7 @@ See the accompanying LICENSE file for applicable license.
   </xsl:template>
 
   <xsl:template match="*[contains(@class, ' topic/tgroup ')]/*" mode="table:section">
-    <xsl:apply-templates select="../*[contains(@class, ' ditaot-d/ditaval-startprop ')]/@outputclass" mode="add-ditaval-style"/>
+    <xsl:apply-templates select="../*[contains(@class, ' ditaot-d/ditaval-startprop ')]/@style" mode="add-ditaval-style"/>
     <xsl:apply-templates select="." mode="table:common"/>
     <xsl:apply-templates/>
   </xsl:template>
@@ -518,6 +523,13 @@ See the accompanying LICENSE file for applicable license.
     <xsl:sequence select="dita-ot:css-class((), .)"/>
   </xsl:template>
 
+  <xsl:template match="@rotate" mode="css-class">
+    <xsl:if test=". = 1">
+      <xsl:value-of select="name()"/>
+    </xsl:if>
+  </xsl:template>
+  
+
   <xsl:template match="*[contains(@class, ' topic/tgroup ')]/*" mode="css-class">
     <xsl:apply-templates select="@valign" mode="#current"/>
   </xsl:template>
@@ -530,7 +542,7 @@ See the accompanying LICENSE file for applicable license.
     <xsl:variable name="colsep" as="attribute(colsep)?" select="table:get-entry-colsep(.)"/>
     <xsl:variable name="rowsep" as="attribute(rowsep)?" select="table:get-entry-rowsep(.)"/>
     <xsl:apply-templates mode="#current" select="
-      table:get-entry-align(.), $colsep, $rowsep, @valign
+      table:get-entry-align(.), $colsep, $rowsep, @valign, @rotate
     "/>
   </xsl:template>
 
@@ -566,7 +578,8 @@ See the accompanying LICENSE file for applicable license.
     <span class="table--title-label">
       <xsl:apply-templates select="." mode="title-number">
         <xsl:with-param name="number" as="xs:integer"
-          select="count(key('enumerableByClass', 'topic/table')[. &lt;&lt; current()])"/>
+          select="count((key('enumerableByClass', 'topic/table') | key('enumerableByClass', 'topic/simpletable'))
+                        [. &lt;&lt; current()])"/>
       </xsl:apply-templates>
     </span>
   </xsl:template>

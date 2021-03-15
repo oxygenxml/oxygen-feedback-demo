@@ -76,8 +76,8 @@ I18N file for fi
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(fi):after,
-*[class ~= "topic/link"][href]:lang(fi):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(fi):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(fi):after {
   content: " ( " target-counter(attr(href), page) ")";
 }
 

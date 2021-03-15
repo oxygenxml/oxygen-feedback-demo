@@ -76,8 +76,8 @@ I18N file for ja
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(ja):after,
-*[class ~= "topic/link"][href]:lang(ja):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(ja):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(ja):after {
   content: " (（ページ） " target-counter(attr(href), page) ")";
 }
 

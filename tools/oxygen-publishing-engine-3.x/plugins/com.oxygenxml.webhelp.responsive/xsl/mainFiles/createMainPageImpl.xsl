@@ -2,7 +2,7 @@
 <!--
     
 Oxygen Webhelp plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 -->
 
@@ -38,7 +38,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
     omit-xml-declaration="yes"
     include-content-type="no"/>
   
-  <xsl:variable name="toc" select="document(oxygen:makeURL($TOC_XML_FILEPATH))/toc:toc"/>
+  <xsl:variable name="toc" select="document(oxygen:makeURL($TOC_XML_FILEPATH), .)/toc:toc"/>
 
   <xsl:variable name="webhelp_language" select="oxygen:getParameter('webhelp.language')"/>
   

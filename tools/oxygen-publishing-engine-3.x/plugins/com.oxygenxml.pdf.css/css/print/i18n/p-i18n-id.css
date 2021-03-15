@@ -76,8 +76,8 @@ I18N file for id
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(id):after,
-*[class ~= "topic/link"][href]:lang(id):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(id):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(id):after {
   content: " (pada halaman " target-counter(attr(href), page) ")";
 }
 

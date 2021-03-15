@@ -76,8 +76,8 @@ I18N file for lt
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(lt):after,
-*[class ~= "topic/link"][href]:lang(lt):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(lt):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(lt):after {
   content: " (puslapyje " target-counter(attr(href), page) ")";
 }
 

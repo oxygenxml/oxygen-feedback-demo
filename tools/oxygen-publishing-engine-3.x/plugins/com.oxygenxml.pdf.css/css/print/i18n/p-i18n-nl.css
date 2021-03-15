@@ -76,8 +76,8 @@ I18N file for nl
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(nl):after,
-*[class ~= "topic/link"][href]:lang(nl):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(nl):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(nl):after {
   content: " (op pagina " target-counter(attr(href), page) ")";
 }
 

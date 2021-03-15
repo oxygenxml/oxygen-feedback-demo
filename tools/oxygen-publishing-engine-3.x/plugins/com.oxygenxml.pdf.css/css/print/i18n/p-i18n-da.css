@@ -76,8 +76,8 @@ I18N file for da
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(da):after,
-*[class ~= "topic/link"][href]:lang(da):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(da):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(da):after {
   content: " (på side " target-counter(attr(href), page) ")";
 }
 

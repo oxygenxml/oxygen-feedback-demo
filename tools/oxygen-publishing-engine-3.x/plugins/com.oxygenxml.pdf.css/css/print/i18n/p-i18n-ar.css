@@ -76,8 +76,8 @@ I18N file for ar
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(ar):after,
-*[class ~= "topic/link"][href]:lang(ar):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(ar):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(ar):after {
   content: " (بالصفحة " target-counter(attr(href), page) ")";
 }
 

@@ -346,13 +346,12 @@ tr{
 	
 *[class~="topic/colspec"]:after{
     content:
-    		"  name " oxy_textfield(edit, "@colname", columns, 7) 
-    		"  number " oxy_textfield(edit, "@colnum", columns, 7)
-    		"  width " oxy_textfield(edit, "@colwidth", columns, 7)
-    		"  align " oxy_combobox(edit, "@align", editable, false, canRemoveValue, true, columns, 10)
-    		"  "    		
-    		oxy_checkbox(edit, "@colsep", values, "1", labels, "colsep", fontInherit, true) 
-    		oxy_checkbox(edit, "@rowsep", values, "1", labels, "rowsep", fontInherit, true);
+    		" name " oxy_textfield(edit, "@colname", columns, 6) 
+    		" number " oxy_textfield(edit, "@colnum", columns, 4)
+    		" width " oxy_textfield(edit, "@colwidth", columns, 6)
+    		" align " oxy_combobox(edit, "@align", editable, false, canRemoveValue, true, columns, 12)
+    		" colsep " oxy_combobox(edit, "@colsep", editable, false, canRemoveValue, true, values, "0, 1", columns, 12)
+    		" rowsep " oxy_combobox(edit, "@rowsep", editable, false, canRemoveValue, true, values, "0, 1", columns, 12);
 	white-space: pre;
 	padding-bottom: 5px;
   

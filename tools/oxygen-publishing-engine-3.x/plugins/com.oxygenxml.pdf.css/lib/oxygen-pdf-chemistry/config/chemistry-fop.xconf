@@ -31,6 +31,7 @@
   <renderers>
 
     <renderer mime="application/pdf">
+      ${PARAM_PDF_VERSION}
       <!--
         To score better at the accessibility support, your PDFs should be in the PDF/UA-1 
         mode. This ensure 508 complience. See documentation, accessibilty section for details.

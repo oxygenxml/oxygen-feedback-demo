@@ -76,8 +76,8 @@ I18N file for kk
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(kk):after,
-*[class ~= "topic/link"][href]:lang(kk):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(kk):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(kk):after {
   content: " (бетте " target-counter(attr(href), page) ")";
 }
 

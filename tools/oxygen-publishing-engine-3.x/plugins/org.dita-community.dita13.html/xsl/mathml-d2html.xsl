@@ -46,6 +46,7 @@
   </xsl:template>
   
   <xsl:template mode="gen-user-scripts" match="*[contains(@class, ' topic/topic ')]">
+  
     <xsl:choose>
       <xsl:when test="$mathJaxUseCDNLinkBoolean">
         <!-- Reference to MathMax script as served over the public Web: -->
@@ -65,6 +66,10 @@
         <!-- Do not use MathJax Javascript library -->
       </xsl:otherwise>
     </xsl:choose>
+    
+    <!-- OXYGEN PATCH FOR EXM-46302, allow other plugins add some user scripts.-->
+    <xsl:next-match/>
+    
   </xsl:template>
   
   <xsl:template match="*[contains(@class, ' mathml-d/mathml ')]">

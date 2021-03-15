@@ -2,7 +2,7 @@
 <!--
     
 Oxygen WebHelp Plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="2.0"
@@ -12,7 +12,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
     exclude-result-prefixes="#all">
     <xsl:include href="review-utils.xsl"/>
     <xsl:param name="show.changes.and.comments" select="'no'"/>
-    <xsl:param name="show.changes.and.comments.as.changebars">"'yes'"</xsl:param>
+    <xsl:param name="show.changes.and.comments.as.changebars" select="'yes'"/>
     <xsl:param name="use.alpha.for.highlights" select="'yes'"/>
     
     <xsl:variable name="cmid2nr">
@@ -68,7 +68,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
             <!-- This anchor will remain in the man flow. -->
             <!-- hr_id is the "human readable id" -->
             <oxy:oxy-range-start id="sc_{$comment-nr}" hr_id="{$comment-nr}">
-                <xsl:if test="$show.changes.and.comments and $show.changes.and.comments.as.changebars">
+                <xsl:if test="$show.changes.and.comments.as.changebars = 'yes'">
                     <xsl:attribute name="is-changebar">true</xsl:attribute>
                 </xsl:if>
             </oxy:oxy-range-start>
@@ -85,7 +85,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
                     </xsl:value-of>
                 </oxy:oxy-delete-hl>
                 <oxy:oxy-range-end hr_id="{$comment-nr}">
-                    <xsl:if test="$show.changes.and.comments and $show.changes.and.comments.as.changebars">
+                    <xsl:if test="$show.changes.and.comments.as.changebars = 'yes'">
                         <xsl:attribute name="is-changebar">true</xsl:attribute>
                     </xsl:if>
                 </oxy:oxy-range-end>
@@ -94,7 +94,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
             
             <xsl:if test="name() = 'oxy_attributes'">
                 <oxy:oxy-range-end hr_id="{$comment-nr}">
-                    <xsl:if test="$show.changes.and.comments and $show.changes.and.comments.as.changebars">
+                    <xsl:if test="$show.changes.and.comments.as.changebars = 'yes'">
                         <xsl:attribute name="is-changebar">true</xsl:attribute>
                     </xsl:if>
                 </oxy:oxy-range-end>
@@ -329,7 +329,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
             <xsl:variable name="id" select="generate-id($start-pi)"/>
             <xsl:variable name="comment-nr" select="$cmid2nr//mapping[@id = $id]/@nr"/>
             <oxy:oxy-range-end hr_id="{$comment-nr}">
-                <xsl:if test="$show.changes.and.comments and $show.changes.and.comments.as.changebars">
+                <xsl:if test="$show.changes.and.comments.as.changebars = 'yes'">
                     <xsl:attribute name="is-changebar">true</xsl:attribute>
                 </xsl:if>
             </oxy:oxy-range-end>

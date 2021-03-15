@@ -34,7 +34,7 @@ define(function() {
         "jquery-private" : "jquery-private",
 
         // JQuery
-        "jquery" : "jquery-3.4.1.min",
+        "jquery" : "jquery-3.5.1.min",
 
         // Bootstrap
         "bootstrap" : "../bootstrap/js/bootstrap.min"

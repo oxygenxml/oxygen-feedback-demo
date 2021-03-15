@@ -54,14 +54,13 @@
   	
   	<property name="map2indesign.style" location="${indesign.dir}/xsl/dita2indesign.xsl"/>
   	<echo message="[DEBUG] Applying transform '${map2indesign.style}' to input document '${dita.temp.dir}/${dita.input.filename}'..."/>
-    <xslt processor="trax"
+  	<pipeline>
+    <xslt
       basedir="${dita.temp.dir}"
       destdir="${output.dir}"
-      classpathref="dost.class.path"
       style="${map2indesign.style}"
-    	includesfile="${dita.temp.dir}${file.separator}${fullditatopicfile}"
     	>
-    	<includesfile name="${dita.temp.dir}${file.separator}${chunkedtopicfile}" if="chunkedtopicfile"/>
+    	<ditafileset format="dita" processingRole="normal"/>
       <param name="debug" expression="${debug}"/>
      	<param name="outdir" expression="${indesign.xslt.outdir}"/>
      	<param name="tempdir" expression="${indesign.xslt.tempdir}"/>
@@ -73,6 +72,7 @@
       <param name="WORKDIR" expression="${workdir}" if="workdir"/>
       <xmlcatalog refid="dita.catalog"></xmlcatalog>
     </xslt>
+     </pipeline>
   	<echo message="[DEBUG] Transform applied"/>
   </target>
 
@@ -86,12 +86,12 @@
   	
   	<property name="map2indesign.style" location="${indesign.dir}/xsl/dita2indesign.xsl"/>
   	<echo message="[DEBUG] Applying transform '${map2indesign.style}' to input document '${dita.input.filename}'..."/>
-    <xslt processor="trax"
+  	<pipeline>
+    <xslt 
       basedir="${dita.temp.dir}"
       destdir="${output.dir}"
-      includes="${dita.input.filename}"
-      classpathref="dost.class.path"
       style="${map2indesign.style}">
+      <ditafileset input="true" format="ditamap"/>
       <param name="debug" expression="${debug}"/>
      	<param name="outdir" expression="${indesign.xslt.outdir}"/>
      	<param name="tempdir" expression="${indesign.xslt.tempdir}"/>
@@ -101,6 +101,7 @@
       <param name="WORKDIR" expression="${workdir}" if="workdir"/>
       <xmlcatalog refid="dita.catalog"></xmlcatalog>
     </xslt>
+  		</pipeline>
   	
   </target>
   

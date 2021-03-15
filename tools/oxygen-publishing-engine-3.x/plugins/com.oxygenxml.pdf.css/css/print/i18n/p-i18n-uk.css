@@ -76,8 +76,8 @@ I18N file for uk
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(uk):after,
-*[class ~= "topic/link"][href]:lang(uk):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(uk):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(uk):after {
   content: " (на стор. " target-counter(attr(href), page) ")";
 }
 

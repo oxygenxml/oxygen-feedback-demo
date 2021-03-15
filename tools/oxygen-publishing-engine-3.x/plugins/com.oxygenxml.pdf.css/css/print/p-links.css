@@ -61,6 +61,6 @@
  *[class ~= "topic/link"][href^='ftp://' ]:after,
  *[show-onpage-lbl="no"] *[class ~= "topic/xref"][href]:after,
  *[show-onpage-lbl="no"] *[class ~= "topic/link"][href]:after {
-     content:none;        
+     content:none !important;        
  }    
 

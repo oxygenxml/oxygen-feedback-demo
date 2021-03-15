@@ -76,8 +76,8 @@ I18N file for bs
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(bs):after,
-*[class ~= "topic/link"][href]:lang(bs):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(bs):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(bs):after {
   content: " (on page " target-counter(attr(href), page) ")";
 }
 

@@ -1,4 +1,4 @@
-DITA Open Toolkit bundled with Oxygen 22.1, build 2020051413
+DITA Open Toolkit bundled with Oxygen 23.1, build 2021030218
 
 Differences between the DITA Open Toolkit bundled with Oxygen and a regular DITA Open Toolkit distribution
 downloaded from the DITA-OT project:
@@ -28,8 +28,7 @@ com.oxygenxml.media
 com.oxygenxml.merged
 com.oxygenxml.pdf.css 		
 com.oxygenxml.pdf.custom - deprecated, will be removed in future versions
-com.oxygenxml.pdf.review
-com.oxygenxml.webhelp.classic 
+com.oxygenxml.pdf.review 
 com.oxygenxml.webhelp.common
 com.oxygenxml.webhelp.responsive
 mathml
@@ -38,6 +37,7 @@ mathml
 DITA plugins not distributed by default:
 
 org.dita.javahelp
+org.dita.troff
 
 
 Other third party plugins are distributed under the Apache 2.0 License:
@@ -68,7 +68,14 @@ org.dita4publishers.html2
 org.dita4publishers.json
 org.dita4publishers.kindle
 org.dita4publishers.word2dita
-
+----------PATCHES---------------------
+These is an overview of the major changes we made to the DITA For publishers plugins.
+org.dita-community.dita13.html/xsl/mathml-d2html.xsl
+   EXM-46302 Disable calling a template if certain parameters are not enabled.
+org.dita4publishers.epub/xsl/epubHtmlOverrides.xsl
+   EXM-42549 - adding a / for paths that do not end in a / or \
+org.dita4publishers.epub/lib/epub-font-obfuscator.jar
+    EXM-46537 Removed references to Apache commons io classes
 
 
 --------REMOVED RESOURCES----------------
@@ -113,9 +120,19 @@ org.lwdita
 	
 org.dita.pdf2.fop
 	Added oxygen-patched-* extra jar libraries to the FOP. It allows the FOP to output MathML equations, and various SVG fixes.
+	Updated used Batik Libraries to version 1.13 to avoid CVE-2019-17566
 org.dita.pdf2.fop/cfg.fop.xconf	
     EXM-42187, use a higher source resolution so that SVGs do not appear scaled up
+    
+org.oasis-open.dita.v2_0
+org.oasis-open.dita.techcomm.v2_0
+  Added OASIS license and updated to latest OASIS DTDs from DITA OT project.
 
+    
+lib/commons-io-2.6.jar
+EXM-46537 Updated the JAR library to version 2.8.0 due to security concerns
+lib/ant*.jar
+EXM-46532 Updated to Apache ANT 1.10.9
   
 com.elovirta.ooxml/docx/word/document.topic.xsl
     EXM-44025 Added a patch which uses only the SVG file name for the reference.

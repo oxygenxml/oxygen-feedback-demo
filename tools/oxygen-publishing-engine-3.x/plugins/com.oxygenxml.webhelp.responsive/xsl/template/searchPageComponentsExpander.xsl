@@ -2,7 +2,7 @@
 <!--
     
 Oxygen Webhelp plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 -->
 
@@ -30,22 +30,33 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
   </xsl:template>
   
   <xsl:template match="whc:webhelp_search_results" mode="copy_template">
+    <xsl:param name="template_base_uri" tunnel="yes"/>
+    <xsl:param name="i18n_context" tunnel="yes" as="element()*"/>
+    
     <xsl:variable name="webhelp_search_results">
       <xsl:choose>
         <xsl:when test="string-length($WEBHELP_SEARCH_SCRIPT) > 0 and string-length($WEBHELP_SEARCH_RESULT) > 0">
           <xsl:copy-of select="doc($WEBHELP_SEARCH_RESULT)"/>
         </xsl:when>
-        <xsl:when test="string-length($WEBHELP_SEARCH_SCRIPT) > 0">
-          <div class="gcse-searchresults-only" data-autoSearchOnLoad="true" data-queryParameterName="searchQuery"></div>
+        <xsl:when test="oxygen:getParameter('webhelp.custom.search.engine.enabled') = 'true'">
+          <div class="wh_custom_search_engine_container">
+            <xsl:call-template name="extractFileContent">
+              <xsl:with-param name="href" select="oxygen:getParameter('webhelp.fragment.custom.search.engine.script')"/>
+              <xsl:with-param name="template_base_uri" select="$template_base_uri"/>
+            </xsl:call-template>
+            <xsl:call-template name="extractFileContent">
+              <xsl:with-param name="href" select="oxygen:getParameter('webhelp.fragment.custom.search.engine.results')"/>
+              <xsl:with-param name="template_base_uri" select="$template_base_uri"/>
+            </xsl:call-template>
+          </div>
         </xsl:when>
         <xsl:otherwise>
-          <div>
-            <xsl:call-template name="generateComponentClassAttribute">
-              <xsl:with-param name="compClass">wh_search_results</xsl:with-param>
-            </xsl:call-template>
-            <xsl:copy-of select="@* except @class"/>
-            <xsl:call-template name="generateSearchPreloader"/>
-          </div>
+          <xsl:variable name="whPluginDir" select="oxygen:getParameter('webhelp.responsive.dir')"/>
+          <xsl:variable name="pageLibRefsDir" select="concat($whPluginDir, '/oxygen-webhelp/page-templates-fragments/search/')"/>
+          <xsl:call-template name="extractFileContent">
+            <xsl:with-param name="href" select="concat($pageLibRefsDir, 'search-results.html')"/>
+            <xsl:with-param name="template_base_uri" select="$template_base_uri"/>
+          </xsl:call-template>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>

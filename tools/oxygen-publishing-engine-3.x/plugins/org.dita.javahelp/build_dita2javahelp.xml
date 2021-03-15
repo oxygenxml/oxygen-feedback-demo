@@ -6,7 +6,7 @@ Copyright 2006 IBM Corporation
 
 See the accompanying LICENSE file for applicable license.
 -->
-<project name="dita2javahelp">
+<project name="dita2javahelp" xmlns:if="ant:if">
    <!-- OXYGEN PATCH START EXM-18027 -->
     <import file="build_contexts.xml"/>
     <!-- OXYGEN PATCH END EXM-18027 -->
@@ -20,10 +20,10 @@ See the accompanying LICENSE file for applicable license.
             depends="dita2javahelp.init, build-init, preprocess, 
                      xhtml.topics,
                      copy-css">
-          <antcall target="dita.map.javahelp"/>
-          <antcall target="compile.Java.Help"/>
+          <antcall target="dita.map.javahelp" inheritrefs="true"/>
+          <antcall target="compile.Java.Help" inheritrefs="true"/>
              <!-- OXYGEN PATCH START EXM-18027 -->
-        <antcall target="buildJar"/>
+        <antcall target="buildJar" inheritrefs="true"/>
                      <!-- OXYGEN PATCH END EXM-18027 -->
     </target>
 
@@ -65,8 +65,8 @@ See the accompanying LICENSE file for applicable license.
               includesfile="${dita.temp.dir}/${user.input.file.listfile}"
               classpathref="dost.class.path"
               style="${dita.plugin.org.dita.javahelp.dir}/xsl/map2javahelptoc.xsl">
-        	<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
-            <param name="OUTEXT" expression="${out.ext}" if="out.ext" />
+          <excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
+            <param name="OUTEXT" expression="${out.ext}" if:set="out.ext" />
             <mergemapper to="${args.javahelp.toc}.xml"/>
           <xmlcatalog refid="dita.catalog"/>
         </xslt>
@@ -82,8 +82,8 @@ See the accompanying LICENSE file for applicable license.
             includesfile="${dita.temp.dir}/${user.input.file.listfile}"
             classpathref="dost.class.path"
             style="${dita.plugin.org.dita.javahelp.dir}/xsl/map2javahelptoc.xsl">
-        	<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
-            <param name="OUTEXT" expression="${out.ext}" if="out.ext" />
+          <excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
+            <param name="OUTEXT" expression="${out.ext}" if:set="out.ext" />
             <mapper type="glob"
                 from="${user.input.file}"
                 to="${args.javahelp.toc}.xml" />
@@ -104,8 +104,8 @@ See the accompanying LICENSE file for applicable license.
               includesfile="${dita.temp.dir}/${user.input.file.listfile}"
               classpathref="dost.class.path"
               style="${dita.plugin.org.dita.javahelp.dir}/xsl/map2javahelpmap.xsl">
-        	<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
-            <param name="OUTEXT" expression="${out.ext}" if="out.ext" />
+          <excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
+            <param name="OUTEXT" expression="${out.ext}" if:set="out.ext" />
             <mergemapper to="${args.javahelp.map}.jhm"/>
           <xmlcatalog refid="dita.catalog"/>
         </xslt>
@@ -121,8 +121,8 @@ See the accompanying LICENSE file for applicable license.
             includesfile="${dita.temp.dir}/${user.input.file.listfile}"
             classpathref="dost.class.path"
             style="${dita.plugin.org.dita.javahelp.dir}/xsl/map2javahelpmap.xsl">
-        	<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
-            <param name="OUTEXT" expression="${out.ext}" if="out.ext" />
+          <excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
+            <param name="OUTEXT" expression="${out.ext}" if:set="out.ext" />
             <mapper type="glob"
                 from="${user.input.file}"
                 to="${args.javahelp.map}.jhm" />
@@ -143,11 +143,11 @@ See the accompanying LICENSE file for applicable license.
               includesfile="${dita.temp.dir}/${user.input.file.listfile}"
               classpathref="dost.class.path"
               style="${dita.plugin.org.dita.javahelp.dir}/xsl/map2javahelpset.xsl">
-        	<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
+          <excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
             <param name="javahelpmap" expression="${args.javahelp.map}" />
             <param name="javahelptoc" expression="${args.javahelp.toc}" />
-        	<param name="basedir" expression="${basedir}"/>
-        	<param name="outputdir" expression="${dita.output.dir}"/>
+          <param name="basedir" expression="${basedir}"/>
+          <param name="outputdir" expression="${dita.output.dir}"/>
             <mergemapper to="${dita.map.filename.root}_helpset.hs"/>
           <xmlcatalog refid="dita.catalog"/>
         </xslt>
@@ -163,11 +163,11 @@ See the accompanying LICENSE file for applicable license.
             includesfile="${dita.temp.dir}/${user.input.file.listfile}"
             classpathref="dost.class.path"
             style="${dita.plugin.org.dita.javahelp.dir}/xsl/map2javahelpset.xsl">
-        	<excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
+          <excludesfile name="${dita.temp.dir}/${resourceonlyfile}" if="resourceonlyfile"/>
             <param name="javahelpmap" expression="${args.javahelp.map}" />
             <param name="javahelptoc" expression="${args.javahelp.toc}" />
-        	<param name="basedir" expression="${basedir}"/>
-        	<param name="outputdir" expression="${dita.output.dir}"/>
+          <param name="basedir" expression="${basedir}"/>
+          <param name="outputdir" expression="${dita.output.dir}"/>
             <mapper type="glob"
                 from="${user.input.file}"
                 to="${dita.map.filename.root}_helpset.hs" />
@@ -188,8 +188,8 @@ See the accompanying LICENSE file for applicable license.
             <param name="output" location="${javahelp.index.output.dir}/${dita.map.filename.root}.xml"/>
             <param name="targetext" value=".html"/>
             <param name="indextype" value="javahelp"/>
-            <param name="indexclass" value="org.dita.dost.writer.JavaHelpIndexWriter"/>
-            <param name="encoding" value="${args.dita.locale}" if="args.dita.locale"/>
+           <param name="indexclass" value="org.dita.dost.writer.JavaHelpIndexWriter"/>
+            <param name="encoding" value="${args.dita.locale}" if:set="args.dita.locale"/>
           </module>
         </pipeline>
     </target>
@@ -205,7 +205,7 @@ See the accompanying LICENSE file for applicable license.
             <param name="targetext" value=".html"/>
             <param name="indextype" value="javahelp"/>
             <param name="indexclass" value="org.dita.dost.writer.JavaHelpIndexWriter"/>
-            <param name="encoding" value="${args.dita.locale}" if="args.dita.locale"/>
+            <param name="encoding" value="${args.dita.locale}" if:set="args.dita.locale"/>
           </module>
         </pipeline>
     </target>

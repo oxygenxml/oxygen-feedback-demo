@@ -76,8 +76,8 @@ I18N file for vi
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(vi):after,
-*[class ~= "topic/link"][href]:lang(vi):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(vi):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(vi):after {
   content: " (trên trang " target-counter(attr(href), page) ")";
 }
 

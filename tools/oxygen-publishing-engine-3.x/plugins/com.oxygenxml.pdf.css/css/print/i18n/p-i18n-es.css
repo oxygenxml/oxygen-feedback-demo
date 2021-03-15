@@ -76,8 +76,8 @@ I18N file for es
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(es):after,
-*[class ~= "topic/link"][href]:lang(es):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(es):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(es):after {
   content: " (en la página " target-counter(attr(href), page) ")";
 }
 

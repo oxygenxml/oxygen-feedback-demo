@@ -76,8 +76,8 @@ I18N file for th
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(th):after,
-*[class ~= "topic/link"][href]:lang(th):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(th):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(th):after {
   content: " (ในหน้า " target-counter(attr(href), page) ")";
 }
 

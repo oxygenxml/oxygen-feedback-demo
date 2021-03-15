@@ -2,7 +2,7 @@
 <!--
     
 Oxygen WebHelp Plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 -->
 
@@ -21,46 +21,19 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
     <xsl:param name="INDEXTERMS_PROPERTIES_URL"/>
     
     <!-- List of topic files that contain indexterms. -->
-    <xsl:param name="FILELIST"/>
-    
-    <!-- 
-    	List of topic files that are marked as resource only. 
-    	They should should be excluded when collecting indexterms
-     -->
-    <xsl:param name="FILELIST_TO_EXCLUDE"/>
-
-    <!-- The encoding of the file list. -->
-    <xsl:param name="FILELIST_ENCODING"/>
+    <xsl:param name="JOB_FILE"/>
     
     <xsl:output name="properties" omit-xml-declaration="yes" method="text"/> 
     
     <xsl:template match="/">
         <xsl:variable name="terms">
-            <xsl:analyze-string select="unparsed-text(oxygen:makeURL($FILELIST), $FILELIST_ENCODING)" regex="\n">
-                <xsl:non-matching-substring>
-                    <xsl:variable name="indexTermsFile" select="."/>
-                    <xsl:variable 
-                        name="fileToExclude" 
-                        select="unparsed-text(oxygen:makeURL($FILELIST_TO_EXCLUDE), $FILELIST_ENCODING)"/>
-                    <!-- EXM-35003 - Do not collect indexterm for topics marked as resource only. -->
-                    
-                    <!-- Escape '\' char that is used in file paths -->                    
-                    <xsl:variable name="regExp" select="
-                        oxygen:escape-for-regex(replace(concat('(^)?', $indexTermsFile, '($)?'), '\\', '\\\\'))"/>
-                    
-                    <xsl:if 
-                        test="not(matches(
-                        $fileToExclude, 
-                        $regExp, 
-                            'm'))">
-                        <xsl:variable 
-                            name="INDEXFILE_URL" 
-                            select="oxygen:makeURL(concat($TEMPFOLDER, '/', $indexTermsFile, '.indexterms'))"/>
-                        <xsl:message>Generate <xsl:value-of select="$INDEXFILE_URL"/></xsl:message>
-                        <xsl:copy-of select="document($INDEXFILE_URL)/*/*"/>
-                    </xsl:if>
-                </xsl:non-matching-substring>
-            </xsl:analyze-string>
+            <xsl:variable name="jobContents" select="document(oxygen:makeURL($JOB_FILE), .)"/>
+            <xsl:for-each select="$jobContents//file[@format='dita'][not(@resource-only='true')]/@uri">
+                <xsl:variable 
+                    name="INDEXFILE_URL" 
+                    select="oxygen:makeURL(concat($TEMPFOLDER, '/', ., '.indexterms'))"/>
+                <xsl:copy-of select="document($INDEXFILE_URL, .)/*/*"/>
+            </xsl:for-each>
         </xsl:variable>
         
         <index xmlns="http://www.oxygenxml.com/ns/webhelp/index">

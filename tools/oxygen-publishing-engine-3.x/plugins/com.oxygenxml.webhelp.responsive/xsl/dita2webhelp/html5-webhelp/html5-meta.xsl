@@ -9,6 +9,7 @@
 
   <!-- Finds all index terms and adds them to the meta element 'indexterms'. (EXM-20576) -->
   <xsl:template match="*" mode="gen-keywords-metadata">
+    <xsl:next-match/>
     <xsl:variable name="indexterms-content">
       <xsl:for-each select="descendant::*[contains(@class,' topic/keywords ')]//*[contains(@class,' topic/indexterm ')]">
         <xsl:value-of select="normalize-space(text()[1])" />

@@ -76,8 +76,8 @@ I18N file for ko
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(ko):after,
-*[class ~= "topic/link"][href]:lang(ko):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(ko):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(ko):after {
   content: " (페이지 " target-counter(attr(href), page) ")";
 }
 

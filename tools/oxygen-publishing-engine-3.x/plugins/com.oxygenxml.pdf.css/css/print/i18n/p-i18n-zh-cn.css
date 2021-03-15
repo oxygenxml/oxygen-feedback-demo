@@ -76,8 +76,8 @@ I18N file for zh-cn
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(zh-cn):after,
-*[class ~= "topic/link"][href]:lang(zh-cn):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(zh-cn):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(zh-cn):after {
   content: " (on page " target-counter(attr(href), page) ")";
 }
 

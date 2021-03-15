@@ -8,7 +8,6 @@
     exclude-result-prefixes="#all">
 
     <xsl:import href="../review/review-pis-to-elements.xsl"/>    
-    <xsl:import href="../review/review-dita-id-filter.xsl"/>
 
     <xsl:param name="args.draft" select="'no'"/>
     <xsl:param name="args.chapter.layout" select="'BASIC'" />
@@ -35,10 +34,11 @@
     <xsl:include href="merged-topics.xsl"/>
     <xsl:include href="merged-figures.xsl"/>
     <xsl:include href="merged-titles.xsl"/>
-    <xsl:include href="merged-footnotes.xsl"/>
     
     <xsl:include href="merged-flagging.xsl"/>
     <xsl:include href="merged-placeholders.xsl"/>
     <xsl:include href="merged-named-destinations.xsl"/>
+    
+    <xsl:include href="merged-plugin-svg-syntaxdiagrams.xsl"/>
     
 </xsl:stylesheet>

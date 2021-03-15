@@ -1,11 +1,6 @@
 <transtype name="webhelp-responsive" extends="webhelp-responsive-common" desc="WebHelp Responsive" xml:base="."/>
 <transtype name="webhelp-responsive-common" extends="webhelpCommons" abstract="true"  xml:base=".">
-    <!-- EXM-44376: Set default on "yes" -->
-    <param name="args.copycss" desc="Specifies whether to copy the custom .css file to the output directory." type="enum">
-        <val default="true">yes</val>
-        <val>no</val>
-    </param>
-    
+
     <param name="webhelp.topic.collapsible.elements.initial.state"
         desc="Set the inital state of collapsible elements."
         type="enum">
@@ -176,6 +171,26 @@
         type="file">
         <val default="true"></val>            
     </param>
+    <param name="webhelp.fragment.head.main.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It inserts the given XHTML content in the 'head' element of the Main page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.head.topic.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It inserts the given XHTML content in the 'head' element of each Topic page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.head.search.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It inserts the given XHTML content in the 'head' element of the Search Results page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.head.terms.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It inserts the given XHTML content in the 'head' element of the Index Terms page."
+        type="file">
+        <val default="true"></val>            
+    </param>
     
     <param name="webhelp.fragment.header"
         desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content as header in all generated WebHelp pages."
@@ -183,26 +198,180 @@
         <val default="true">header.xml</val>            
     </param>        
     
+    <param name="webhelp.fragment.after.header"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the header section in all generated WebHelp pages."
+        type="file">
+        <val default="true"></val>            
+    </param> 
+    <param name="webhelp.fragment.after.header.main.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the header section in the Main page."
+        type="file">
+        <val default="true"></val>            
+    </param> 
+    <param name="webhelp.fragment.after.header.topic.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the header section in each Topic page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.header.search.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the header section in the Search Results page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.header.terms.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the header section in the Index Terms page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    
+    
+    
     <!-- Before & after html -->
     <param name="webhelp.fragment.before.body"
         desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the beginning of the html 'body' element in all generated WebHelp pages."
         type="file">
         <val default="true"></val>            
     </param>
+    <param name="webhelp.fragment.before.body.main.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the beginning of the html 'body' element in the Main page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.body.topic.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the beginning of the html 'body' element in each Topic page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.body.search.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the beginning of the html 'body' element in the Search Results page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.body.terms.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the beginning of the html 'body' element in the Index Terms page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    
     <param name="webhelp.fragment.after.body"
         desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the end of the html 'body' element in all generated WebHelp pages."
         type="file">
         <val default="true"></val>            
     </param>
+    <param name="webhelp.fragment.after.body.main.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the end of the html 'body' element in the Main page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.body.topic.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the end of the html 'body' element in each Topic page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.body.search.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the end of the html 'body' element in the Search Results page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.body.terms.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. The XHTML content will be included at the end of the html 'body' element in the Index Terms page."
+        type="file">
+        <val default="true"></val>            
+    </param>
     
-    <!-- Before & after the main page search component -->
-    <param name="webhelp.fragment.before.main.page.search"
+    <!-- Before & after the search component  -->
+    <param name="webhelp.fragment.before.search.input"
         desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the search field in all generated WebHelp pages."
         type="file">
         <val default="true"></val>            
     </param>
-    <param name="webhelp.fragment.after.main.page.search"
+    <param name="webhelp.fragment.before.search.input.main.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the search field in the Main page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.search.input.topic.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the search field in each Topic page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.search.input.search.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the search field in the Search Results page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    
+    <param name="webhelp.fragment.after.search.input"
         desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the search field in all generated WebHelp pages."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.search.input.main.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the search field in the Main page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.search.input.topic.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the search field in each Topic page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.search.input.search.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the search field in the Search Results page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    
+    <!-- Before & after the main content section  -->
+    <param name="webhelp.fragment.before.main.content.area"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the main content section ('div.wh_content_area') in all generated WebHelp pages."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.main.content.area.main.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the main content section ('div.wh_content_area') in the Main page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.main.content.area.topic.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the main content section ('div.wh_content_area') in each Topic page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.main.content.area.search.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the main content section ('div.wh_content_area') in the Search Results page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.main.content.area.terms.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content before the main content section ('div.wh_content_area') in the Index Terms page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    
+    <param name="webhelp.fragment.after.main.content.area"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the main content section ('div.wh_content_area') in all generated WebHelp pages."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    
+    <param name="webhelp.fragment.after.main.content.area.main.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the main content section ('div.wh_content_area') in the Main page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.main.content.area.topic.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the main content section ('div.wh_content_area') in each Topic page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.main.content.area.search.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the main content section ('div.wh_content_area') in the Search Results page."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.main.content.area.terms.page"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content after the main content section ('div.wh_content_area') in the Index Terms page."
         type="file">
         <val default="true"></val>            
     </param>
@@ -218,6 +387,69 @@
         type="file">
         <val default="true"></val>            
     </param>
+    
+    <!-- Before & after topic components -->
+    <param name="webhelp.fragment.before.topic.toolbar"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, before the toolbar buttons from above the topic content."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.topic.toolbar"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, after the toolbar buttons from above the topic content."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.topic.breadcrumb"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, before the topic's breadcrumb component."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.topic.breadcrumb"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, after the topic's breadcrumb component."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.publication.toc"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, before the topic's Publication Table of Contents component."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.publication.toc"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, after the topic's Publication Table of Contents component."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.topic.content"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, before the topic's content."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.topic.content"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, after the topic's content."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.feedback"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, before the topic's Feedback component."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.feedback"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, after the topic's Feedback component."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.before.topic.toc"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, before the topic's Table of Contents component."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    <param name="webhelp.fragment.after.topic.toc"
+        desc="Specifies either an XHTML fragment or the path to an XHTML file. It displays the given XHTML content in the Topic page of the generated WebHelp output, after the topic's Table of Contents component."
+        type="file">
+        <val default="true"></val>            
+    </param>
+    
     
     <param name="webhelp.enable.search.autocomplete"
         desc="Specifies if autocomplete feature is enabled in the WebHelp search text field."        
@@ -275,6 +507,20 @@
         Use comma separator to specify more than one word. Sample: 'if,for'."
         type="string">        
     </param>
+    <param name="webhelp.search.stop.words.include"
+        desc="Specifies a list of words that should be included in the default stop words list.
+        Use comma separator to specify more than one word. Sample: 'if,for'."
+        type="string">        
+    </param>
+    
+    <param name="webhelp.search.index.elements.to.exclude"
+        desc="Specifies a list of HTML elements that will not be indexed by the search engine.
+        The value of the @class attribute can be used to exclude specific HTML elements from indexing. 
+        For example, the 'div.not-indexed' value will not index all &lt;div&gt; elements that have a @class attribute with the value of 'not-indexed'.
+        Use a comma separator to specify more than one element.
+        Example: 'table,span.not-indexed,div.not-indexed'."
+        type="string">        
+    </param>
     
     <param name="webhelp.default.collection.type.sequence"
         desc="Specifies if the 'sequence' value will be used by default when the collection-type attribute is not specified.
@@ -301,6 +547,69 @@
         type="enum">
         <val default="true">yes</val>
         <val>no</val>
-    </param>    
+    </param>
+    
+    <param name="webhelp.fragment.custom.search.engine.script"
+        desc="Replaces WebHelp's built-in search engine with your own custom search engine. The value of the parameter is the path to an XHTML file that contains the scripts required for your custom search engine to run."
+        type="file">
+    </param>
+    
+    <param name="webhelp.fragment.custom.search.engine.results"
+        desc="Replaces the search results area with a custom XHTML content. The value of the parameter is the path to an XHTML file that contains your custom content."
+        type="file">
+    </param>
+    
+    <param name="webhelp.enable.html.fragments.cleanup"
+        desc="Enables/disables automatically conversion of the values provided as HTML fragments to well-formed XML fragments.&#xa;
+        If it set to 'true', then the fragments that are not XML well-formed are converted.&#xa;
+        Otherwise, the transformation will fail if at least one HTML fragment is not well formed."        
+        type="enum">
+        <val default="true">true</val>
+        <val>false</val>
+    </param>
+    <param name="webhelp.html.fragments.converter.properties.file"
+        desc="Path to the file containing properties for configuring the HTML to Well Formed XML converter.&#xa;
+        The available properties are described here: http://htmlcleaner.sourceforge.net/parameters.php#params"        
+        type="file">
+    </param>
+    
+    
+    <param name="webhelp.show.pdf.link"
+        desc="Specifies if the PDF link component will be presented in the Webhelp Responsive output."        
+        type="enum">
+        <val default="true">yes</val>
+        <val>no</val>
+    </param>
+    
+    <param name="webhelp.pdf.link.url"
+        desc="Specifies the target URL for the PDF link."        
+        type="string">
+    </param>
+    
+    <param name="webhelp.pdf.link.text"
+        desc="Specifies the text for the PDF link."        
+        type="string">
+    </param>
+    
+    <param name="webhelp.pdf.link.icon.path"
+        desc="Specifies the path or the URL of the image icon used for the PDF link."        
+        type="string">
+    </param>
+    
+    <param name="webhelp.pdf.link.name.destination.enabled"
+        desc="Specifies if the current topic ID should be appended as name destination at the end of the PDF link."        
+        type="enum">
+        <val default="true">yes</val>
+        <val>no</val>
+    </param>
+    
+    <param name="webhelp.enable.block.elements.id.generation"
+        desc="Specifies if the data-ofbid attribute should be auto generated for block elements in the Webhelp Responsive output.
+        If is set to 'yes' and Oxygen Feedback is integrated in the Webhelp Responsive output then you will be able to add and manage 
+        comments contextually at a specific location within the output page where block elements appear (e.g. section, paragraph, list, or table elements)."        
+        type="enum">
+        <val default="true">no</val>
+        <val>yes</val>
+    </param>
 </transtype>
     

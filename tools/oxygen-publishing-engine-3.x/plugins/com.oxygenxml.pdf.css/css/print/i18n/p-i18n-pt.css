@@ -76,8 +76,8 @@ I18N file for pt
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(pt):after,
-*[class ~= "topic/link"][href]:lang(pt):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(pt):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(pt):after {
   content: " (na página " target-counter(attr(href), page) ")";
 }
 

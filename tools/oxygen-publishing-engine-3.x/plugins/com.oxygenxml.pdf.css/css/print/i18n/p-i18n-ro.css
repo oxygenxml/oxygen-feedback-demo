@@ -76,8 +76,8 @@ I18N file for ro
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(ro):after,
-*[class ~= "topic/link"][href]:lang(ro):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(ro):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(ro):after {
   content: " ( " target-counter(attr(href), page) ")";
 }
 

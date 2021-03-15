@@ -2,7 +2,7 @@
 <!--
     
 Oxygen Webhelp plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 -->
 
@@ -253,7 +253,7 @@ Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
         <xsl:call-template name="generateComponentClassAttribute">
           <xsl:with-param name="compClass" select="$class"></xsl:with-param>
         </xsl:call-template>
-        <xsl:copy-of select="@* except (@class | @wh-toc-id)"/>
+        <xsl:copy-of select="@* except (@class | @wh-toc-id | @xtrf | @xtrc)"/>
         <xsl:apply-templates select="$cTopic/toc:shortdesc"/>
       </div>
     </xsl:if>

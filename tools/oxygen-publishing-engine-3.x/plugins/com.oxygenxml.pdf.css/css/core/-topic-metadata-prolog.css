@@ -454,9 +454,16 @@
 /*========= EXM-29633 - DITA 1.3 Change elements domain =======*/
 
 
-
-
-
+/* Inhibit the topic/data inherited static content */
+*[class*="relmgmt-d/"]:before {
+    content:none !important; 
+}
+*[class*="relmgmt-d/"]:before(3) {
+  content: "";
+}
+*[class*="relmgmt-d/"][name]:before(2) {
+    content: "";
+}
 /* ==================================================
  *
  * <change-historylis>
@@ -513,12 +520,6 @@
 *[class~="relmgmt-d/change-person"]:before(300) {
 /**/
 }
-/* Inhibit the topic/data inherited static content */
-*[class~="relmgmt-d/change-person"]:before {
-    content:none !important; 
-}
-
-
 
 /* ==================================================
  *

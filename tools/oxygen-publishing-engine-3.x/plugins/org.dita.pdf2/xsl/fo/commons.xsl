@@ -74,11 +74,9 @@ See the accompanying LICENSE file for applicable license.
     <xsl:key name="enumerableByClass"
              match="*[contains(@class, ' topic/fig ')][*[contains(@class, ' topic/title ')]] |
                     *[contains(@class, ' topic/table ')][*[contains(@class, ' topic/title ')]] |
+                    *[contains(@class, ' topic/simpletable ')][*[contains(@class, ' topic/title ')]] |
                     *[contains(@class,' topic/fn ') and empty(@callout)]"
               use="tokenize(@class, ' ')"/>
-
-    <!-- Deprecated since 2.3 -->
-    <xsl:variable name="msgprefix" select="'PDFX'"/>
 
     <xsl:variable name="id.toc" select="'ID_TOC_00-0F-EA-40-0D-4D'"/>
     <xsl:variable name="id.index" select="'ID_INDEX_00-0F-EA-40-0D-4D'"/>

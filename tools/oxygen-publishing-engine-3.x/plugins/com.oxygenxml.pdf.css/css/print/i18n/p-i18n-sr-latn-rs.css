@@ -76,8 +76,8 @@ I18N file for sr-latn-rs
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(sr-latn-rs):after,
-*[class ~= "topic/link"][href]:lang(sr-latn-rs):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(sr-latn-rs):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(sr-latn-rs):after {
   content: " (na strani " target-counter(attr(href), page) ")";
 }
 

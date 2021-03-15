@@ -6,12 +6,26 @@
  * =====================================================
  */
 
-
+/* 
+ Use 96dpi to be compatible with the CSS spec. Until 23.0 this was 120dpi.	
+ In this way the coordinates from a image map area are perfectly aligned with the image.
+*/
 *[class ~= "topic/image"] {
-    prince-image-resolution: 120dpi;
-    -ah-image-resolution: 120dpi;
-    image-resolution: 120dpi;
+    prince-image-resolution: 96dpi;
+    -ah-image-resolution: 96dpi;
+    image-resolution: 96dpi;
     max-width: 100%;         
+}
+
+/*
+ The images that use image maps must not to be automatically scaled.
+ By default, all images have the max-width = 100% that triggers 
+ scaling down if the image is too big. However, this will change 
+ the effective image size and the areas will not be placed correctly.
+ Inhibit this.  
+ */
+*[class ~= "ut-d/imagemap"] > *[class ~= "topic/image"] {
+    max-width: auto;
 }
 
 /*
@@ -43,20 +57,22 @@
   counter-increment: figcount;
 }
 
+/* Image Map inherits from Fig and should not increment the counter. */
+*[class~="ut-d/imagemap"] {
+  counter-increment: none;
+}
 
 /*
  Keep the figure caption on the same page with the image, for HTML5 output, for the images
  with placement break.
 */
-
 /* figure title placement top */
 figure > figcaption + br {
 	page-break-before:avoid;
 }
-figure > figcaption + br + img[placement='break']{
+figure > figcaption + br + img[placement='break'] {
 	page-break-before:avoid;
 }
-
 
 /* figure title placement bottom */
 figure > br + img[placement='break'] + br {
@@ -70,3 +86,27 @@ img[placement='break'] {
 	display:block;
 }
 
+/* 
+ * Center images with align center.
+ */
+figure:has(img[align='center']) > figcaption {
+  text-align: center;
+}
+
+img[align='center'] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 
+ * Right align images with align right.
+ */
+figure:has(img[align='right']) > figcaption {
+  text-align: right;
+}
+
+img[align='right'] {
+  display: block;
+  margin-left: auto;
+}

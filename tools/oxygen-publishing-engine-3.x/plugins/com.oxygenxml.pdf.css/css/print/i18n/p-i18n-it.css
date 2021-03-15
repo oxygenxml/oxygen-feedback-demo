@@ -76,8 +76,8 @@ I18N file for it
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(it):after,
-*[class ~= "topic/link"][href]:lang(it):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(it):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(it):after {
   content: " (alla pagina " target-counter(attr(href), page) ")";
 }
 

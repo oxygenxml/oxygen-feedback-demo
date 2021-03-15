@@ -2,7 +2,7 @@
 <!--
     
 Oxygen float image
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 Licensed under the terms stated in the license file LICENSE 
 available in the base directory of this plugin.
 

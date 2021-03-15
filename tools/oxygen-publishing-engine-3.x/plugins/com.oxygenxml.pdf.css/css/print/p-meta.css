@@ -11,7 +11,7 @@
 /* 
  * Titles (maps).
  */
-*[class ~= "front-page/front-page-title"] *[class ~= "topic/title"] {
+*[class ~= "front-page/front-page-title"] *[class ~= "topic/title"]:not([class ~= 'bookmap/booktitle']) {
     -oxy-pdf-meta-title: content();
 }
 
@@ -108,3 +108,12 @@
 	display: none;
 }
 
+/*
+ * For the HTML based transformation we need to ignore the property
+ * set on the HTML title element in order to let the CSS selectors matching the class
+ * front-page/title set its value. Please note that the PDF title is collected only 
+ * from the first occurence of the property on an element, in document order.
+ */
+html > head > title {
+	-oxy-pdf-meta-title: unset;
+}

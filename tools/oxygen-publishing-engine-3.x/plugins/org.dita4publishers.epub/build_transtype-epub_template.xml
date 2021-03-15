@@ -1,5 +1,6 @@
 <project name="dita2epub" default="dita2epub"
   xmlns:dita="http://dita-ot.sourceforge.net"
+  xmlns:if="ant:if"
   >
 
   <!-- test to see where the plugin is located, plugins or demo -->

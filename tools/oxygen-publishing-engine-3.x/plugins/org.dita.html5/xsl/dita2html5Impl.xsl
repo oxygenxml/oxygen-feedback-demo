@@ -31,7 +31,7 @@ See the accompanying LICENSE file for applicable license.
   
   <xsl:import href="plugin:org.dita.html5:xsl/htmlflag.xsl"/>
     
-  <xsl:import xmlns:dita="http://dita-ot.sourceforge.net" href="plugin:com.oxygenxml.dita-ot.plugin.mathml:xhtmlMathML.xsl"/><xsl:import href="plugin:com.oxygenxml.editlink:xhtml.xsl"/><xsl:import href="plugin:com.oxygenxml.highlight:xhtmlHighlight.xsl"/><xsl:import href="plugin:com.oxygenxml.html.embed:xhtmlEmbed.xsl"/><xsl:import href="plugin:com.oxygenxml.image.float:customXHTML.xsl"/><xsl:import href="plugin:com.oxygenxml.media:xhtmlMedia.xsl"/><xsl:import href="plugin:org.dita-community.dita13.html:xsl/dita13Vocab2Html.xsl"/>
+  <xsl:import xmlns:dita="http://dita-ot.sourceforge.net" href="plugin:com.oxygenxml.dita-ot.plugin.mathml:xhtmlMathML.xsl"/><xsl:import href="plugin:com.oxygenxml.editlink:xhtml.xsl"/><xsl:import href="plugin:com.oxygenxml.highlight:xhtmlHighlight.xsl"/><xsl:import href="plugin:com.oxygenxml.html.embed:xhtmlEmbed.xsl"/><xsl:import href="plugin:com.oxygenxml.image.float:customXHTML.xsl"/><xsl:import href="plugin:com.oxygenxml.media:xhtmlMedia.xsl"/><xsl:import href="plugin:org.dita-community.dita13.html:xsl/dita13Vocab2Html.xsl"/><xsl:import href="plugin:org.dita.html5.dublin-core:xsl/dublin-core.xsl"/>
 
   <!-- root rule -->
   <xsl:template match="/">

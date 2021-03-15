@@ -7,4 +7,3 @@
 <template file="xsl/mainFiles/createIndextermsPage_template.xsl" xml:base="."/>
 
 <template file="build_dita_template.xml" xml:base="."/>
-<template file="build_dita_template.2x.xml" xml:base="."/>

@@ -76,8 +76,8 @@ I18N file for sr-latn-me
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(sr-latn-me):after,
-*[class ~= "topic/link"][href]:lang(sr-latn-me):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(sr-latn-me):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(sr-latn-me):after {
   content: " (on page " target-counter(attr(href), page) ")";
 }
 

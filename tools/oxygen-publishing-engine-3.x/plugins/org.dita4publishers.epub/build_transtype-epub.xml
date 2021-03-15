@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project xmlns:dita="http://dita-ot.sourceforge.net" name="dita2epub" default="dita2epub">
+<?xml version="1.0" encoding="UTF-8"?><project xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" name="dita2epub" default="dita2epub">
 
   <!-- test to see where the plugin is located, plugins or demo -->
   <dirname property="epub.dir" file="${ant.file.dita2epub}"/>

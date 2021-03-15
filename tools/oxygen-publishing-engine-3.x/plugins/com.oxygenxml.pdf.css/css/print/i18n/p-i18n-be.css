@@ -76,8 +76,8 @@ I18N file for be
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(be):after,
-*[class ~= "topic/link"][href]:lang(be):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(be):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(be):after {
   content: " (на стар. " target-counter(attr(href), page) ")";
 }
 

@@ -76,8 +76,8 @@ I18N file for sl
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(sl):after,
-*[class ~= "topic/link"][href]:lang(sl):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(sl):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(sl):after {
   content: " (na strani " target-counter(attr(href), page) ")";
 }
 

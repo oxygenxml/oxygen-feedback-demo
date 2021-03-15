@@ -11,9 +11,6 @@ See the accompanying LICENSE file for applicable license.
                 xmlns:ditamsg="http://dita-ot.sourceforge.net/ns/200704/ditamsg" version="2.0"
                 exclude-result-prefixes="dita-ot ditamsg">
 
-  <!-- Deprecated since 2.3 -->
-  <xsl:variable name="msgprefix">DOTX</xsl:variable>
-
   <xsl:param name="OUTEXT" select="'.html'"/>
   <xsl:param name="WORKDIR">
     <xsl:apply-templates select="/processing-instruction('workdir-uri')[1]" mode="get-work-dir"/>
@@ -137,8 +134,8 @@ See the accompanying LICENSE file for applicable license.
         <xsl:value-of select="@navtitle"/>
       </xsl:when>
       <!-- If there is no title and none can be retrieved, check for <linktext> -->
-      <xsl:when test="*[contains(@class, ' map/topicmeta ')]/*[contains(@class, ' map/linktext ')]">
-        <xsl:apply-templates select="*[contains(@class, ' map/topicmeta ')]/*[contains(@class, ' map/linktext ')]"
+      <xsl:when test="*[contains(@class, ' map/topicmeta ')]/*[dita-ot:matches-linktext-class(@class)]">
+        <xsl:apply-templates select="*[contains(@class, ' map/topicmeta ')]/*[dita-ot:matches-linktext-class(@class)]"
                              mode="dita-ot:text-only"/>
       </xsl:when>
       <!-- No local title, and not targeting a DITA file. Could be just a container setting

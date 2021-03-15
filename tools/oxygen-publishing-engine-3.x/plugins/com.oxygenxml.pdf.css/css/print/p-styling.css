@@ -25,11 +25,18 @@
  *	pdf-css-html specific	
  * ==================================================
  */
-/*
- * The codeblock element should do an overflow-wrap.
+/* 
+ * The screen element should pre-wrap.
  */
+*[class~="ui-d/screen"] {
+  white-space:pre-wrap;
+}
+/*
+ * The pre and the codeblock elements should do an overflow-wrap.
+ */
+*[class~="topic/pre"],
 *[class~="pr-d/codeblock"] {
-    overflow-wrap:break-word;
+  overflow-wrap:break-word;
 }
 
 /*
@@ -46,4 +53,11 @@
  */ 
 *[class ~= "glossentry/glossUsage"] > .note__title {
   display: none;
+}
+
+/* 
+ * Avoid any page-break between note title and first next sibling.
+ */
+span.note__title {
+  page-break-after: avoid;
 }

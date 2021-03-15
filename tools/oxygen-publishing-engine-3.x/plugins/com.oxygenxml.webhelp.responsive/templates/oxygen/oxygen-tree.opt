@@ -14,6 +14,8 @@
         <resources>
             <!-- Main CSS file -->
             <css file="oxygen.css"/>
+            <!-- CSS for notes -->
+            <css file="notes.css"/>
             <!-- Images -->
             <fileset>
                 <include name="resources/**/*"/>

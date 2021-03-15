@@ -13,6 +13,8 @@
         <resources>
             <!-- Main CSS file -->
             <css file="ashes.css"/>
+            <!-- CSS for notes -->
+            <css file="notes.css"/>
         </resources>
         
         <parameters>

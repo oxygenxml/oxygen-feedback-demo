@@ -2,7 +2,7 @@
 /*
     
 Oxygen WebHelp Plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 */
 
@@ -30,6 +30,7 @@ if (isset($_POST['update']) && trim($_POST['update']) != '') {
     $info['notifyPage'] = $_POST['notifyPage'];
     $info['notifyAll'] = $_POST['notifyAll'];
     $info['notifyReply'] = $_POST['notifyReply'];
+    $info['userId'] = $_POST['userId'];
 
     $pName = (isset($_POST['product']) ? $_POST['product'] : "");
     $pVersion = (isset($_POST['version']) ? $_POST['version'] : "");

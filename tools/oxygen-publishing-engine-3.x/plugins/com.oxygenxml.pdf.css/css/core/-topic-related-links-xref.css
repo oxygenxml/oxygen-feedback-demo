@@ -44,14 +44,12 @@
  */
  
 /* EXM-44118 - Allow keyref navigation for xref and link elements*/ 
-@media oxygen and (platform:"standalone"), oxygen and (platform:"eclipse") {
-    *[class~="topic/link"][href],
-    *[class~="topic/xref"][href] {
-        link: attr(href);
-         -oxy-link-activation-trigger:modifier-click;
-    }
+*[class~="topic/link"][href],
+*[class~="topic/xref"][href] {
+    link: attr(href);
+     -oxy-link-activation-trigger: modifier-click;
 }
- 
+
 *[class~="topic/link"][href]:before,
 *[class~="topic/xref"][href]:before {
     link: attr(href);

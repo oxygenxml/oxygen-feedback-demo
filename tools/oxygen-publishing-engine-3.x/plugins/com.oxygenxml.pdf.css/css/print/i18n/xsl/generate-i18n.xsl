@@ -250,8 +250,8 @@ I18N file for <xsl:value-of select="$lang"/>
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]<xsl:value-of select="$lang-cond"/>:after,
-*[class ~= "topic/link"][href]<xsl:value-of select="$lang-cond"/>:after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]<xsl:value-of select="$lang-cond"/>:after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]<xsl:value-of select="$lang-cond"/>:after {
   content: " (<xsl:value-of select="normalize-space(//*[@id = 'On the page'])"/> " target-counter(attr(href), page) ")";
 }
 

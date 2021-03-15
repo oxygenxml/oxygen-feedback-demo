@@ -362,7 +362,6 @@
       + imagesOutputDir = "<xsl:sequence select="$imagesOutputDir"/>"
       + imagesOutputDir = "<xsl:sequence select="$imagesOutputDir"/>"
       + mathJaxInclude  = "<xsl:sequence select="$mathJaxInclude"/>"
-      + mathJaxConfigParam = "<xsl:sequence select="$mathJaxConfigParam"/>"
       + mathJaxLocalJavascriptUri= "<xsl:sequence select="$mathJaxLocalJavascriptUri"/>"
       + outdir          = "<xsl:sequence select="$outdir"/>"
       + tempdir         = "<xsl:sequence select="$tempdir"/>"
@@ -378,7 +377,6 @@
       
       + WORKDIR         = "<xsl:sequence select="$WORKDIR"/>"
       + PATH2PROJ       = "<xsl:sequence select="$PATH2PROJ"/>"
-      + KEYREF-FILE     = "<xsl:sequence select="$KEYREF-FILE"/>"
       + CSS             = "<xsl:sequence select="$CSS"/>"
       + CSSPATH         = "<xsl:sequence select="$CSSPATH"/>"
       + debug           = "<xsl:sequence select="$debug"/>"

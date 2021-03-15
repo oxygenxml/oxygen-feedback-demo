@@ -40,7 +40,7 @@
    -oxy-pdf-tag-type: "H6";
 }
 *[class ~= "topic/q"] {
-   -oxy-pdf-tag-type: "Q";
+   -oxy-pdf-tag-type: "Quote";
 }
 *[class ~= "topic/pre"],
 *[class ~= "pr-d/codeph"] {

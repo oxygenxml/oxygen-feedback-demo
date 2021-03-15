@@ -76,8 +76,8 @@ I18N file for lv
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(lv):after,
-*[class ~= "topic/link"][href]:lang(lv):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(lv):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(lv):after {
   content: " (lpp. " target-counter(attr(href), page) ")";
 }
 

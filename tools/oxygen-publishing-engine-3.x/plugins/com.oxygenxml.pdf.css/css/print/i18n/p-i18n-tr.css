@@ -76,8 +76,8 @@ I18N file for tr
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(tr):after,
-*[class ~= "topic/link"][href]:lang(tr):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(tr):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(tr):after {
   content: " (sayfa " target-counter(attr(href), page) ")";
 }
 

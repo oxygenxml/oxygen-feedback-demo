@@ -76,8 +76,8 @@ I18N file for he
 }
 
 /* Links. */
-*[class ~= "topic/xref"][href]:lang(he):after,
-*[class ~= "topic/link"][href]:lang(he):after {
+*[class ~= "map/map"] *[class ~= "topic/xref"][href]:lang(he):after,
+*[class ~= "map/map"] *[class ~= "topic/link"][href]:lang(he):after {
   content: " (בעמוד " target-counter(attr(href), page) ")";
 }
 

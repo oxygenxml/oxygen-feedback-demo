@@ -13,7 +13,6 @@ See the accompanying LICENSE file for applicable license.
   <xsl:import href="plugin:org.dita.pdf2.fop:xsl/fo/root-processing_fop.xsl"/>
   <xsl:import href="plugin:org.dita.pdf2.fop:xsl/fo/tables_fop.xsl"/>
   <xsl:import href="plugin:org.dita.pdf2.fop:xsl/fo/index_fop.xsl"/>
-  <xsl:import href="plugin:org.dita.pdf2.fop:xsl/fo/flagging_fop.xsl"/>
   <xsl:import href="plugin:org.dita.pdf2.fop:xsl/fo/topic_fop.xsl"/>
 
   <xsl:import xmlns:dita="http://dita-ot.sourceforge.net" href="plugin:com.oxygenxml.dita-ot.plugin.mathml:pdfMathML.xsl"/><xsl:import href="plugin:com.oxygenxml.editlink:xslfo.xsl"/><xsl:import href="plugin:com.oxygenxml.highlight:pdfHighlight.xsl"/><xsl:import href="plugin:com.oxygenxml.image.float:customFO.xsl"/><xsl:import href="plugin:com.oxygenxml.media:pdfMedia.xsl"/><xsl:import href="plugin:com.oxygenxml.pdf.custom:custom.xsl"/><xsl:import href="plugin:com.oxygenxml.pdf.review:review/review-pis-to-elements-pdf-classic.xsl"/><xsl:import href="plugin:org.dita-community.common.xslt:xsl/commonXsltExtensionSupport.xsl"/><xsl:import href="plugin:org.dita-community.dita13.pdf:xsl/dita13Vocab2Pdf.xsl"/>

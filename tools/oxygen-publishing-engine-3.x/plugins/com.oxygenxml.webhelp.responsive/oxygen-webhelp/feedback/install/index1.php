@@ -2,7 +2,7 @@
 /*
     
 Oxygen WebHelp Plugin
-Copyright (c) 1998-2020 Syncro Soft SRL, Romania.  All rights reserved.
+Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
 */
 
@@ -76,7 +76,7 @@ function check($id, $name)
     <META HTTP-EQUIV="CONTENT-LANGUAGE" CONTENT="en-US"/>
     <link rel="stylesheet" type="text/css" href="../resources/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="install.css"/>
-    <script src="../resources/js/jquery-3.4.1.min.js"></script>
+    <script src="../resources/js/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 <div id="logo" class="text-center">

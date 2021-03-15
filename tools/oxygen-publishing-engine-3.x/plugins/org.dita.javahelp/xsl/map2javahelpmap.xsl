@@ -41,38 +41,39 @@ See the accompanying LICENSE file for applicable license.
   <xsl:param name="isFirst"/>
   <xsl:param name="subtopicNodes"/>
   <xsl:param name="title"/>
-  <xsl:if test="$isFirst">
-    <xsl:if test="$outfile and $outfile!=''">
-      <xsl:variable name="targetID" select="translate($outroot, '\/.', '___')"/>
-      <mapID target="{$targetID}" url="{$outfile}"/>
+  <xsl:if test="not(@processing-role='resource-only') and not(@toc='no')">
+    <xsl:if test="$isFirst">
+      <xsl:if test="$outfile and $outfile!=''">
+        <xsl:variable name="targetID" select="translate($outroot, '\/.', '___')"/>
+        <mapID target="{$targetID}" url="{$outfile}"/>
+      </xsl:if>
+      <!-- OXYGEN PATCH START EXM-18765 -->
+      <!--  
+        <xsl:apply-templates select="$subtopicNodes"/>
+      -->    
+      <!-- OXYGEN PATCH END EXM-18765 -->
     </xsl:if>
-    <!-- OXYGEN PATCH START EXM-18765 -->
-    <!--  
-    <xsl:apply-templates select="$subtopicNodes"/>
-     -->    
-    <!-- OXYGEN PATCH END EXM-18765 -->
-  </xsl:if>
-  
- <xsl:if test="$title">
-    <xsl:if test="@copy-to">
-      <xsl:variable name="copyToWithoutExtension">
-        <xsl:call-template name="replace-extension">
-          <xsl:with-param name="filename" select="@copy-to"/>
-          <xsl:with-param name="extension" select="''"/>
-        </xsl:call-template>
-      </xsl:variable>
-      <xsl:variable name="targetID" select="translate($copyToWithoutExtension, '\/.', '___')"/>   
-      <xsl:variable name="copyToWithHTMLExtension">
-        <xsl:call-template name="replace-extension">
-          <xsl:with-param name="filename" select="@copy-to"/>
-          <xsl:with-param name="extension" select="$OUTEXT"/>
-        </xsl:call-template>
-      </xsl:variable>
-      <xsl:variable name="urlID" select="$copyToWithHTMLExtension"/>      
-      <mapID target="{$targetID}" url="{$urlID}"/>
+    
+    <xsl:if test="$title">
+      <xsl:if test="@copy-to">
+        <xsl:variable name="copyToWithoutExtension">
+          <xsl:call-template name="replace-extension">
+            <xsl:with-param name="filename" select="@copy-to"/>
+            <xsl:with-param name="extension" select="''"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="targetID" select="translate($copyToWithoutExtension, '\/.', '___')"/>   
+        <xsl:variable name="copyToWithHTMLExtension">
+          <xsl:call-template name="replace-extension">
+            <xsl:with-param name="filename" select="@copy-to"/>
+            <xsl:with-param name="extension" select="$OUTEXT"/>
+          </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="urlID" select="$copyToWithHTMLExtension"/>      
+        <mapID target="{$targetID}" url="{$urlID}"/>
+      </xsl:if>
     </xsl:if>
   </xsl:if>
-  
     <!-- OXYGEN PATCH START EXM-18765 -->
   <xsl:apply-templates select="$subtopicNodes"/>
   <!-- OXYGEN PATCH END EXM-18765 -->
