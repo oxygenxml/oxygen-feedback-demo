@@ -10,7 +10,7 @@
 <title>Snow shovel</title>
 <shortdesc>Use the snow shovel to clear the drive way and side walk of snow in the 
 winter.</shortdesc>
-<conbody><p>A good snow shovel has a straight, wide scoop and a strong handle. To 
+<conbody><p id="p_im2_bpw_y4b">A good snow shovel has a straight, wide scoop and a strong handle. To 
 help snow come off the scoop, spray the scoop with cooking spray.</p></conbody>
 <related-links>
 <link href="../tasks/shovellingsnow.dita" format="dita" type="task"></link>

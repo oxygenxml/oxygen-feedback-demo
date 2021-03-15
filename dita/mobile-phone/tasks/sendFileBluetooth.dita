@@ -6,7 +6,7 @@
         Bluetooth&#174; enabled device such as a phone or notebook computer. </shortdesc>
     <taskbody>
         <context>
-            <p> Before you begin, make sure that the receiving device is set to discoverable mode </p>
+            <p id="p_ccm_dpw_y4b"> Before you begin, make sure that the receiving device is set to discoverable mode </p>
         </context>
         <steps>
             <step>

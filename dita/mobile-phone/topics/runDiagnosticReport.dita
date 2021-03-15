@@ -3,7 +3,7 @@
 <topic id="topic_jtn_y2c_fg">
   <title>Running problem diagnostic report</title>
   <body>
-    <p>If you have connectivity problems, you can run a diagnostic report that helps you to identity
+    <p id="p_g2m_dpw_y4b">If you have connectivity problems, you can run a diagnostic report that helps you to identity
       the issues the phone might have. To run the report, follow this procedure:<ol
         id="ol_m5n_wfc_fg">
         <li>Select <term>Menu</term> > <term>Settings</term>.</li>

@@ -6,7 +6,7 @@
         appears on your phone screen. </shortdesc>
     <taskbody>
         <context>
-            <p>To perform this task, the Bluetooth&#174; must be turned on. See <xref
+            <p id="p_qcm_dpw_y4b">To perform this task, the Bluetooth&#174; must be turned on. See <xref
                     href="../tasks/turnBluetoothOnOff.dita"/></p>
         </context>
         <steps>

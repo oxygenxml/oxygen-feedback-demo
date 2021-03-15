@@ -6,7 +6,7 @@
         accounts.</shortdesc>
     <taskbody>
         <context>
-            <p>From the home menu, select <term>Messaging -&gt; Options -&gt; Settings -&gt; Email
+            <p id="p_tzl_dpw_y4b">From the home menu, select <term>Messaging -&gt; Options -&gt; Settings -&gt; Email
                     -&gt; Mailboxes</term> and add a new mailbox. Then follow the wizard which walks
                 you through the process. First choose <term>Start</term> to begin the process
                 described below:</p>

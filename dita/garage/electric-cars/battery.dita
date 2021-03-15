@@ -3,7 +3,7 @@
 <task id="electric_car_maintanance">
     <title>Protect your electic car's battery</title>
     <taskbody><context>
-        <p>The battery of your electric car doesn't require maintenance but there are a few
+        <p id="p_uf2_bpw_y4b">The battery of your electric car doesn't require maintenance but there are a few
                 tips that you can do to maintain its capacity and increase its lifespan.</p>
     </context>
     <steps-unordered>

@@ -9,7 +9,7 @@
 <concept id="paintconcept" xml:lang="en-us">
 <title>Paint</title>
 <shortdesc>Paint is useful for refreshing the look of rooms and furniture.</shortdesc>
-<conbody><p>Store unused 
+<conbody><p id="p_fl2_bpw_y4b">Store unused 
 paint in the garage.</p></conbody>
 <related-links>
 <link href="../tasks/spraypainting.dita" format="dita" type="task"></link>

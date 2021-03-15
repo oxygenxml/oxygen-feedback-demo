@@ -33,8 +33,8 @@ from the hose.</cmd></step>
 <step><cmd>Dry the car using a dampened chamois.</cmd>
 </step>
 </steps>
-<result><p><image href="../image/carwash.jpg" alt="washing the car" height="171"
-width="249"/></p></result>
+<result><p id="p_kg2_bpw_y4b"><image href="../image/carwash.jpg" alt="washing the car" height="171"
+width="249" id="image_lg2_bpw_y4b"/></p></result>
 </taskbody>
 <related-links>
 <link href="../concepts/waterhose.dita" format="dita" type="concept"></link>

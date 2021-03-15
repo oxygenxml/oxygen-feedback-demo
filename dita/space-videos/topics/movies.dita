@@ -3,7 +3,7 @@
 <topic id="topic_cdz_5yv_kx">
     <title>Movies</title>
     <body>
-        <p>To insert a new videos into your topics, use the <uicontrol>Insert Media</uicontrol>
+        <p id="p_cxd_fpw_y4b">To insert a new videos into your topics, use the <uicontrol>Insert Media</uicontrol>
             button from the toolbar. If your movie is already published on YouTube and you want to
             refer it in your documentation, make sure you select the <uicontrol>iframe</uicontrol>
             option, and set as URL the value from the YouTube embed code for that video clip. To

@@ -3,18 +3,18 @@
 <topic id="topic_d5p_h3b_fg">
   <title>Brief specifications</title>
   <body>
-    <dl>
+    <dl id="dl_etl_dpw_y4b">
       <dlentry>
         <dt>Display</dt>
         <dd product="X1000">2.10” screen, 320 x 240 resolution </dd>
         <dd product="X2000">2.40” screen, 480 x 360 resolution</dd>
       </dlentry>
     </dl>
-    <dl>
+    <dl id="dl_ftl_dpw_y4b">
       <dlentry>
         <dt>Dimensions</dt>
         <dd>
-          <dl>
+          <dl id="dl_gtl_dpw_y4b">
             <dlentry>
               <dt>Height</dt>
               <dd><ph product="X1000">110 mm</ph></dd>

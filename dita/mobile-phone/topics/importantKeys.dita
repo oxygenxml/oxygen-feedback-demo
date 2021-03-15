@@ -3,8 +3,8 @@
 <topic id="topic_4qz_gjm_2g">
   <title>Important keys and shortcuts</title>
   <body>
-    <p>The most important keys and shortcuts of your phone are listed here:</p>
-    <p>
+    <p id="p_jvl_dpw_y4b">The most important keys and shortcuts of your phone are listed here:</p>
+    <p id="p_kvl_dpw_y4b">
       <table frame="all" id="table_zxl_fkm_2g">
         <title>Important keys</title>
         <tgroup cols="3">
@@ -77,7 +77,7 @@
         </tgroup>
       </table>
     </p>
-    <p>
+    <p id="p_lvl_dpw_y4b">
       <table frame="all" id="table_r1r_c4n_2g">
         <title>Phone shortcuts</title>
         <tgroup cols="2" align="center">
@@ -118,6 +118,6 @@
         </tgroup>
       </table>
     </p>
-    <p/>
+    <p id="p_mvl_dpw_y4b"/>
   </body>
 </topic>

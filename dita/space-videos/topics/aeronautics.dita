@@ -3,14 +3,14 @@
 <topic id="topic_ngb_vkv_kx">
     <title>Aeronautics</title>
     <body>
-        <p>NASA is an important player in the aviation research. Here are some videos published by
+        <p id="p_dyd_fpw_y4b">NASA is an important player in the aviation research. Here are some videos published by
             NASA that uncover the research done by them in this field.</p>
-        <section><title>Accelerating to New Aviation Horizons </title><p>NASA has a 10-year plan to
+        <section id="section_eyd_fpw_y4b"><title>Accelerating to New Aviation Horizons </title><p id="p_fyd_fpw_y4b">NASA has a 10-year plan to
                 accelerate aviation research that includes the design, build and flight of a series
                 of piloted X-planes - experimental aircraft - which will test advanced technologies
                 to their full capabilities and help make aviation more Earth-friendly.</p><object
                 data="https://www.youtube.com/embed/Yfr6WDFN7d0" outputclass="iframe"/></section>
-        <section><title>Quiet Supersonic X-plane to Be Designed</title><p>The return of supersonic
+        <section id="section_gyd_fpw_y4b"><title>Quiet Supersonic X-plane to Be Designed</title><p id="p_hyd_fpw_y4b">The return of supersonic
                 passenger travel is one step closer to reality with NASA's award of a contract for
                 the preliminary design of a low boom flight demonstrator aircraft.</p><object
                 data="https://www.youtube.com/embed/x8r-Pm1-dVc" outputclass="iframe"/></section>

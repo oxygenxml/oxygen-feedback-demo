@@ -9,7 +9,7 @@
 <concept id="waterhoseconcept" xml:lang="en-us">
 <title>Water hose</title>
 <shortdesc>A water hose is useful for cleaning and gardening projects around the yard.</shortdesc>
-<conbody><p>Keep the hose coiled on a large hook near a water spout.</p></conbody>
+<conbody><p id="p_zn2_bpw_y4b">Keep the hose coiled on a large hook near a water spout.</p></conbody>
 <related-links>
 <link href="../tasks/washingthecar.dita" format="dita" type="task"></link>
 </related-links>

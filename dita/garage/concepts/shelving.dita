@@ -9,7 +9,7 @@
 <concept id="shelvingconcept" xml:lang="en-us">
 <title>Shelving</title>
 <shortdesc>Wooden or metal shelving is useful for storing things in the garage.</shortdesc>
-<conbody><p>Shelving also keeps 
+<conbody><p id="p_tl2_bpw_y4b">Shelving also keeps 
 things neat and organized.</p></conbody>
 <related-links>
 <link href="../tasks/organizing.dita" format="dita" type="task"></link>

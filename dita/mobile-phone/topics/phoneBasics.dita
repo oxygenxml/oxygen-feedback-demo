@@ -4,6 +4,6 @@
   <title>Phone Basics </title>
   <shortdesc>Basic phone operations.</shortdesc>
   <body>
-    <p>This section shows the basics phone features.</p>
+    <p id="p_bwl_dpw_y4b">This section shows the basics phone features.</p>
   </body>
 </topic>

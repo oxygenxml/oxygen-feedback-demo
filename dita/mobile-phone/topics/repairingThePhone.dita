@@ -3,9 +3,9 @@
 <topic id="repairing">
   <title>Repairing the phone</title>
   <body>
-    <p>This section contains a brief explanation that helps the technician to identify and
+    <p id="p_rdm_dpw_y4b">This section contains a brief explanation that helps the technician to identify and
       troubleshoot the phone problems.</p>
-    <p>
+    <p id="p_sdm_dpw_y4b">
       <ol id="ol_bt3_3gb_fg">
         <li>Take the back cover off and <xref href="../tasks/removingBattery.dita">remove the
             battery</xref>.</li>
