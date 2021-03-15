@@ -3,8 +3,8 @@
 <topic id="salvia">
   <title>Salvia</title>
   <body>
-    <p><i>From Wikipedia, the free encyclopedia.</i></p>
-    <p><b>Salvia</b><indexterm>flowers<indexterm>autumn<indexterm>salvia</indexterm></indexterm></indexterm>
+    <p id="p_llq_1mw_y4b"><i>From Wikipedia, the free encyclopedia.</i></p>
+    <p id="p_mlq_1mw_y4b"><b>Salvia</b><indexterm>flowers<indexterm>autumn<indexterm>salvia</indexterm></indexterm></indexterm>
       is the largest <xref keyref="genus" format="dita">genus</xref> of plants in the mint
       family,
         <b><?oxy_comment_start author="Mary" timestamp="20120510T124943+0300" comment="The correct term is Lamiaceae."?>Lamiac<?oxy_insert_start author="Mary" timestamp="20120510T124928+0300"?>e<?oxy_insert_end?>ae<?oxy_comment_end?></b>,
@@ -15,12 +15,12 @@
       scientific name <b>Salvia</b>. The genus is distributed throughout the world, with the center
       of diversity and origin appearing to be Central and South Western Asia, while nearly 500
       species are native to Mexico and Central and South America.</p>
-    <p><image href="../../images/Salvia.jpg" scale="75"/></p>
-    <p>The name is derived from the Latin <i>salvere</i> ("to save"), referring to the long-believed
+    <p id="p_nlq_1mw_y4b"><image href="../../images/Salvia.jpg" scale="75" id="image_olq_1mw_y4b"/></p>
+    <p id="p_plq_1mw_y4b">The name is derived from the Latin <i>salvere</i> ("to save"), referring to the long-believed
       healing properties of salvia. The Latin was corrupted to '<i>sauja</i>', to the French
         '<i>sauge</i>', and to the old English '<i>sawge</i>', and eventually became the modern day
         '<i>sage</i>'. Pliny the Elder was the first to use the Latin name salvia.</p>
-    <p><b>Salvia</b> species include annual, biennial, or perennial herbs, along with woody based
+    <p id="p_qlq_1mw_y4b"><b>Salvia</b> species include annual, biennial, or perennial herbs, along with woody based
       sub-shrubs. The stems are typically angled like other members in <b>Lamiaceae</b>. The flowers
       are produced in spikes,
       <?oxy_comment_start author="Mary" timestamp="20120510T120839+0300" comment="Please add the term definition for &quot;raceme&quot; in Glossary."?>racemes<?oxy_comment_end?>,
@@ -39,7 +39,7 @@
       the <b>Coleophora</b> case-bearers <b>C. aegyptiacae</b>, <b>C. salviella</b> (both feed
       exclusively on <b>S. aegyptiaca</b>), <b>C. ornatipennella</b> and <b>C. virgatella</b> (both
       recorded on <b>S. pratensis</b>).</p>
-    <p>The defining characteristic of the genus <b>Salvia</b> is the unusual <xref
+    <p id="p_rlq_1mw_y4b">The defining characteristic of the genus <b>Salvia</b> is the unusual <xref
         keyref="pollination" format="dita">pollination</xref> mechanism,
       which consists of two stamens (instead of the typical four found in other members of the tribe
         <b>Mentheae</b>) and the way the two stamens are connected to form a lever. When a

@@ -3,13 +3,13 @@
 <topic id="lilac">
  <title>Lilac</title>
  <body>
-  <p><i>From Wikipedia, the free encyclopedia.</i></p>
-  <p><b>Lilac</b>
+  <p id="p_qjq_1mw_y4b"><i>From Wikipedia, the free encyclopedia.</i></p>
+  <p id="p_rjq_1mw_y4b"><b>Lilac</b>
      (<b>Syringa</b>)<indexterm>flowers<indexterm>summer<indexterm>lilac</indexterm></indexterm></indexterm>
    is a <xref keyref="genus" format="dita">genus</xref> of about 20–25
    species of flowering plants in the olive family (<b>Oleaceae</b>), native to Europe and Asia.</p>
-  <p><image href="../../images/Lilac.jpg" scale="75"/></p>
-  <p>They are deciduous shrubs or small trees, ranging in size from 2–10 m tall, with stems up to
+  <p id="p_sjq_1mw_y4b"><image href="../../images/Lilac.jpg" scale="75" id="image_tjq_1mw_y4b"/></p>
+  <p id="p_ujq_1mw_y4b">They are deciduous shrubs or small trees, ranging in size from 2–10 m tall, with stems up to
    20–30 cm diameter. The leaves are opposite (occasionally in whorls of three) in arrangement, and
    their shape is simple and heart-shaped to broad lanceolate in most species, but pinnate in a few
    species (e.g. <b>S. protolaciniata</b>, <b>S. pinnatifolia</b>). The flowers are produced in
@@ -20,12 +20,12 @@
    have a strong fragrance. Flowering varies between mid spring to early summer, depending on the
    species. The fruit is a dry, brown capsule, splitting in two at maturity to release the two
    winged seeds.</p>
-  <p><b>Lilacs</b> are popular shrubs in parks and gardens throughout the temperate zone. In
+  <p id="p_vjq_1mw_y4b"><b>Lilacs</b> are popular shrubs in parks and gardens throughout the temperate zone. In
    addition to the species listed above, several hybrids and numerous <xref
     keyref="cultivar" format="dita">cultivars</xref> have been developed. The
    term <b>French lilac</b> is often used to refer to modern double-flowered cultivars, thanks to
    the work of prolific breeder Victor Lemoine.</p>
-  <p><b><?oxy_comment_start author="John" timestamp="20120510T114641+0300" comment="What kind of growing conditions do lilacs need?"?>Lilacs<?oxy_comment_end?></b>
+  <p id="p_wjq_1mw_y4b"><b><?oxy_comment_start author="John" timestamp="20120510T114641+0300" comment="What kind of growing conditions do lilacs need?"?>Lilacs<?oxy_comment_end?></b>
    flower on old wood, and produce more flowers if unpruned. If pruned, the plant responds by
    producing fast-growing young vegetative growth with no flowers, in an attempt to restore the
    removed branches; a pruned lilac often produces few or no flowers for one to five or more years,

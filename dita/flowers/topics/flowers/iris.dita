@@ -3,8 +3,8 @@
 <topic id="iris">
     <title>Iris</title>
     <body>
-        <p><i>From Wikipedia, the free encyclopedia.</i></p>
-        <p><b>Iris</b><indexterm>flowers<indexterm>spring<indexterm>iris</indexterm></indexterm></indexterm>
+        <p id="p_ehq_1mw_y4b"><i>From Wikipedia, the free encyclopedia.</i></p>
+        <p id="p_fhq_1mw_y4b"><b>Iris</b><indexterm>flowers<indexterm>spring<indexterm>iris</indexterm></indexterm></indexterm>
             is a <xref keyref="genus" format="dita">genus</xref> of
             between 200-300 species of flowering plants with showy flowers. It takes its name from
             the Greek word for a <i>rainbow</i>, referring to the wide variety of flower colors
@@ -13,12 +13,12 @@
             some plants called thus belong to closely related genera. In North America, a common
             name for irises is <b>flags</b>, while the subgenus <b>Scorpiris</b> is widely known as
                 <b>junos</b>, particularly in horticulture.</p>
-        <p><image href="../../images/Iris_sanguinea.jpg" scale="50"/></p>
-        <p>The <xref keyref="genus" format="dita">genus</xref> is widely
+        <p id="p_ghq_1mw_y4b"><image href="../../images/Iris_sanguinea.jpg" scale="50" id="image_hhq_1mw_y4b"/></p>
+        <p id="p_ihq_1mw_y4b">The <xref keyref="genus" format="dita">genus</xref> is widely
             distributed throughout the north temperate zone. Their habitats are considerably varied,
             ranging from cold and mountain regions to the grassy slopes, meadowlands and riverbanks
             of Europe, the Middle East and northern Africa, Asia and across North America.</p>
-        <p>The inflorescences are fan-shaped and contain one or more symmetrical six-lobed flowers.
+        <p id="p_jhq_1mw_y4b">The inflorescences are fan-shaped and contain one or more symmetrical six-lobed flowers.
             These grow on a pedicel or lack a footstalk. The three <xref
                 keyref="sepal" format="dita">sepals</xref>, which are
             spreading or droop downwards, are referred to as "falls". They expand from their narrow
@@ -31,7 +31,7 @@
             the ovary. The styles divide towards the apex into petaloid branches; this is
             significant in <xref keyref="pollination" format="dita"
                 >pollination</xref>.</p>
-        <p>The iris flower is of special interest as an example of the relation between flowering
+        <p id="p_khq_1mw_y4b">The iris flower is of special interest as an example of the relation between flowering
             plants and pollinating insects. The shape of the flower and the position of the
             pollen-receiving and stigmatic surfaces on the outer petals form a landing-stage for a
             flying insect, which in probing the perianth for nectar, will first come in contact of
@@ -47,12 +47,12 @@
     <topic id="use">
         <title>Use</title>
         <body>
-            <p><b>Irises</b> are extensively grown as ornamental plants in home and botanical
+            <p id="p_lhq_1mw_y4b"><b>Irises</b> are extensively grown as ornamental plants in home and botanical
                 gardens. <i>Presby Memorial Iris Gardens</i> in New Jersey, for example, is a living
                 iris museum with over 10,000 plants, while in Europe the most famous iris garden is
                 arguably the <i>Giardino dell'Iris</i> in Florence (Italy) which every year hosts
                 one of the most famous iris breeders' competitions in the world.</p>
-            <p>Some <xref keyref="rhizome" format="dita">rhizomes</xref>
+            <p id="p_mhq_1mw_y4b">Some <xref keyref="rhizome" format="dita">rhizomes</xref>
                 are traded as orris root and are used in perfume and medicine, though more common in
                 ancient times than today. Today <b>Iris</b> essential oil (absolute) from flowers
                 are sometimes used in aromatherapy as sedative medicines. The dried rhizomes are
