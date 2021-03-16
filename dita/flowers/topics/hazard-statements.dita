@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="hazard-statements">
+    <title>Hazard Statements</title>
+    <body>
+        <p>
+            <hazardstatement type="notice">
+                <messagepanel>
+                    <typeofhazard>Lorem Ipsum</typeofhazard>
+                    <howtoavoid>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla.</howtoavoid>
+                </messagepanel>
+            </hazardstatement>
+            <hazardstatement type="caution">
+                <messagepanel>
+                    <typeofhazard>Lorem Ipsum</typeofhazard>
+                    <howtoavoid>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla.</howtoavoid>
+                </messagepanel>
+            </hazardstatement>
+            <hazardstatement type="warning">
+                <messagepanel>
+                    <typeofhazard>Lorem Ipsum</typeofhazard>
+                    <howtoavoid>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla.</howtoavoid>
+                </messagepanel>
+            </hazardstatement>
+            <hazardstatement type="danger">
+                <messagepanel>
+                    <typeofhazard>Lorem Ipsum</typeofhazard>
+                    <howtoavoid>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla.</howtoavoid>
+                </messagepanel>
+            </hazardstatement>
+            <hazardstatement type="attention">
+                <messagepanel>
+                    <typeofhazard>Lorem Ipsum</typeofhazard>
+                    <howtoavoid>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla.</howtoavoid>
+                </messagepanel>
+            </hazardstatement>
+            <hazardstatement type="important">
+                <messagepanel>
+                    <typeofhazard>Lorem Ipsum</typeofhazard>
+                    <howtoavoid>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla.</howtoavoid>
+                </messagepanel>
+            </hazardstatement>
+            <hazardstatement type="restriction">
+                <messagepanel>
+                    <typeofhazard>Lorem Ipsum</typeofhazard>
+                    <howtoavoid>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus risus at ultrices mi tempus imperdiet nulla.</howtoavoid>
+                </messagepanel>
+            </hazardstatement>
+        </p>
+    </body>
+</topic>
