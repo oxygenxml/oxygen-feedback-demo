@@ -25,4 +25,5 @@
    <appContext helpID="flowers.perennial" path="concepts/glossaryPerennial.html"/>
    <appContext helpID="flowers.panicle" path="concepts/glossaryPanicle.html"/>
    <appContext helpID="copyright" path="topics/copyright.html"/>
+   <appContext helpID="notes" path="topics/notes.html"/>
 </map>
