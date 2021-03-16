@@ -36,6 +36,7 @@
             </step>
             <step id="step_l3w_txz_y4b">
                 <cmd>Clean up the area. Burn all pest infested branches. </cmd>
+                <info><note type="caution">Burning the pest infested branches should be done under supervision.</note></info>
             </step>
         </steps>
     </taskbody>
