@@ -26,4 +26,5 @@
    <appContext helpID="flowers.panicle" path="concepts/glossaryPanicle.html"/>
    <appContext helpID="copyright" path="topics/copyright.html"/>
    <appContext helpID="notes" path="topics/notes.html"/>
+   <appContext helpID="hazard-statements" path="topics/hazard-statements.html"/>
 </map>
