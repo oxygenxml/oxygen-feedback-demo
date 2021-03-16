@@ -13,6 +13,9 @@
         <resources>
             <!-- Main CSS file -->
             <css file="flowers.css"/>
+            <!-- CSS for notes -->
+            <css file="notes.css"/>
+
             <!-- Images -->
             <fileset>
                 <include name="resources/**/*"/>

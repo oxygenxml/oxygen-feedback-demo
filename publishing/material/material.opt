@@ -10,6 +10,9 @@
         <resources>
             <!-- Main CSS file -->
             <css file="material.css"/>
+            <!-- CSS for notes -->
+            <css file="notes.css"/>
+
             <!-- Images -->
             <logo file="resources/logo.png"/>
             <favicon file="resources/favicon.png"/>
@@ -43,6 +46,9 @@
         </tags>
         <resources>
             <css file="material-print.css"/>
+            <!-- CSS for notes -->
+            <css file="notes.css"/>
+
         </resources>
     </pdf>
 </publishing-template>
