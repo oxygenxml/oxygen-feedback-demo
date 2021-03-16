@@ -16,26 +16,26 @@
             <p id="p_v2q_1mw_y4b">In general the smaller the wound (smaller the branch that is cut) the less harm to
                 the tree. It is therefore typically better to formative prune the tree when juvenile
                 than try to cut off large branches on a mature tree.</p>
-            <p id="p_w2q_1mw_y4b"><?oxy_comment_start author="John" timestamp="20120510T110753+0300" comment="A list of tools required for prunning should be also provided to the reader (like: 
-Rope Saws, Pole Prunner and Lopper,  Folding Prunner, Portable Buck Saws)."?>Follow
-                these simple steps:<?oxy_comment_end?></p>
+            <p id="p_w2q_1mw_y4b">Follow
+                these simple steps:</p>
         </context>
         <steps>
-            <step>
+            <step id="step_i3w_txz_y4b">
                 <cmd>Begin by cutting out all the dead branches.</cmd>
+                <info>
+                    <note type="important">Before pruning, remember to disinfect your tools. Tree diseases are easily spread by infected tools.</note>
+                </info>
             </step>
-            <step>
+            <step id="step_j3w_txz_y4b">
                 <cmd>Remove all tangled or crossed over branches. This allows air to circulate and
                     reduces bug and fungi infestation. </cmd>
             </step>
-            <step>
+            <step id="step_k3w_txz_y4b">
                 <cmd>Take your time! Work comfortably and do not make shortcuts when cutting stems.
                     Use good quality, sharp tools.</cmd>
             </step>
-            <step>
-                <cmd>Clean up the area.
-                    <?oxy_comment_start author="Mary" timestamp="20120510T110831+0300" comment="Burning the pest infested branches should be done under supervision. Please mention this."?>Burn
-                    all pest infested branches<?oxy_comment_end?>. </cmd>
+            <step id="step_l3w_txz_y4b">
+                <cmd>Clean up the area. Burn all pest infested branches. </cmd>
             </step>
         </steps>
     </taskbody>
