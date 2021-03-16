@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd">
+<topic id="notes">
+    <title>Notes</title>
+    <body>
+        <p>
+            <note id="note_ktk_xn2_r4b" type="note">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_jnk_drf_r4b" type="attention">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_ts5_2rf_r4b" type="caution">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_d3p_frf_r4b" type="danger">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_fjy_nrf_r4b" type="trouble">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_vyy_4rf_r4b" type="warning">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_z1g_hrf_r4b" type="important" othertype="note">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_hjq_lrf_r4b" type="restriction">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_gxm_3rf_r4b" type="notice">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_rdy_jrf_r4b" type="remember">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_s1m_grf_r4b" type="fastpath">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_n1c_nrf_r4b" type="tip">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+            <note id="note_ny5_lmd_r4b" type="other" othertype="Other">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</note>
+        </p>
+    </body>
+</topic>

@@ -34,24 +34,17 @@
   <topichead navtitle="Glossary" id="glossary">
     <topicmeta>
       <shortdesc>Definitions of the most commonly used gardening terms.</shortdesc>
-    </topicmeta>
-    <?oxy_comment_end?>
-    <topicref navtitle="Genus" href="concepts/glossaryGenus.dita"
-      keys="genus" print="yes"/>
-    <topicref navtitle="Pollination" href="concepts/glossaryPollination.dita"
-      keys="pollination" print="yes"/>
-    <topicref navtitle="Sepal" href="concepts/glossarySepal.dita"
-      keys="sepal" print="yes"/>
-    <topicref navtitle="Rhizome" href="concepts/glossaryRhizome.dita"
-      keys="rhizome" print="yes"/>
-    <topicref navtitle="Bulb" href="concepts/glossaryBulb.dita"
-      keys="bulb" print="yes"/>
-    <topicref navtitle="Cultivar" href="concepts/glossaryCultivar.dita"
-      keys="cultivar" print="yes"/>
-    <topicref navtitle="Perennial" href="concepts/glossaryPerennial.dita"
-      keys="perennial" print="yes"/>
-    <topicref navtitle="Panicle" href="concepts/glossaryPanicle.dita"
-      keys="panicle" print="yes"/>
+    </topicmeta><?oxy_comment_end?>
+    <topicref navtitle="Genus" href="concepts/glossaryGenus.dita" keys="genus" print="yes"/>
+    <topicref navtitle="Pollination" href="concepts/glossaryPollination.dita" keys="pollination"
+      print="yes"/>
+    <topicref navtitle="Sepal" href="concepts/glossarySepal.dita" keys="sepal" print="yes"/>
+    <topicref navtitle="Rhizome" href="concepts/glossaryRhizome.dita" keys="rhizome" print="yes"/>
+    <topicref navtitle="Bulb" href="concepts/glossaryBulb.dita" keys="bulb" print="yes"/>
+    <topicref navtitle="Cultivar" href="concepts/glossaryCultivar.dita" keys="cultivar" print="yes"/>
+    <topicref navtitle="Perennial" href="concepts/glossaryPerennial.dita" keys="perennial"
+      print="yes"/>
+    <topicref navtitle="Panicle" href="concepts/glossaryPanicle.dita" keys="panicle" print="yes"/>
   </topichead>
   <topicref href="topics/copyright.dita">
     <topicmeta>
@@ -60,4 +53,5 @@
       </data>
     </topicmeta>
   </topicref>
+  <topicref href="topics/notes.dita"/>
 </map>
