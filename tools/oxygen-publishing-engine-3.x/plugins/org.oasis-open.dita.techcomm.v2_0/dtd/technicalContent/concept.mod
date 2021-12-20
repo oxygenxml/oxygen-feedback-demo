@@ -52,7 +52,6 @@
 <!--                    LONG NAME: Concept                         -->
 <!ENTITY % concept.content
                        "((%title;),
-                         (%titlealts;)?,
                          (%abstract; |
                           %shortdesc;)?,
                          (%prolog;)?,
@@ -88,15 +87,7 @@
                           %conbodydiv;)*)"
 >
 <!ENTITY % conbody.attributes
-              "%id-atts;
-               %localization-atts;
-               base
-                          CDATA
-                                    #IMPLIED
-               %base-attribute-extensions;
-               outputclass
-                          CDATA
-                                    #IMPLIED"
+              "%univ-atts;"
 >
 <!ELEMENT  conbody %conbody.content;>
 <!ATTLIST  conbody %conbody.attributes;>

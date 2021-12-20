@@ -48,6 +48,54 @@
     </xsl:template>
     
     
+    <!-- Add sections to the TOC, if the numbering sections parameter is active. -->
+    <xsl:template match="opentopic:map//*[contains(@class, ' map/topicref ')]" priority="3">
+        <xsl:choose>
+          <xsl:when test="$numbering-sections">
+              <xsl:variable name="nm">
+                <xsl:next-match/>
+              </xsl:variable>
+              <xsl:apply-templates select="$nm" mode="expand-sections-in-toc">
+                <xsl:with-param name="target-topic" select="key('ids_in_content', @id)[last()]"/>
+              </xsl:apply-templates>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:next-match/>          
+          </xsl:otherwise>
+        </xsl:choose>    
+    </xsl:template>
+  
+    <xsl:template match="*[contains(@class, ' map/topicref ')]" mode="expand-sections-in-toc">
+      <xsl:param name="target-topic"/>
+      <xsl:copy>
+              
+        <xsl:copy-of select="@*"/>
+        <!-- Metadata, like topicmeta with navtitles -->
+        <xsl:copy-of select="* except(*[contains(@class, ' map/topicref')])"/>
+        
+        <!-- Creates references to sections from content.
+          Aware of specializations: we are matching only the pure sections! -->
+        <xsl:for-each select="$target-topic/*[contains(@class, '- topic/body ')]/*[@class = '- topic/section ']">
+        
+          <xsl:variable name="section-id" select="if(@id) then @id else generate-id(.)"/>
+          
+          <topicref class="- map/topicref " href="#{$section-id}" type="topic">
+            <topicmeta class="- map/topicmeta " data-topic-id="$section-id">
+              <resourceid appid="{$section-id}" class="- topic/resourceid " oxy-source="topic"/>
+              <xsl:variable name="title-content">
+                <xsl:apply-templates select="*[contains(@class, ' topic/title ')]"/>
+              </xsl:variable>
+              <navtitle href="#{$section-id}" class="- topic/navtitle "><xsl:copy-of select="$title-content/*/node()"/></navtitle>
+            </topicmeta>
+          </topicref>
+        </xsl:for-each>
+        
+        <!-- The rest of children topicrefs -->
+        <xsl:copy-of select="*[contains(@class, ' map/topicref ')]"/>
+        
+      </xsl:copy>
+    </xsl:template>
+    
     <!--
          Adds a href attribute to the navtitle, builds its content.
 
@@ -85,7 +133,6 @@
             <xsl:apply-templates select="$input" mode="navtitle-remove-tms" />
         </xsl:copy>
     </xsl:template>
-    
     
     <xsl:template match="*[contains(@class, ' topic/tm ')]" mode="navtitle-remove-tms">
         <xsl:choose>
@@ -205,8 +252,8 @@
             -->
             <xsl:variable name="indexElem" select="//opentopic-index:index.groups[1]"/>
             <xsl:if test="$indexElem/* and not (//*[contains(@class, ' bookmap/indexlist ')]) and 
-            			  $hide.frontpage.toc.index.glossary = 'no'">
-            			  
+                    $hide.frontpage.toc.index.glossary = 'no'">
+                    
                 <xsl:variable name="indexId" select="generate-id($indexElem)"/>
                 <topicref is-chapter="true" is-index="true" class="- map/topicref ">
                     <topicmeta class="- map/topicmeta ">
@@ -222,8 +269,8 @@
     </xsl:template>
     
     <!-- 
-    	The topicgroup element is for creating groups of topicref elements without affecting 
-    	the hierarchy. 
+      The topicgroup element is for creating groups of topicref elements without affecting 
+      the hierarchy. 
     -->
     <xsl:template match="*[contains(@class,' mapgroup-d/topicgroup ')]">
       <xsl:apply-templates />

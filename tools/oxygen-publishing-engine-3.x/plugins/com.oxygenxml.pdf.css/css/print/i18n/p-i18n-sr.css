@@ -91,7 +91,7 @@ I18N file for sr
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(sr):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(sr):after(2) {
     content: " " "";
 }
 

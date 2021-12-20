@@ -9,7 +9,7 @@ See the accompanying LICENSE file for applicable license.
   <!-- Start of Ant Messages -->
   <message id="DOTA001F" type="FATAL">
     <reason>"%1" is not a recognized transformation type.</reason>
-    <response>Supported transformation types are dita, docx, eclipsehelp, epub, exportmap, html2, html5, htmlhelp, indesign, javahelp, json, kindle, markdown, markdown_gitbook, markdown_github, merged, metrics-report, metrics-report-xml, pdf, pdf-css, pdf-css-html5, pdf-css-html5-single-topic, pdf2, troff, webhelp-responsive, webhelp-responsive-preprocess2, webhelpCommons, word2dita, xhtml.</response>
+    <response>Supported transformation types are dita, docx, eclipsehelp, epub, exportmap, html2, html5, htmlhelp, indesign, javahelp, json, kindle, markdown, markdown_gitbook, markdown_github, merged, metrics-report, metrics-report-xml, pdf, pdf-css-html5, pdf-css-html5-single-topic, pdf2, troff, webhelp-responsive, webhelp-responsive-preprocess2, webhelpCommons, word2dita, xhtml, zendesk-xhtml.</response>
   </message>
   
   <message id="DOTA002F" type="FATAL">
@@ -618,7 +618,7 @@ See the accompanying LICENSE file for applicable license.
   </message>
   
   <message id="DOTX037W" type="WARN">
-    <reason>No title found for this document; using "***" in XHTML title bar.</reason>
+    <reason>No title found for this document; using "***" as HTML page title.</reason>
     <response/>
   </message>
   

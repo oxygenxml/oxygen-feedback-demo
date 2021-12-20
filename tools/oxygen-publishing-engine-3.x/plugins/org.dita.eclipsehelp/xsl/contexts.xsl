@@ -29,17 +29,19 @@
   <xsl:template match="text()" mode="addContext"/>
     
   <xsl:template match="*[@id]" mode="addContext">
-    <xsl:param name="href"/>
-    <xsl:element name="context">
-        <xsl:attribute name="id">
-          <xsl:value-of select="@id"/>
-        </xsl:attribute>
-      <xsl:variable name="title" select="normalize-space(/xhtml:html/xhtml:head/xhtml:title)"/>
-      <xsl:if test="string-length($title) > 0">
-          <description><xsl:value-of select="$title"/></description>
-          <topic label="{$title}" href="{concat($prefixHelpInstallPath, $href, '#', @id)}"/>
-        </xsl:if>
-    </xsl:element>
+  	<xsl:param name="href"/>
+  	<xsl:if test="local-name()='body' or contains(@class, 'topic ')">
+  		<xsl:element name="context">
+  			<xsl:attribute name="id">
+  				<xsl:value-of select="@id"/>
+  			</xsl:attribute>
+  			<xsl:variable name="title" select="normalize-space(/xhtml:html/xhtml:head/xhtml:title)"/>
+  			<xsl:if test="string-length($title) > 0">
+  				<description><xsl:value-of select="$title"/></description>
+  				<topic label="{$title}" href="{concat($prefixHelpInstallPath, $href, '#', @id)}"/>
+  			</xsl:if>
+  		</xsl:element>
+  	</xsl:if>
     <xsl:for-each select="descendant::*[@id]">
       <xsl:apply-templates select="." mode="addContext">
         <xsl:with-param name="href" select="@href"/>

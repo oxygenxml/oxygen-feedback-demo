@@ -29,9 +29,9 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   
   <xsl:output 
             method="xhtml" 
+            html-version="5.0"
             encoding="UTF-8"
             indent="no"
-            doctype-system="about:legacy-compat"
             omit-xml-declaration="yes"
             include-content-type="no"/>
 
@@ -81,8 +81,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   <xsl:param name="WEBHELP_PARAMETERS_URL" />
   
   <xsl:param name="WEBHELP_TRIAL_LICENSE" select="'no'"/>
-  <xsl:param name="WEBHELP_PRODUCT_ID" select="''"/>
-  <xsl:param name="WEBHELP_PRODUCT_VERSION" select="''"/>
   
   <xsl:param name="BASEDIR"/>
   <xsl:param name="OUTPUTDIR"/>

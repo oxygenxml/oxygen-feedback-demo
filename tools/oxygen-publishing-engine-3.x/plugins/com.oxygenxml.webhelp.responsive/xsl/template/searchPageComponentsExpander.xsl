@@ -19,7 +19,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   <xsl:import href="commonComponentsExpander.xsl"/>
   
   <xsl:template match="html:html" mode="copy_template">
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:attribute name="lang" select="oxygen:getParameter('webhelp.language')"/>
       <xsl:attribute name="dir" select="oxygen:getParameter('webhelp.page.direction')"/>
@@ -65,23 +65,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       <xsl:with-param name="compContent" select="$webhelp_search_results"/>
       <xsl:with-param name="compName" select="local-name()"/>
     </xsl:call-template>
-  </xsl:template>
-  
-  <xsl:template name="generateSearchPreloader">
-    <div class="searchPreload">
-      <ul>
-        <xsl:for-each select="1 to 3">
-          <li>
-            <div class="fakeResult">
-              <div class="fakeTitle"><!-- --></div>
-              <div class="fakeText"><!-- --></div>
-              <div class="fakeText"><!-- --></div>
-              <div class="fakeText"><!-- --></div>
-            </div>
-          </li>
-        </xsl:for-each>
-      </ul>
-    </div>
   </xsl:template>
   
   <!-- 

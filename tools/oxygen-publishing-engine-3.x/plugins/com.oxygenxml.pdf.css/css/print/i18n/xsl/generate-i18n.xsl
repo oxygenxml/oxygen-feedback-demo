@@ -144,7 +144,7 @@ I18N file for <xsl:value-of select="$lang"/>
 		concat(':lang(', $lang, ')')
 		else
 		''"/>
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]<xsl:value-of select="$lang-cond"/>:after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]<xsl:value-of select="$lang-cond"/>:after(2) {
     content: " " "<xsl:value-of select="//str[@name = 'Continued']"/>";
 }
 </xsl:template>

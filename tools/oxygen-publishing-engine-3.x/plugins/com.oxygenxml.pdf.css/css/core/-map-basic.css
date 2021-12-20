@@ -165,7 +165,7 @@ map > *[class~="topic/title"], /* opentopic namespace - merged map */
      font-weight: bold;     
   }
   *[class~="map/topicref"][href]:before(1020) {
-     content: attr(href) " ";
+     content: oxy_unescapeURLValue(attr(href)) " ";
   }
   *[class~="map/topicref"][navtitle]:before(1020) {
      content: attr(navtitle) " ";
@@ -431,7 +431,7 @@ document. To open a reference one could click the topicref icon.*/
     
         /* Show the keyref or href attribute */
    *[class~="map/map"]:-oxy-show-topic-titles *[class~="map/topicref"][href]:before(1010) {
-     content: attr(href);
+     content: oxy_unescapeURLValue(attr(href));
 /*     TODO: ask Dragos for a better color (maybe we change the global purble with another shade */
      color: #7b7b7b;
    }

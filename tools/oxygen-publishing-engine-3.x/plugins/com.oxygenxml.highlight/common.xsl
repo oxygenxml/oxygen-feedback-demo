@@ -18,6 +18,9 @@ available in the base directory of this plugin.
   xmlns:oxy="http://www.oxygenxml.com/ns/author/xpath-extension-functions"
   exclude-result-prefixes="exsl ConnectorSaxonEE ConnectorSaxonB d oxy"
   version='2.0'>
+	
+	<!-- Sequence containing all highlight IDs -->
+	<xsl:param name="allConfigHighlights" select="document('highlighters/xslthl-config.xml')//highlighter/@id"/>
   
   <xsl:template name="outputStyling" use-when="function-available('version:getProductVersion') or function-available('oxy:highlight')">
     <xsl:choose>

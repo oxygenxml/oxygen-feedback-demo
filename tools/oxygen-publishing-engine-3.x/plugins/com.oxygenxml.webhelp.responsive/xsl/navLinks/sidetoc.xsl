@@ -6,9 +6,12 @@
     xmlns:st="http://www.oxygenxml.com/ns/webhelp/side-toc" 
     exclude-result-prefixes="xs toc st xhtml" version="2.0">
 
-		<!-- It sets how many nodes are visible before and after current node -->
-		<xsl:variable name="nodesVisible" select="1000000" as="xs:integer"/>
+	<!-- It sets how many nodes are visible before and after current node -->
+	<xsl:variable name="nodesVisible" select="1000000" as="xs:integer"/>
     
+    <xsl:variable name="expandActionID" as="xs:string">button-expand-action</xsl:variable>
+    <xsl:variable name="collapseActionID" as="xs:string">button-collapse-action</xsl:variable>
+    <xsl:variable name="pendingActionID" as="xs:string">button-pending-action</xsl:variable>
     
     <xsl:template match="/toc:toc" mode="side-toc">
         <xsl:apply-templates mode="side-toc"/>
@@ -170,7 +173,6 @@
             </xsl:apply-templates>
         </xsl:variable>
         
-        
         <!-- 
             Write the Side TOC for the current node in a temporary file 
             next to file of its referenced target topic. 
@@ -190,9 +192,16 @@
                 </xsl:variable>
                 <xsl:result-document format="html" href="{$outputHref}">
                     <xsl:variable name="publicationToc">
-                        <ul>
-                            <xsl:copy-of select="$currentNodeSideToc"/>
-                        </ul>
+                        <div data-type="temporary">
+                            <span class="expand-button-action-labels">
+                                <span id="{$expandActionID}" role="button" aria-label="Expand"/>
+                                <span id="{$collapseActionID}" role="button" aria-label="Collapse"/>
+                                <span id="{$pendingActionID}" role="button" aria-label="Pending"/>
+                            </span>   
+                            <ul>
+                                <xsl:copy-of select="$currentNodeSideToc"/>
+                            </ul>
+                        </div>
                     </xsl:variable>
                     <xsl:apply-templates select="$publicationToc" mode="toc-accessibility"/>
                 </xsl:result-document>
@@ -218,13 +227,9 @@
         </xsl:copy>
     </xsl:template>
     
-    <xsl:variable name="expandActionID" as="xs:string">button-expand-action</xsl:variable>
-    <xsl:variable name="collapseActionID" as="xs:string">button-collapse-action</xsl:variable>
-    <xsl:variable name="pendingActionID" as="xs:string">button-pending-action</xsl:variable>
-    
     <xsl:template match="xhtml:ul" mode="toc-accessibility">
         <xsl:copy>
-            <xsl:variable name="isRoot" as="xs:boolean" select="count(parent::*) = 0"/>
+            <xsl:variable name="isRoot" as="xs:boolean" select="exists(parent::node()[@data-type='temporary'])"/>
             <xsl:attribute name="role">
                 <xsl:choose>
                     <xsl:when test="$isRoot">
@@ -238,11 +243,6 @@
             <xsl:apply-templates select="@*" mode="toc-accessibility"/>
             <xsl:if test="$isRoot">
                 <xsl:attribute name="aria-label">Table of Contents</xsl:attribute>
-                <span class="expand-button-action-labels">
-                    <span id="{$expandActionID}" aria-label="Expand"/>
-                    <span id="{$collapseActionID}" aria-label="Collapse"/>
-                    <span id="{$pendingActionID}" aria-label="Pending"/>
-                </span>
             </xsl:if>
             
             <xsl:apply-templates select="node()" mode="toc-accessibility"/>
@@ -251,7 +251,7 @@
     
     <xsl:template match="xhtml:li" mode="toc-accessibility">
         <xsl:copy>
-            <xsl:variable name="state" select="xhtml:span/@data-state"/>
+            <xsl:variable name="state" select="xhtml:div/@data-state"/>
             <xsl:attribute name="role">treeitem</xsl:attribute>
             <xsl:if test="not($state = 'leaf')">
                 <xsl:attribute name="aria-expanded">
@@ -271,7 +271,7 @@
     
     <xsl:template match="xhtml:span[contains(@class, 'wh-expand-btn')]" mode="toc-accessibility">
         <xsl:copy>
-            <xsl:variable name="state" select="parent::xhtml:span/@data-state"/>
+            <xsl:variable name="state" select="parent::xhtml:div/@data-state"/>
             <xsl:attribute name="role">button</xsl:attribute>
             <xsl:if test="not($state = 'leaf')">
                 <xsl:attribute name="tabindex">0</xsl:attribute>
@@ -285,7 +285,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                     <xsl:value-of select="' '"/>
-                    <xsl:value-of select="following-sibling::xhtml:span[contains(@class, 'title')]/xhtml:a/@id"/>
+                    <xsl:value-of select="following-sibling::xhtml:div[contains(@class, 'title')]/xhtml:a/@id"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:apply-templates select="node() | @*" mode="toc-accessibility"/>
@@ -362,7 +362,7 @@
                 -->
                 <xsl:attribute name="data-processing-mode" select="'linkPoint'"/>
             </xsl:if>
-            <span data-tocid="{@wh-toc-id}">
+            <div data-tocid="{@wh-toc-id}">
                 <xsl:attribute name="class">
                     <xsl:value-of select="'topicref'"/>
                     <xsl:if test="@outputclass">
@@ -397,7 +397,7 @@
                     <xsl:call-template name="computeHrefAttr"/>
                 </xsl:variable>
                 <span class="wh-expand-btn"/>
-                <span class="title">
+                <div class="title">
                     <a href="{$hrefValue}" id="{@wh-toc-id}-link">
                         <xsl:if test="@scope='external'">
                             <!-- Mark the current link as being external to the DITA map. -->
@@ -406,8 +406,8 @@
                         <xsl:copy-of select="toc:title/node()"/>
                     </a>
                     <xsl:apply-templates select="toc:shortdesc" mode="topic2html"/>
-                </span>
-            </span>
+                </div>
+            </div>
         </li>
     </xsl:template>
     
@@ -425,9 +425,9 @@
     </xsl:template>
     
     <xsl:template match="toc:shortdesc" mode="topic2html">
-        <span class="wh-tooltip">
+        <div class="wh-tooltip">
             <xsl:copy-of select="node()"/>
-        </span>
+        </div>
     </xsl:template>
     
 	<xsl:template match="text()" mode="side-toc"/>

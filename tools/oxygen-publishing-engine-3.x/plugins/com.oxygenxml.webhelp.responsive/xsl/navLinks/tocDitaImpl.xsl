@@ -9,7 +9,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     xmlns:relpath="http://dita2indesign/functions/relpath"
     xmlns:oxygen="http://www.oxygenxml.com/functions"
     xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc"
-    xmlns="http://www.oxygenxml.com/ns/webhelp/toc" exclude-result-prefixes="relpath oxygen"
+    xmlns="http://www.oxygenxml.com/ns/webhelp/toc" exclude-result-prefixes="relpath oxygen toc"
     xmlns:xhtml="http://www.w3.org/1999/xhtml" version="2.0">
 
 

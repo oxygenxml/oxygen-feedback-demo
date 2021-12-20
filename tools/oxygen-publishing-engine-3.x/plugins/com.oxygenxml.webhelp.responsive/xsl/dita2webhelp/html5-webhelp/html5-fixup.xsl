@@ -21,11 +21,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   
   <!-- Oxygen build number that created the WebHelp pages. -->
   <xsl:param name="WEBHELP_BUILD_NUMBER"/>
-  
-  <!-- 
-    Flag indicating the output is feedback enabled. 
-  -->
-  <xsl:variable name="IS_FEEDBACK_ENABLED" select="string-length($WEBHELP_PRODUCT_ID) > 0"/>
     
   <xsl:include href="../../util/fixupNS.xsl"/>
   
@@ -53,7 +48,15 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       </xsl:attribute>
     </xsl:element>
   </xsl:template>
+
+  <!-- WH-2615 Remove the <meta charser='UTF-8'> element. 
+  The charset is declared in the page-templates -->  
+  <xsl:template match="*:head/*:meta[@charset='UTF-8']" mode="fixup"/>
   
+  <!-- 
+    WH-2616 Remove the <meta/@scheme> attribute. 
+  -->  
+  <xsl:template match="*:head/*:meta/@scheme" mode="fixup"/>
   
   <!-- 
     Has no description. Compute one. 

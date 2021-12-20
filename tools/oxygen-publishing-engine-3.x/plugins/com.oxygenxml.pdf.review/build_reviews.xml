@@ -29,8 +29,9 @@
             <xslt in="${pdf2.temp.dir}/${tmpProcess2}"
                 out="${pdf2.temp.dir}/${tmpProcess3}"
                 style="${dita.plugin.com.oxygenxml.pdf.review.dir}/review/review-elements-to-fo.xsl">
-                <param name="show.changes.and.comments" expression="${show.changes.and.comments}"/>
-                <param name="show.changebars" expression="${show.changebars}"/>
+                <param name="show.changes.and.comments" expression="${show.changes.and.comments}" if:set="show.changes.and.comments"/>
+                <param name="show.changebars" expression="${show.changebars}" if:set="show.changebars"/>
+                <param name="show.changes.and.comments.as.changebars.only" expression="${show.changes.and.comments.as.changebars.only}" if:set="show.changes.and.comments.as.changebars.only"/>            	
                 <param name="insert.color" expression="${ct.insert.color}" if:set="ct.insert.color"/>
                 <param name="delete.color" expression="${ct.delete.color}" if:set="ct.delete.color"/>
                 <param name="comment.bg.color" expression="${ct.comment.bg.color}" if:set="ct.comment.bg.color"/>

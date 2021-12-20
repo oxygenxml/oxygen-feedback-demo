@@ -42,46 +42,27 @@ with those set forth herein.
   </condition>
 
   <!--
-    The main target (deprecated)
-    
-    1. Merges the map in a file together with metainformation about the TOC and index
-      (similar to what the "org.dita.pdf2" plugin would do before converting it to FO.)
-    2. Converts the merged map to PDF using Prince.
-  -->
-  <target name="dita2pdf-css" depends="
-  	pdf-css.init-root-map,
-  	pdf-css.init-extensions,
-  	pdf-css.init-dita,
-  	pdf-css.init-template,
-  	pdf-css.init-template-fallback,
-  	pdf-css.close-acrobat-reader,
-  	pdf-css.dita2pdf2,
-  	pdf-css.prepare-merged,
-  	pdf-css.publish-pdf,
-  	pdf-css.clean-output-debug-files"/>
-
-  <!--
-	The main target (HTML5)
-	    
-	1. Merges the map in a file together with metainformation about the TOC and index
-	  (similar to what the "org.dita.pdf2" plugin would do before converting it to FO.)
-	2. Transforms the merged map to HTML
-	3. Converts the HTML to PDF using Prince.
+  The main target (HTML5)
+      
+  1. Merges the map in a file together with metainformation about the TOC and index
+    (similar to what the "org.dita.pdf2" plugin would do before converting it to FO.)
+  2. Transforms the merged map to HTML
+  3. Converts the HTML to PDF using Prince.
   -->
   <target name="dita2pdf-css-html5" depends="
-  	pdf-css.init-root-map,
-  	pdf-css.init-extensions,
-  	pdf-css.init-html5,
-  	pdf-css.init-dita,
-  	pdf-css.init-template,
-  	pdf-css.init-template-fallback,
-  	pdf-css.close-acrobat-reader,
-  	pdf-css.dita2pdf2,
-  	pdf-css.prepare-merged,
-  	pdf-css.merged-to-html5-init,
-  	pdf-css.merged-to-html5,
-  	pdf-css.publish-pdf,
-  	pdf-css.clean-output-debug-files"/>
+    pdf-css.init-root-map,
+    pdf-css.init-extensions,
+    pdf-css.init-html5,
+    pdf-css.init-dita,
+    pdf-css.init-template,
+    pdf-css.init-template-fallback,
+    pdf-css.close-acrobat-reader,
+    pdf-css.dita2pdf2,
+    pdf-css.prepare-merged,
+    pdf-css.merged-to-html5-init,
+    pdf-css.merged-to-html5,
+    pdf-css.publish-pdf,
+    pdf-css.clean-output-debug-files"/>
 
   <target name="dita2pdf-css-html5-single-topic" depends="dita2pdf-css-html5"/>
 
@@ -93,11 +74,11 @@ with those set forth herein.
     description="Initiate Preprocessing of the Root Map"
     depends="pdf-css.init-root-map.check">
     <!-- 
-  		Forwarding args.root.map to the parameter with the same purpose in DITA-OT.
-  		Our implementation was removed after the DITA-OT implemented single
-  		topic publishing using a context map indicated in the args.resources parameter.
-  	--> 
-  	<property name="args.resources" location="${args.root.map}" />
+      Forwarding args.root.map to the parameter with the same purpose in DITA-OT.
+      Our implementation was removed after the DITA-OT implemented single
+      topic publishing using a context map indicated in the args.resources parameter.
+    --> 
+    <property name="args.resources" location="${args.root.map}" />
   </target>
 
   <target name="pdf-css.init-root-map.check">
@@ -119,7 +100,7 @@ with those set forth herein.
   </target>
 
   <!-- 
-  	Sets the input, output and XSL for the HTML transformation.
+    Sets the input, output and XSL for the HTML transformation.
   -->
   <target name="pdf-css.merged-to-html5-init">
     <antcall target="moveXML" inheritrefs="true">
@@ -134,8 +115,8 @@ with those set forth herein.
 
   <!--
     
-	    Load the PDF custom template.
-	    
+      Load the PDF custom template.
+      
    -->
   <target name="pdf-css.init-template" depends="dita2pdf2.init"
     if="${can.use.oxygen.publishing.templates}">
@@ -165,14 +146,24 @@ with those set forth herein.
     <makeurl property="pdf.default.xml.catalog.url"
       file="${dita.plugin.com.oxygenxml.pdf.css.dir}/xsl/template_catalog.xml"/>
 
-    <echo>Publishing template root path: ${publishing.template}</echo>
-    <echo>Publishing template descriptor: ${publishing.template.descriptor}</echo>
-
+  	<echo>Publishing template root path: ${publishing.template}</echo>
+  	<echo>Publishing template descriptor: ${publishing.template.descriptor}</echo>
+    <dirname file="${publishing.template}" property="publishing.template.dir"/>
+    
+    <condition property="publishing.template.specified" else="false">
+      <not>
+  	    <and>
+  	   	    <equals arg1="${publishing.template}" arg2=""/>
+            <equals arg1="${publishing.template.descriptor}" arg2=""/>
+        </and>
+  	  </not>
+  	</condition>
+  	
     <templatetask outputDir="${dita.map.output.dir}" tempDir="${dita.temp.dir}"
       pluginDir="${dita.plugin.com.oxygenxml.pdf.css.dir}"
       templateDescriptor="${publishing.template.descriptor}"
       templateRootPath="${publishing.template}" defaultXMLCatalog="${pdf.default.xml.catalog.url}"
-      transtype="pdf-css"/>
+      transtype="pdf-css" if:true="${publishing.template.specified}"/>
 
     <!-- Catalog for the XSLT extension points. Can be generated from the publishing template. -->
     <property name="xsl.extensions.xml.catalog.file.path"
@@ -211,16 +202,22 @@ with those set forth herein.
       <and>
         <isset property="use.chemistry"/>
         <or>
-          <available file="chemistry.bat"/>
-          <available file="chemistry.bat" filepath="${env.PATH}"/>
-          <!-- special case for Windows, may be PATH or Path -->
-          <available file="chemistry.bat" filepath="${env.Path}"/>
-          <available file="chemistry.bat" filepath="${env.PATH}"/>
-
-          <available file="chemistry.sh"/>
-          <available file="chemistry.sh" filepath="${env.PATH}"/>
           <!-- the path was already set in the transformation parameters -->
           <isset property="css.processor.path.chemistry"/>
+        	
+          <or unless:set="css.processor.path.chemistry">
+          	<!-- avoid scanning all dirs specified the PATH if not necessary,
+          	   we simplify the policy file rules in this way -->
+          	
+	          <available file="chemistry.bat" />
+	          <available file="chemistry.bat" filepath="${env.PATH}"/>
+	          <!-- special case for Windows, may be PATH or Path -->
+	          <available file="chemistry.bat" filepath="${env.Path}"/>
+	          <available file="chemistry.bat" filepath="${env.PATH}"/>
+	
+	          <available file="chemistry.sh"/>
+	          <available file="chemistry.sh" filepath="${env.PATH}"/>
+          </or>
         </or>
       </and>
     </condition>
@@ -267,7 +264,36 @@ with those set forth herein.
 
     <!-- Controls the substitutions of latin glyphs -->
     <property name="enable.latin.glyph.substitutions">yes</property>
-
+      
+    <!--
+      Controls the security permissions, these parameters are set without values in Oxygen Chemistry
+      so we need to use a separate property that is set only if the DITA parameter value is 'yes'.
+    -->
+    <condition property="pdf.security.no.assembledoc">
+      <equals arg1="${pdf.security.restrict.assembledoc}" arg2="yes"/>
+    </condition>
+    <condition property="pdf.security.no.accesscontent">
+      <equals arg1="${pdf.security.restrict.accesscontent}" arg2="yes"/>
+    </condition>
+    <condition property="pdf.security.no.fillinforms">
+      <equals arg1="${pdf.security.restrict.fillinforms}" arg2="yes"/>
+    </condition>
+    <condition property="pdf.security.no.annotations">
+      <equals arg1="${pdf.security.restrict.annotations}" arg2="yes"/>
+    </condition>
+    <condition property="pdf.security.no.print">
+      <equals arg1="${pdf.security.restrict.print}" arg2="yes"/>
+    </condition>
+    <condition property="pdf.security.no.printhq">
+      <equals arg1="${pdf.security.restrict.printhq}" arg2="yes"/>
+    </condition>
+    <condition property="pdf.security.no.copy">
+      <equals arg1="${pdf.security.restrict.copy}" arg2="yes"/>
+    </condition>
+    <condition property="pdf.security.no.edit">
+      <equals arg1="${pdf.security.restrict.edit}" arg2="yes"/>
+    </condition>
+    
     <!-- Collect the parameters that are migrated as attributes on the root element. 
       For example "args.css.param.my_attr" results in the attribute:
       oxy-attrs:my_attr="value"
@@ -357,29 +383,18 @@ with those set forth herein.
   </target>
 
   <target name="pdf-css.prepare-merged"
-    depends="pdf-css.check.exec.prince, pdf-css.check.exec.antenna-house">
+    depends="pdf-css.check.exec.prince, pdf-css.check.exec.antenna-house"> 	
 
-    <!-- 
-  	     Use the CSSs from the oXygen frameworks/dita directory, if available.
-  		 They are preferred because they can be easily changed by the end user 
-  		 (making use of the CSS Inspector)
-  	-->
-    <condition property="default.css.dir"
-      value="${dita.plugin.com.oxygenxml.pdf.css.dir}/../../../css"
-      else="${dita.plugin.com.oxygenxml.pdf.css.dir}/css">
-
-      <available file="${dita.plugin.com.oxygenxml.pdf.css.dir}/../../../css"/>
-    </condition>
-    <property name="default.css.dir.abs.path" location="${default.css.dir}"/>
-
-    <!-- 
-  		This property may be overriden from the oXygen transformation scenario, 
-  	    based on the user selection of the stylesheet. 
-  	-->
+  	<!-- These properties are used in the set-css-list-properties task --> 
+    <property name="default.css.dir.abs.path" location="${dita.plugin.com.oxygenxml.pdf.css.dir}/css"/>
+  	<!-- 
+        This property may be overriden from the oXygen transformation scenario, 
+         based on the user selection of the stylesheet. 
+     -->
     <property name="dita.css.list" value="${default.css.dir.abs.path}/edit/style-basic.css"/>
     <!-- 
-		This has the semantic similar to the args.css from the XHTML transtype, of additional CSSs that contain the most important rules.
-	-->
+    This has the semantic similar to the args.css from the XHTML transtype, of additional CSSs that contain the most important rules.
+    -->
     <property name="args.css" value=""/>
     <property name="dita.print.css" value="${default.css.dir.abs.path}/print/p-dita.css"/>
     <property name="webhelp.topic.css"
@@ -392,10 +407,10 @@ with those set forth herein.
     <echo message="The args input ${args.input}."/>
 
     <!--
-  	
-  		XSLT pipeline
-  	
-  	-->
+    
+      XSLT pipeline
+    
+    -->
 
     <antcall target="pdf-css.prepare-merged.rename-topic-as-merged-map" inheritrefs="true"/>
 
@@ -413,7 +428,7 @@ with those set forth herein.
         </and>
       </condition>
     </fail>
-  	
+    
     <condition property="pdf.css.computed.input.dir" value="${user.input.dir}">
       <not>
         <equals arg1="${transtype}" arg2="pdf-css-html5-single-topic"/>
@@ -421,8 +436,8 @@ with those set forth herein.
     </condition>
     <dirname property="pdf.css.computed.input.dir" file="${args.input}"/>
     <!--Used to make relative image references absolute in XSLT code.-->
-  	<makeurl property="user.input.dir.url" file="${pdf.css.computed.input.dir}"/>
-  	  <!-- Figure title placement. May come as argument. -->
+    <makeurl property="user.input.dir.url" file="${pdf.css.computed.input.dir}"/>
+      <!-- Figure title placement. May come as argument. -->
     <property name="figure.title.placement" value="top"/>
     <!-- Table title placement. May come as argument. -->
     <property name="table.title.placement" value="top"/>
@@ -444,11 +459,11 @@ with those set forth herein.
       </not>
     </condition>
 
-    <!--  	
-  		It is best to fail early than to wait for formatter to create the PDF 
-  		and then fail when writing the output file. 
-  		Usually the output file remains opened in Acrobat Reader.
-  	-->
+    <!--    
+      It is best to fail early than to wait for formatter to create the PDF 
+      and then fail when writing the output file. 
+      Usually the output file remains opened in Acrobat Reader.
+    -->
     <delete file="${outputFile}" failonerror="false"/>
     <fail
       message="[OXY-PDFCSS03E][ERROR] Cannot overwrite the output file: ${outputFile}. Make sure it is not opened in Acrobat Reader or other program that locks it.">
@@ -459,10 +474,10 @@ with those set forth herein.
 
 
     <!-- 
-  	  Generating a main stylesheet that imports all the CSSs specified by the user.
-  	  Will be passed as a parameter to the Prince process. We are using this approach because 
-  	  we cannot dynamically alter the number of -style arguments.
-  	  -->
+      Generating a main stylesheet that imports all the CSSs specified by the user.
+      Will be passed as a parameter to the Prince process. We are using this approach because 
+      we cannot dynamically alter the number of -style arguments.
+      -->
     <property name="main.css.path" value="${dita.temp.dir.fullpath}/main.css"/>
 
     <taskdef name="set-css-list-properties"
@@ -475,8 +490,8 @@ with those set forth herein.
     <antcall target="pdf-css.write-main-css-file-for-direct-transformation" inheritrefs="true"/>
     <antcall target="pdf-css.write-main-css-file-for-html-transformation" inheritrefs="true"/>
     <!-- 
-    	 Copy the input XML file to the output directory.
-    	 Add CSS references, so the file can be opened directly in a browser for CSS inspection.
+       Copy the input XML file to the output directory.
+       Add CSS references, so the file can be opened directly in a browser for CSS inspection.
      -->
     <antcall target="copyXML" inheritrefs="true">
       <param name="src" value="${dita.map.merged.post.processed}"/>
@@ -578,6 +593,8 @@ with those set forth herein.
       <arg value="${show.image.map.area.shapes}" if:set="show.image.map.area.shapes"/>
       <arg value="-show-image-map-area-numbers" if:set="show.image.map.area.numbers"/>
       <arg value="${show.image.map.area.numbers}" if:set="show.image.map.area.numbers"/>
+      <arg value="-image-resolution" if:set="image.resolution"/>
+      <arg value="${image.resolution}" if:set="image.resolution"/>
       <arg value="-drop-block-margins-at-page-boundary"/>
       <arg value="${drop.block.margins.at.page.boundary}"/>
       <arg value="-use-css-for-embedded-svg"/>
@@ -588,6 +605,39 @@ with those set forth herein.
       <arg value="${args.hyph.dir}" if:set="args.hyph.dir"/>
       <arg value="-pdf-version" if:set="pdf.version"/>
       <arg value="${pdf.version}" if:set="pdf.version"/>
+      <arg value="-pdf-ua" if:true="${pdf.accessibility}"/>
+      
+      <arg value="-security-policy" if:set="chemistry.security.policy"/>
+      <arg value="${chemistry.security.policy}" if:set="chemistry.security.policy"/>
+      <arg value="-security-workspace" if:set="chemistry.security.workspace"/>
+      <arg value="${chemistry.security.workspace}" if:set="chemistry.security.workspace"/>
+      <arg value="-security-resources-dir1" if:set="basedir"/>  	  
+      <arg value="${basedir}" if:set="basedir"/>
+      <arg value="-security-resources-dir2" if:set="dita.dir"/>  	  
+      <arg value="${dita.dir}" if:set="dita.dir"/>
+      <arg value="-security-resources-dir3" if:set="publishing.template.dir"/>  	  
+      <arg value="${publishing.template.dir}" if:set="publishing.template.dir"/>
+      <arg value="-security-resources-dir4" if:set="dita.temp.dir"/>
+      <arg value="${dita.temp.dir}" if:set="dita.temp.dir"/>
+      <arg value="-security-resources-dir5" if:set="chemistry.security.resources.dir"/>
+      <arg value="${chemistry.security.resources.dir}" if:set="chemistry.security.resources.dir"/>
+      <arg value="-security-resources-host" if:set="chemistry.security.resources.host"/>
+      <arg value="${chemistry.security.resources.host}" if:set="chemistry.security.resources.host"/>      	      	
+
+      <arg value="-pdf-security-restrict-assembledoc" if:set="pdf.security.no.assembledoc"/>
+      <arg value="-pdf-security-restrict-accesscontent" if:set="pdf.security.no.accesscontent"/>
+      <arg value="-pdf-security-restrict-fillinforms" if:set="pdf.security.no.fillinforms"/>
+      <arg value="-pdf-security-restrict-annotations" if:set="pdf.security.no.annotations"/>
+      <arg value="-pdf-security-restrict-print" if:set="pdf.security.no.print"/>
+      <arg value="-pdf-security-restrict-printhq" if:set="pdf.security.no.printhq"/>
+      <arg value="-pdf-security-restrict-copy" if:set="pdf.security.no.copy"/>
+      <arg value="-pdf-security-restrict-edit" if:set="pdf.security.no.edit"/>
+      
+      <arg value="-pdf-security-user-password" if:set="pdf.security.user.password"/>
+      <arg value="${pdf.security.user.password}" if:set="pdf.security.user.password"/>
+      <arg value="-pdf-security-owner-password" if:set="pdf.security.owner.password"/>
+      <arg value="${pdf.security.owner.password}" if:set="pdf.security.owner.password"/>
+
     </exec>
   </target>
   
@@ -656,6 +706,8 @@ with those set forth herein.
       <arg value="${show.image.map.area.shapes}" if:set="show.image.map.area.shapes"/>
       <arg value="-show-image-map-area-numbers" if:set="show.image.map.area.numbers"/>
       <arg value="${show.image.map.area.numbers}" if:set="show.image.map.area.numbers"/>
+      <arg value="-image-resolution" if:set="image.resolution"/>
+      <arg value="${image.resolution}" if:set="image.resolution"/>
       <arg value="-drop-block-margins-at-page-boundary"/>
       <arg value="${drop.block.margins.at.page.boundary}"/>
       <arg value="-use-css-for-embedded-svg"/>
@@ -666,6 +718,40 @@ with those set forth herein.
       <arg value="${args.hyph.dir}" if:set="args.hyph.dir"/>
       <arg value="-pdf-version" if:set="pdf.version"/>
       <arg value="${pdf.version}" if:set="pdf.version"/>
+      <arg value="-pdf-ua" if:true="${pdf.accessibility}"/>
+      	
+      
+      <arg value="-security-policy" if:set="chemistry.security.policy"/>
+      <arg value="${chemistry.security.policy}" if:set="chemistry.security.policy"/>
+      <arg value="-security-workspace" if:set="chemistry.security.workspace"/>
+      <arg value="${chemistry.security.workspace}" if:set="chemistry.security.workspace"/>
+      <arg value="-security-resources-dir1" if:set="basedir"/>      
+      <arg value="${basedir}" if:set="basedir"/>
+      <arg value="-security-resources-dir2" if:set="dita.dir"/>     
+      <arg value="${dita.dir}" if:set="dita.dir"/>
+      <arg value="-security-resources-dir3" if:set="publishing.template.dir"/>      
+      <arg value="${publishing.template.dir}" if:set="publishing.template.dir"/>
+      <arg value="-security-resources-dir4" if:set="dita.temp.dir"/>
+      <arg value="${dita.temp.dir}" if:set="dita.temp.dir"/>
+      <arg value="-security-resources-dir5" if:set="chemistry.security.resources.dir"/>
+      <arg value="${chemistry.security.resources.dir}" if:set="chemistry.security.resources.dir"/>
+      <arg value="-security-resources-host" if:set="chemistry.security.resources.host"/>
+      <arg value="${chemistry.security.resources.host}" if:set="chemistry.security.resources.host"/>  	      	
+          	
+      <arg value="-pdf-security-restrict-assembledoc" if:set="pdf.security.no.assembledoc"/>
+      <arg value="-pdf-security-restrict-accesscontent" if:set="pdf.security.no.accesscontent"/>
+      <arg value="-pdf-security-restrict-fillinforms" if:set="pdf.security.no.fillinforms"/>
+      <arg value="-pdf-security-restrict-annotations" if:set="pdf.security.no.annotations"/>
+      <arg value="-pdf-security-restrict-print" if:set="pdf.security.no.print"/>
+      <arg value="-pdf-security-restrict-printhq" if:set="pdf.security.no.printhq"/>
+      <arg value="-pdf-security-restrict-copy" if:set="pdf.security.no.copy"/>
+      <arg value="-pdf-security-restrict-edit" if:set="pdf.security.no.edit"/>
+      
+      <arg value="-pdf-security-user-password" if:set="pdf.security.user.password"/>
+      <arg value="${pdf.security.user.password}" if:set="pdf.security.user.password"/>
+      <arg value="-pdf-security-owner-password" if:set="pdf.security.owner.password"/>
+      <arg value="${pdf.security.owner.password}" if:set="pdf.security.owner.password"/>
+
     </java>
   </target>
 
@@ -686,9 +772,9 @@ with those set forth herein.
       output="${dita.temp.dir.fullpath}${file.separator}index-id-to-page.js" failonerror="true"
       logError="true">
       <!-- 
-	  What to do?
-	     Moving the output in a log hides the error messages in the oXygen console.
-	     Living them in the normal output may create garbage in the output collected for the next stage.
+    What to do?
+       Moving the output in a log hides the error messages in the oXygen console.
+       Living them in the normal output may create garbage in the output collected for the next stage.
       <arg value="-\-log"/>
       <arg value="${dita.temp.dir.fullpath}${file.separator}firstPhaseLog.txt"/>   
       -->
@@ -742,8 +828,8 @@ with those set forth herein.
   </target>
 
   <!-- 
-  	When transforming a single topic, this is processed into the temporary folder
-  	keeping its name. Move it as merged map, so next stages can find it.
+    When transforming a single topic, this is processed into the temporary folder
+    keeping its name. Move it as merged map, so next stages can find it.
   -->
   <target name="pdf-css.prepare-merged.rename-topic-as-merged-map" if="noMap">
     <antcall target="moveXML" inheritrefs="true">
@@ -751,7 +837,7 @@ with those set forth herein.
       <param name="dest" value="${dita.map.merged}"/>
     </antcall>
   </target>
-	
+  
   <!--
     After the transformation, cleans the output if delete.debug.files is true.
   -->

@@ -79,7 +79,8 @@ a:hover {
     }
 
     /* Menu bar */
-    .wh_top_menu ul li:hover a {
+    .wh_top_menu ul li:hover a,
+    .wh_top_menu.activated-on-click ul li.active a {
         background-color: #4acaa8;
         color: #ffffff;
     }
@@ -95,14 +96,16 @@ a:hover {
        This will add a blank space between the menu bar and the current submenu.
        Also will ensure that when the mouse transits the blank space, the submenu is not hidden.
     */
-    .wh_top_menu > ul > li:hover > ul {
+    .wh_top_menu:not(.activated-on-click) > ul > li > ul,
+    .wh_top_menu.activated-on-click > ul > li.active > ul {
         margin-top: 0;
         border-top: 1.3em solid transparent;
         background-color: transparent;
     }
 
     /* The ^ arrow on top of the drop-down menu */
-    .wh_top_menu > ul > li:hover > ul:before {
+    .wh_top_menu:not(.activated-on-click) > ul > li > ul:before,
+    .wh_top_menu.activated-on-click > ul > li.active > ul:before{
         content: '';
         position: absolute;
         top: -1.3em;
@@ -113,14 +116,30 @@ a:hover {
         border-left: solid 0.8em transparent;
         border-right: solid 0.8em transparent;
     }
-    
+
+    /* WH-2521 Apply transitions only if the document has been fully loaded. */
+    /* Otherwise, there will be color transitions between styles from different CSS files */
+    .doc-ready .wh_top_menu:not(.activated-on-click) ul:hover li a,
+    .doc-ready .wh_top_menu:not(.activated-on-click) ul li:hover a {
+        /* WH-2521 Change the background color imediatelly when the current menu item (li) or other menu item is hovered. */
+        transition: none; 
+    }
+
+    .doc-ready .wh_top_menu:not(.activated-on-click) ul li a {
+        /* WH-2521 Delay the background color change on hover off. */
+        transition: 0.2s 1s;
+        transition-property: background-color, color;
+    }
+
+
     /* @RTL: Display the arrow in the right side. */    
-    *[dir='rtl'] .wh_top_menu > ul > li:hover > ul:before {
+    *[dir='rtl'] .wh_top_menu:not(.activated-on-click) > ul > li:hover > ul:before,
+    *[dir='rtl'] .wh_top_menu.activated-on-click > ul > li.active > ul:before{
         left: auto;
         right: 1.3em
     }
 
-    .wh_top_menu ul li:hover ul a {
+    .wh_top_menu ul ul a {
         color: #d1f1e9;
         transition: background-color .25s ease-out 0s,
         color .3s ease-out 0s;
@@ -381,6 +400,7 @@ Example:
 .wh_search_input {
     padding: 2em 0;
     margin: 0;
+    background: white;
 }
 
 .wh_search_textfield {
@@ -459,7 +479,11 @@ Example:
     text-decoration: underline;
 }
 
-.wh_publication_toc span, .wh_publication_toc a, .wh_publication_toc a:visited, .wh_publication_toc a:hover {
+.wh_publication_toc .active > .topicref a {
+    font-weight: normal;
+}  
+
+.wh_publication_toc div, .wh_publication_toc a, .wh_publication_toc a:visited, .wh_publication_toc a:hover {
     color: #4ACAA8;
 }
 
@@ -478,26 +502,30 @@ Example:
 
 /* Publication(Side) TOC tooltip */
 .wh_breadcrumb .topicref .wh-tooltip,
-.wh_publication_toc .topicref .wh-tooltip {
+.wh-toc-tooltip {
     background-color: #4d5251;
     color: #d1f1e9;
 }
 
 /* Tooltip arrow. */
 
-[data-tooltip-position="left"] .topicref .wh-tooltip::before {
+[data-tooltip-position="left"] .topicref .wh-tooltip::before,
+[data-tooltip-position="left"] .whc-toc-tooltip::before {
     border-left-color: #4d5251;
 }
 
-[data-tooltip-position="right"] .topicref .wh-tooltip::before {
+[data-tooltip-position="right"] .topicref .wh-tooltip::before,
+[data-tooltip-position="right"] .whc-toc-tooltip::before {
     border-right-color: #4d5251;
 }
 
-[data-tooltip-position="bottom"] .topicref .wh-tooltip::before {
+[data-tooltip-position="bottom"] .topicref .wh-tooltip::before,
+[data-tooltip-position="bottom"] .whc-toc-tooltip::before {
     border-bottom-color: #4d5251;
 }
 
-[data-tooltip-position="top"] .topicref .wh-tooltip::before {
+[data-tooltip-position="top"] .topicref .wh-tooltip::before,
+[data-tooltip-position="top"] .whc-toc-tooltip::before {
     border-top-color: #4d5251;
 }
 

@@ -31,10 +31,10 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   <xsl:include href="params.xsl"/>
   
   <xsl:output 
-    method="xhtml" 
+    method="xhtml"
+    html-version="5.0" 
     encoding="UTF-8"
     indent="no"
-    doctype-system="about:legacy-compat"
     omit-xml-declaration="yes"
     include-content-type="no"/>
   

@@ -55,13 +55,11 @@
                 (%basic.block; |
                  %data.elements.incl; |
                  %foreign.unknown.incl; |
-                 %sectiondiv; |
                  %txt.incl;)*)"
 >
 <!--                    LONG NAME: Troubleshooting                 -->
 <!ENTITY % troubleshooting.content
                        "((%title;),
-                         (%titlealts;)?,
                          (%abstract; |
                           %shortdesc;)?,
                          (%prolog;)?,
@@ -96,15 +94,7 @@
                          (%troubleSolution;)+)?"
 >
 <!ENTITY % troublebody.attributes
-              "%id-atts;
-               %localization-atts;
-               base
-                          CDATA
-                                    #IMPLIED
-               %base-attribute-extensions;
-               outputclass
-                          CDATA
-                                    #IMPLIED"
+              "%univ-atts;"
 >
 <!ELEMENT  troublebody %troublebody.content;>
 <!ATTLIST  troublebody %troublebody.attributes;>

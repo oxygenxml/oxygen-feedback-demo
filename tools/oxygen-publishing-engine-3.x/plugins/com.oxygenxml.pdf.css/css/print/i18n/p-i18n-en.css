@@ -93,7 +93,7 @@ I18N file for en
 			  			
 			  				
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:after(2) {
     content: " " "(continued)";
 }
 

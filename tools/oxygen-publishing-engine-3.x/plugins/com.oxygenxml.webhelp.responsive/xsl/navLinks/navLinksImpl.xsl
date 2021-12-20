@@ -23,7 +23,7 @@
     <xsl:param name="WEBHELP_TOP_MENU_DEPTH"/>
     
     <xsl:variable name="VOID_HREF" select="'javascript:void(0)'"/>
-    <xsl:output name="html" method="xhtml" media-type="text/html" omit-xml-declaration="yes" indent="no"/>
+    <xsl:output name="html" method="xhtml" html-version="5.0" media-type="text/html" omit-xml-declaration="yes" indent="no"/>
     
     <xsl:key name="tocHrefs" match="toc:topic[@href][not(@href=$VOID_HREF)][not(@format) or @format = 'dita']" use="tokenize(@href, '#')[1]"/>
     

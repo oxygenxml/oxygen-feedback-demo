@@ -11,6 +11,12 @@
     counter-increment: footnote;
 }
 
+*[class~="map/topicref"] *[class~="topic/fn"] {
+    float: none;
+    display: none;
+    counter-increment: none;
+}
+
 *[class~="topic/fn"]::footnote-call {
     content: counter(footnote);
     font-size: smaller;
@@ -33,4 +39,14 @@
     	border-top: solid black thin;
     	padding-top: 8pt;
     }
+}
+
+@media screen {
+  *[class~="topic/fn"]::before {
+    content: "[";
+  }
+  
+  *[class~="topic/fn"]::after {
+    content: "]";
+  }
 }

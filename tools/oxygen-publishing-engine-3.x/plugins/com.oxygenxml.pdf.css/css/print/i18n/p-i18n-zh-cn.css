@@ -93,7 +93,7 @@ I18N file for zh-cn
 			  			
 			  				
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(zh-cn):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(zh-cn):after(2) {
     content: " " "(续)";
 }
 

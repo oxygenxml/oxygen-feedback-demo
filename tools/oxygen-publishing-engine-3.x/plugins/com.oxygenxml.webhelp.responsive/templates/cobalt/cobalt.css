@@ -40,6 +40,20 @@ a:hover {
 .wh_topic_content a {
   text-decoration: underline;
 }
+
+/* WH-2521 Apply transitions only if the document has been fully loaded. */
+/* Otherwise, there will be color transitions between styles from different CSS files */
+.doc-ready .wh_top_menu:not(.activated-on-click) ul:hover li a,
+.doc-ready .wh_top_menu:not(.activated-on-click) ul li:hover a {
+  /* WH-2521 Change the background color imediatelly when the current menu item (li) or other menu item is hovered. */
+  transition: none; 
+}
+
+.doc-ready .wh_top_menu:not(.activated-on-click) ul li a {
+  /* WH-2521 Delay the background color change on hover off. */
+  transition: 0.2s 1s;
+  transition-property: background-color, color;
+}
 /*
  * ------------------------------------------------------------------
  *
@@ -91,7 +105,8 @@ a:hover {
     border: none;
   }
   /* Menu bar */
-  .wh_top_menu ul li:hover a {
+  .wh_top_menu ul li:hover a,
+  .wh_top_menu.activated-on-click ul li.active a {
     background-color: #112e51;
     color: #ffffff;
   }
@@ -100,7 +115,8 @@ a:hover {
     border: none;
     background-color: #112e51;
   }
-  .wh_top_menu ul li:hover ul a {
+  .wh_top_menu ul li:hover ul a,
+  .wh_top_menu.activated-on-click ul li.active ul a {
     color: #ffffff;
     transition: background-color 0.25s ease-out 0s, color 0.3s ease-out 0s;
   }
@@ -511,6 +527,23 @@ a:hover {
   padding: 1em;
   line-height: 2em;
 }
+.close-toc-button:hover {
+  background-color: unset;
+}
+#wh_close_publication_toc_button {
+  margin-top: 4px;
+  margin-left: 10px;
+  background-color: black;
+}
+#wh_close_topic_toc_button {
+  margin-top: 4px;
+  margin-right: 4px;
+  background-color: #02bfe7;
+}
+.close-toc-icon {
+  border: 2px solid white
+}
+
 /* x more */
 .dots-after span,
 .dots-before span {
@@ -522,7 +555,7 @@ a:hover {
 .wh_publication_toc .active > .topicref a {
   font-weight: bold;
 }
-.wh_publication_toc span,
+.wh_publication_toc div,
 .wh_publication_toc a,
 .wh_publication_toc a:visited,
 .wh_publication_toc a:hover {
@@ -542,38 +575,42 @@ a:hover {
 }
 /* Publication TOC tooltip */
 .wh_breadcrumb .topicref .wh-tooltip,
-.wh_publication_toc .topicref .wh-tooltip {
+.wh-toc-tooltip {
   background-color: #112e51;
   color: #ffffff;
 }
 .wh_breadcrumb .topicref .wh-tooltip a,
-.wh_publication_toc .topicref .wh-tooltip a {
+.wh-toc-tooltip a {
   color: #ffffff;
   text-decoration: underline;
 }
 /* Tooltip arrow. */
-[data-tooltip-position="left"] .topicref .wh-tooltip::before {
+[data-tooltip-position="left"] .topicref .wh-tooltip::before,
+[data-tooltip-position="left"] .wh-toc-tooltip::before {
   border-left-color: #112e51;
 }
-[data-tooltip-position="right"] .topicref .wh-tooltip::before {
+[data-tooltip-position="right"] .topicref .wh-tooltip::before,
+[data-tooltip-position="right"] .wh-toc-tooltip::before {
   border-right-color: #112e51;
 }
-[data-tooltip-position="bottom"] .topicref .wh-tooltip::before {
+[data-tooltip-position="bottom"] .topicref .wh-tooltip::before,
+[data-tooltip-position="bottom"] .wh-toc-tooltip::before {
   border-bottom-color: #112e51;
 }
-[data-tooltip-position="top"] .topicref .wh-tooltip::before {
+[data-tooltip-position="top"] .topicref .wh-tooltip::before,
+[data-tooltip-position="top"] .wh-toc-tooltip::before {
   border-top-color: #112e51;
 }
 /* Topic TOC */
 .wh_topic_toc {
-  border-left: 5px solid #0071bc;
+  border-left: 5px solid #112e51;
   border-radius: 4px;
   background-color: #f1f1f1;
   padding: 0;
 }
 .wh_topic_toc .wh_topic_label {
   color: #ffffff;
-  background-color: #0071bc;
+  background-color: #112e51;
   font-family: 'Merriweather', sans-serif;
   padding-left: 0.5em;
 }

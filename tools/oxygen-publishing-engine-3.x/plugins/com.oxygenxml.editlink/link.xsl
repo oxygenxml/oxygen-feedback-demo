@@ -86,10 +86,10 @@
       <!-- The URL of DITA map opened in Content Fusion. -->
       <xsl:param name="ditamap.edit.url" as="xs:string"/>
 
-
+<!--
       <xsl:message select="concat('local.ditamap.path.semi.encoded: ', $local.ditamap.path.semi.encoded)"></xsl:message>
       <xsl:message select="concat('local.topic.file.url: ', $local.topic.file.url)"></xsl:message>
-      <xsl:message select="concat('ditamap.edit.url: ', $ditamap.edit.url)"></xsl:message>
+      <xsl:message select="concat('ditamap.edit.url: ', $ditamap.edit.url)"></xsl:message>-->
       
 
       <xsl:variable name="fusion-edit-root-url" select='replace($ditamap.edit.url, "(^.*/tasks/[^/]+/edit/).+", "$1")'/>
@@ -97,20 +97,20 @@
       <xsl:variable name="common-ancestor-path-length" select='string-length($local.ditamap.path.semi.encoded) - string-length($ditamap-relative-path)'/>
       <xsl:variable name="common-ancestor-path" select="concat(substring($local.ditamap.path.semi.encoded, 0, $common-ancestor-path-length), '/')"/>
       
-      <xsl:message select="concat('fusion-edit-root-url: ', $fusion-edit-root-url)"></xsl:message>
+    <!--  <xsl:message select="concat('fusion-edit-root-url: ', $fusion-edit-root-url)"></xsl:message>
       <xsl:message select="concat('ditamap-relative-path: ', $ditamap-relative-path)"></xsl:message>
       <xsl:message select="concat('common-ancestor-path-length: ', $common-ancestor-path-length)"></xsl:message>
-      <xsl:message select="concat('common-ancestor-path: ', $common-ancestor-path)"></xsl:message>
+      <xsl:message select="concat('common-ancestor-path: ', $common-ancestor-path)"></xsl:message>-->
       
       <xsl:variable name="file.rel.path">
         <xsl:value-of select="editlink:makeRelative(editlink:toUrl(escape-html-uri($common-ancestor-path)), escape-html-uri($local.topic.file.url))"/>
       </xsl:variable>
 
-      <xsl:message select="concat('file.rel.path: ', $file.rel.path)"></xsl:message>
+      <!--<xsl:message select="concat('file.rel.path: ', $file.rel.path)"></xsl:message>-->
 
       <xsl:value-of select="concat($fusion-edit-root-url, $file.rel.path)"/>
       
-      <xsl:message select="concat('resulting: ', $fusion-edit-root-url, $file.rel.path)"/>
+      <!--<xsl:message select="concat('resulting: ', $fusion-edit-root-url, $file.rel.path)"/>-->
     </xsl:function>
 
     <!-- Computes the Web Author link to be opened for a given topic in the context of a given map. -->

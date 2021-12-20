@@ -83,7 +83,7 @@
     <xsl:template match="toc:topic" mode="breadcrumb-html">
         <li>
             <xsl:attribute name="class">active</xsl:attribute>
-            <span>
+            <div>
                 <xsl:attribute name="class">
                     <xsl:value-of select="'topicref'"/>
                     <xsl:if test="@outputclass">
@@ -97,7 +97,7 @@
                 <!-- WH-1820 Copy the Ditaval "pass through" attributes. -->
                 <xsl:copy-of select="@*[starts-with(name(), 'data-')]"/>
                 
-                <span class="title">
+                <div class="title">
                     <a href="{$hrefValue}">
                         <xsl:if test="@scope='external'">
                             <!-- Mark the current link as being external to the DITA map. -->
@@ -106,8 +106,8 @@
                         <xsl:copy-of select="toc:title/node()"/>
                     </a>
                     <xsl:apply-templates select="toc:shortdesc" mode="breadcrumb-html"/>
-                </span>
-            </span>
+                </div>
+            </div>
         </li>
     </xsl:template>
     
@@ -125,9 +125,9 @@
     </xsl:template>
     
     <xsl:template match="toc:shortdesc" mode="breadcrumb-html">
-        <span class="wh-tooltip">
+        <div class="wh-tooltip">
             <xsl:copy-of select="node()"/>
-        </span>
+        </div>
     </xsl:template>
     
 	<xsl:template match="text()" mode="breadcrumb"/>

@@ -1,7 +1,7 @@
 /*
  * ======================================================
  * 
- * CSS rules for automatically rotating the wide tables (cols greater than 5).
+ * CSS rules for automatically rotating the wide tables (data-cols greater than 5).
  * 
  * ======================================================
  */
@@ -11,17 +11,18 @@
 	Rotate only the table.
 ---------------------------------------------------------------	 
 */   
-
- *[class~="topic/table"] > *[class~="topic/tgroup"][cols='5'],
- *[class~="topic/table"] > *[class~="topic/tgroup"][cols='6'],
- *[class~="topic/table"] > *[class~="topic/tgroup"][cols='7'],
- *[class~="topic/table"] > *[class~="topic/tgroup"][cols='8'] {
- 	page: landscape-page;
-     max-width: 100%;
-     max-height: 100%;
-     width: 100%;
-     page-break-before: avoid;
- }
+*[class~="topic/table"][data-cols='5'],
+*[class~="topic/table"][data-cols='6'],
+*[class~="topic/table"][data-cols='7'],
+*[class~="topic/table"][data-cols='8'],
+*[class~="topic/table"][data-cols='9'],
+*[class~="topic/table"][data-cols='10'] {
+  page: landscape-page;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  page-break-before: avoid;
+}
  
 /* 
 ---------------------------------------------------------------
@@ -30,26 +31,34 @@
 ---------------------------------------------------------------	 
 */  
 /*
-*[class~="topic/table"] > *[class~="topic/tgroup"][cols='5'],
-*[class~="topic/table"] > *[class~="topic/tgroup"][cols='6'],
-*[class~="topic/table"] > *[class~="topic/tgroup"][cols='7'],
-*[class~="topic/table"] > *[class~="topic/tgroup"][cols='8'] {
+*[class~="topic/table"][data-cols='5'],
+*[class~="topic/table"][data-cols='6'],
+*[class~="topic/table"][data-cols='7'],
+*[class~="topic/table"][data-cols='8'], 
+*[class~="topic/table"][data-cols='9'], 
+*[class~="topic/table"][data-cols='10'] {
     max-width: 100%;
     table-layout:auto;
 }
 
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='5']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='6']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='7']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='8']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='5']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='6']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='7']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='8']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='5']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='6']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='7']),
-*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"] > *[class~="topic/tgroup"][cols='8']){
-      page: landscape-page;
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='5']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='6']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='7']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='8']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='9']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='10']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='5']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='6']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='7']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='8']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='9']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='10']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='5']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='6']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='7']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='8']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='9']),
+*[class~="topic/topic"]:has(*:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *:not([class~="topic/topic"]) > *[class~="topic/table"][data-cols='10']) {
+    page: landscape-page;
 }
 */    

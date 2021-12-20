@@ -91,7 +91,7 @@ I18N file for hr
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(hr):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(hr):after(2) {
     content: " " "";
 }
 

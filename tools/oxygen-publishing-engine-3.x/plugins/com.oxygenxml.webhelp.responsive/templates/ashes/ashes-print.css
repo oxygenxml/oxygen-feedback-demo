@@ -12,6 +12,10 @@
     font-family: "PT Sans", sans-serif;
 }
 
+*[class ~= "topic/fn"] {
+    font-family: "PT Sans", sans-serif;
+}
+
 body {
   font-size: 10pt;
   background-color: inherit;

@@ -9,6 +9,8 @@
     <xsl:include href="review-utils.xsl"/>
     <xsl:param name="show.changes.and.comments" select="'no'"/>
     <xsl:param name="show.changebars" select="'no'"/>
+    <xsl:param name="show.changes.and.comments.as.changebars.only" select="'no'"/>
+    
     <xsl:param name="insert.color" select="'blue'"/>
     <xsl:param name="delete.color" select="'red'"/>
     <xsl:param name="comment.bg.color" select="'yellow'"/>
@@ -61,35 +63,62 @@
     </xsl:template>
     
     <xsl:template match="oxy:oxy-range-end[not(ancestor::*[local-name() = 'marker' or local-name() = 'footnote'])]">
+      <xsl:if test="$show.changes.and.comments.as.changebars.only = 'no'">
+        <!-- Generate footnotes, the user needs them. -->
         <xsl:call-template name="generateFootnote">
-            <xsl:with-param name="elem" select="oxy:findHighlightInfoElement(.)"/>
-            <xsl:with-param name="color" select="'black'"/>
+          <xsl:with-param name="elem" select="oxy:findHighlightInfoElement(.)"/>
+          <xsl:with-param name="color" select="'black'"/>
         </xsl:call-template>
+      </xsl:if>
     </xsl:template>
+    
+    <xsl:function name="oxy:show-changebars" as="xs:boolean">
+      <xsl:sequence select="$show.changebars = 'yes' or $show.changes.and.comments.as.changebars.only = 'yes'"/>
+    </xsl:function>
     
     <!-- INSERT CHANGE, USE UNDERLINE -->
     <xsl:template match="oxy:oxy-insert-hl[
         not(parent::*[local-name() = 'table' or local-name() = 'table-body' or local-name() = 'table-row' or local-name() = 'list-block' or local-name() = 'flow'])]">
-        <xsl:if test="$show.changebars = 'yes'">
+        
+        <xsl:if test="oxy:show-changebars()">
             <fo:change-bar-begin xsl:use-attribute-sets="changebar.insert"/>
         </xsl:if>
-        <fo:inline xsl:use-attribute-sets="insert">
+        
+        <xsl:choose>
+          <xsl:when test="$show.changes.and.comments.as.changebars.only = 'yes'">
             <xsl:apply-templates/>
-        </fo:inline>
-        <xsl:if test="$show.changebars = 'yes'">
+          </xsl:when>
+          <xsl:otherwise>
+            <fo:inline xsl:use-attribute-sets="insert">
+                <xsl:apply-templates/>
+            </fo:inline>
+          </xsl:otherwise>        
+        </xsl:choose>
+        
+        <xsl:if test="oxy:show-changebars()">
             <fo:change-bar-end change-bar-class="{generate-id()}"/>
         </xsl:if>
     </xsl:template>
     
     <!-- DELETE CHANGE, USE STRIKEOUT -->
     <xsl:template match="oxy:oxy-delete-hl">
-        <xsl:if test="$show.changebars = 'yes'">
+        <xsl:if test="oxy:show-changebars()">
             <fo:change-bar-begin xsl:use-attribute-sets="changebar.delete"/>
         </xsl:if>
-        <fo:inline xsl:use-attribute-sets="delete">
-            <xsl:apply-templates/>
-        </fo:inline>
-        <xsl:if test="$show.changebars = 'yes'">
+        <xsl:choose>
+          <xsl:when test="$show.changes.and.comments.as.changebars.only = 'yes'">
+            <!-- 
+                Hide deletions, leave just the changebar. 
+            	But for the changebar to appear it needs some content.-->
+            <fo:inline>&#x200b;</fo:inline>
+          </xsl:when>
+          <xsl:otherwise>
+            <fo:inline xsl:use-attribute-sets="delete">
+                <xsl:apply-templates/>
+            </fo:inline>
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="oxy:show-changebars()">
             <fo:change-bar-end change-bar-class="{generate-id()}"/>
         </xsl:if>
     </xsl:template>

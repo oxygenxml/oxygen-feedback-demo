@@ -11,10 +11,10 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    exclude-result-prefixes="xs" version="2.0"
     xmlns:d="http://docbook.org/ns/docbook" xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc"
     xmlns:index="http://www.oxygenxml.com/ns/webhelp/index"
-    xmlns:oxygen="http://www.oxygenxml.com/functions">
+    xmlns:oxygen="http://www.oxygenxml.com/functions"
+    exclude-result-prefixes="xs toc" version="2.0">
 
     <!-- Localization of text strings displayed in Webhelp output. -->
     <xsl:import href="../util/functions.xsl"/>
@@ -24,12 +24,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     <!-- Declares all available parameters -->
     <xsl:include href="params.xsl"/>
 
-	<!-- 
-	 	If this parameter is 'true' then we are running a 
-		webhelp feedback enabled transformation
-	-->
-	<xsl:param name="WEBHELP_FEEDBACK_ENABLED"/>
-    
     <xsl:param name="DITA_OT_PLUGINS_FILE_PATH"/>
 
     <!-- 
@@ -76,21 +70,8 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         <!-- Generate localization files for JS -->
         <xsl:call-template name="generateJsLocalizationFile">
             <xsl:with-param name="stringsElem" select="$mergedStringsElem"/>
-            <xsl:with-param name="forFeedback" select="false()"/>
         </xsl:call-template>
-
-        <!-- Generate localization files for PHP -->
-        <xsl:if test="lower-case($WEBHELP_FEEDBACK_ENABLED)='true'"> 
-            <!-- Generate localization files for JS for the feedback module -->
-            <xsl:call-template name="generateJsLocalizationFile">
-                <xsl:with-param name="stringsElem" select="$mergedStringsElem"/>
-                <xsl:with-param name="forFeedback" select="true()"/>
-            </xsl:call-template>
-            
-	        <xsl:call-template name="generatePhpLocalizationFile">
-	            <xsl:with-param name="stringsElem" select="$mergedStringsElem"/>
-	        </xsl:call-template>
-        </xsl:if>
+        
     </xsl:template>
     
     <!--
@@ -191,21 +172,9 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     -->
     <xsl:template name="generateJsLocalizationFile">
         <xsl:param name="stringsElem"/>
-        <!-- true if the file is generated for the Feedback module. -->
-        <xsl:param name="forFeedback" as="xs:boolean" select="false()"/>
 
         <xsl:variable name="jsResponsiveFileName" select="'oxygen-webhelp/app/localization/strings.js'"/>
-        <xsl:variable name="jsFeedbackFileName" select="'oxygen-webhelp/feedback/resources/localization/strings.js'"/>
-        <xsl:variable name="jsURL">
-            <xsl:choose>
-                <xsl:when test="$forFeedback">
-                    <xsl:value-of select="oxygen:makeURL(concat($OUTPUTDIR, '/', $jsFeedbackFileName))"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="oxygen:makeURL(concat($OUTPUTDIR, '/', $jsResponsiveFileName))"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
+        <xsl:variable name="jsURL" select="oxygen:makeURL(concat($OUTPUTDIR, '/', $jsResponsiveFileName))"/>
         
         <xsl:result-document href="{$jsURL}" method="text">
             
@@ -225,35 +194,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
     </xsl:template>
 
-    <!--
-        Generate localization file for PHP.
-    -->
-    <xsl:template name="generatePhpLocalizationFile">
-        <xsl:param name="stringsElem"/>
-
-        <xsl:variable name="phpFileName"
-            select="'oxygen-webhelp/feedback/resources/localization/strings.php'"/>
-        <xsl:variable name="phpURL"
-            select="oxygen:makeURL(concat($OUTPUTDIR, '/', $phpFileName))"/>
-        
-        <xsl:result-document href="{$phpURL}" method="text">
-            <xsl:text>&lt;?php</xsl:text>
-            <xsl:text>&#10;</xsl:text>
-            <xsl:text>$translate = array();</xsl:text>
-            <xsl:text>&#10;</xsl:text>
-
-            <xsl:call-template name="generateArrayElements">
-                <xsl:with-param name="arrayName" select="'$translate'"/>
-                <xsl:with-param name="strings" select="$stringsElem//str[@php = 'true']"/>
-            </xsl:call-template>
-
-            <xsl:text>&#10;</xsl:text>
-            <xsl:text>global $translate;</xsl:text>
-            <xsl:text>&#10;</xsl:text>
-            <xsl:text>?&gt;</xsl:text>
-        </xsl:result-document>
-    </xsl:template>
-    
     <!-- Generate localization array. -->
     <xsl:template name="generateArrayElements">
         <xsl:param name="arrayName"/>

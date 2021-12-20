@@ -38,7 +38,8 @@
   <xsl:template match="section[not(@class)]" mode="add-section-class">
     <xsl:param name="list-type"/>
     <xsl:copy>
-      <xsl:apply-templates select="@*" mode="#current"/>
+      <!-- Default HTML5 style-sheet already set an id on section child (div, ol or ul). -->
+      <xsl:apply-templates select="@* except @id" mode="#current"/>
       <xsl:choose>
         <xsl:when test="$list-type = 'ol'">
           <xsl:attribute name="class">- topic/ol task/steps ol steps</xsl:attribute>

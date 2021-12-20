@@ -16,7 +16,7 @@ available in the base directory of this plugin.
   <xsl:include href="common.xsl"/>
   
   <!-- PRE -->
-  <xsl:template match="*[contains(@class,' topic/pre ')][contains(@outputclass, 'language-')]" name="topic.pre" use-when="function-available('version:getProductVersion') or function-available('oxy:highlight')">
+	<xsl:template match="*[contains(@class,' topic/pre ')][contains(@outputclass, 'language-') or @outputclass=$allConfigHighlights]" name="topic.pre" use-when="function-available('version:getProductVersion') or function-available('oxy:highlight')">
     <!-- This template is deprecated in DITA-OT 1.7. Processing will moved into the main element rule. -->
     <xsl:if test="contains(@frame,'top')"><hr /></xsl:if>
     <xsl:apply-templates select="*[contains(@class,' ditaot-d/ditaval-startprop ')]" mode="out-of-line"/>

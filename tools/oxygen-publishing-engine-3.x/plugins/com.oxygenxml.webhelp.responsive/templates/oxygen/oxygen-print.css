@@ -11,6 +11,10 @@
     font-family: Roboto, sans-serif;
 }
 
+*[class ~= "topic/fn"] {
+    font-family: Roboto, sans-serif;
+}
+
 body {
 	font-size: 10pt;
 }

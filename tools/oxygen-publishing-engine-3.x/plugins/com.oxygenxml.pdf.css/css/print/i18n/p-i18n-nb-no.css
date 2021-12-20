@@ -91,7 +91,7 @@ I18N file for nb-no
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(nb-no):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(nb-no):after(2) {
     content: " " "";
 }
 

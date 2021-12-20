@@ -15,7 +15,12 @@ Applies the XSL transformation to get html5 from the merged map.
 	 			in="${dita.map.merged}" 
 	 			out="${dita.map.merged.post.processed}" 
 	 			style="${dita.plugin.com.oxygenxml.pdf.css.dir}/xsl/merged2merged/merged.xsl" >
-			      <xmlcatalog>
+			      <xmlcatalog classpath="">
+			      		<!-- 
+			      		If this empty classpath attribute is not set, the catalog resolver
+			      		will try to scan the full classpath-ul and the build will fail
+			      		when a security policy file is in place. 
+			      		-->
 			    	  <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
 			    	  <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
 			      </xmlcatalog>	

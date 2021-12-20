@@ -19,15 +19,29 @@
   
   <xsl:param name="table.title.placement" select="'top'"/>
   <xsl:param name="table.title.repeat" select="'yes'"/>
-
-  <!-- DCP-270 Putting a topic/title class on the caption, so it can be 
+  
+  <!--
+    DCP-539 Move the tgroup/@cols attribute on the parent table,
+    so it can be used for styling wide tables.
+    Extracted from org.dita.html5/xsl/tables.xsl.
+  -->
+  <xsl:template match="*[contains(@class, ' topic/table ') ]" mode="table:common">
+    <xsl:next-match/>
+    <xsl:variable name="cols" select="child::*[contains(@class, ' topic/tgroup ') ]/@cols"/>
+    <xsl:if test="$cols">
+      <xsl:attribute name="data-cols" select="$cols"/>
+    </xsl:if>
+  </xsl:template>
+  
+  <!--
+    DCP-270 Putting a topic/title class on the caption, so it can be 
     styled together with all other titles from the publication.
-    -->
+  -->
   <xsl:template match="*[contains(@class, ' topic/table ')][child::*[contains(@class, ' topic/title ')]]" mode="table:title">
     <caption class="- topic/title title tablecap">
-      <xsl:attribute name="caption-side" select="$table.title.placement"/>
+      <xsl:attribute name="data-caption-side" select="$table.title.placement"/>
       <xsl:if test="$table.title.repeat = 'yes'">
-        <xsl:attribute name="is-repeated">true</xsl:attribute>
+        <xsl:attribute name="data-is-repeated">true</xsl:attribute>
       </xsl:if>
       <xsl:apply-templates select="*[contains(@class, ' topic/title ')]" mode="label"/>
       <xsl:apply-templates select="
@@ -122,7 +136,7 @@
         <xsl:variable name="nb-cols" select="ancestor::*[contains(@class, ' topic/tgroup ')][1]/@cols"/>
         
         <xsl:choose>
-          <xsl:when test="number($colsep-attr) = 1 and $x-end &lt; $nb-cols">
+          <xsl:when test="number($colsep-attr) = 1 and number($x-end) &lt; number($nb-cols)">
             <xsl:sequence>1</xsl:sequence>
           </xsl:when>
           <xsl:otherwise>

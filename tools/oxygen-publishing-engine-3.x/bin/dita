@@ -177,7 +177,7 @@ if [ -n "$CYGHOME" ]; then
 fi
 
 # The oxygen dost patches jar contains a class that is used to launch Ant. 
-DOST_PATCHES_CP=$DITA_HOME/target/classes:$DITA_HOME/plugins/com.oxygenxml.dost.patches/lib/*:$DITA_HOME/lib/*
+DOST_PATCHES_CP=$DITA_HOME/target/classes:$DITA_HOME/plugins/com.oxygenxml.dost.patches/lib/*:$DITA_HOME/lib/*:$DITA_HOME/lib/saxon/*:
 
 ant_exec_command="exec \"$JAVACMD\" $ANT_OPTS -Djava.awt.headless=true -classpath \"$LOCALCLASSPATH\" -Dant.home=\"$DITA_HOME\" -Ddita.dir=\"$DITA_HOME\" -Dant.library.dir=\"$ANT_LIB\" $ant_sys_opts org.apache.tools.ant.launch.Launcher $ANT_ARGS -cp \"$CLASSPATH:$DOST_PATCHES_CP\""
 eval $ant_exec_command "$ant_exec_args"

@@ -91,7 +91,7 @@ I18N file for pt-br
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(pt-br):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(pt-br):after(2) {
     content: " " "";
 }
 

@@ -1,4 +1,4 @@
-DITA Open Toolkit bundled with Oxygen 23.1, build 2021030218
+DITA Open Toolkit bundled with Oxygen 24.0, build 2021121611
 
 Differences between the DITA Open Toolkit bundled with Oxygen and a regular DITA Open Toolkit distribution
 downloaded from the DITA-OT project:
@@ -32,6 +32,11 @@ com.oxygenxml.pdf.review
 com.oxygenxml.webhelp.common
 com.oxygenxml.webhelp.responsive
 mathml
+com.oxygenxml.dynamic.resources.converter
+
+Oxygen publishing integrations
+
+com.oxygenxml.zendesk
 
 
 DITA plugins not distributed by default:
@@ -119,8 +124,8 @@ org.lwdita
 	Changed the plugin.xml to use the wildcard for library references.
 	
 org.dita.pdf2.fop
-	Added oxygen-patched-* extra jar libraries to the FOP. It allows the FOP to output MathML equations, and various SVG fixes.
-	Updated used Batik Libraries to version 1.13 to avoid CVE-2019-17566
+	Added oxygen-patched-* extra jar libraries to FOP. It allows the FOP to output MathML equations, and various SVG fixes.
+	Updated used Batik Libraries to version 1.14 and FOP Libraries to 2.6.
 org.dita.pdf2.fop/cfg.fop.xconf	
     EXM-42187, use a higher source resolution so that SVGs do not appear scaled up
     
@@ -133,9 +138,17 @@ lib/commons-io-2.6.jar
 EXM-46537 Updated the JAR library to version 2.8.0 due to security concerns
 lib/ant*.jar
 EXM-46532 Updated to Apache ANT 1.10.9
+lib/icu4j-69_1.jar
+OPE-39 Updated the JAR library to version 69.1 due to security concerns
+lib/logback-*-1.2.6.jar
+OPE-43 Updated the JAR library to version 1.2.6 due to security concerns
   
 com.elovirta.ooxml/docx/word/document.topic.xsl
     EXM-44025 Added a patch which uses only the SVG file name for the reference.
 com.elovirta.ooxml/docx/word/_rels/document.xml.xsl
     EXM-44025 Added a patch which uses only the SVG file name for the reference.
+    
+config/logback.xml
+    EXM-47855 Set slf4j log level to INFO for some packages from plugin com.oxygenxml.zendesk:
+    io.netty, org.zendesk.client, org.asynchttpclient, com.oxygenxml.zendesk, com.oxygenxml.platform.integration
        

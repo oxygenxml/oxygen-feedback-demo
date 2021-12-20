@@ -492,12 +492,12 @@ Example:
   padding-left: 0;
 }
 
-.wh_publication_toc .active > span {
+.wh_publication_toc .active > div {
   color: @sideTocColor;
   text-decoration: underline;
 }
 
-.wh_publication_toc span, .wh_publication_toc a, .wh_publication_toc a:visited, .wh_publication_toc a:hover {
+.wh_publication_toc div, .wh_publication_toc a, .wh_publication_toc a:visited, .wh_publication_toc a:hover {
   color: @sideTocColor;
 }
 
@@ -515,32 +515,36 @@ Example:
 
 /* Publication TOC tooltip */
 .wh_breadcrumb .topicref .wh-tooltip,
-.wh_publication_toc .topicref .wh-tooltip {
+.wh-toc-tooltip {
   background-color: @tooltipBgr;
   color: @tooltipColor;
 }
 
 .wh_breadcrumb .topicref .wh-tooltip a,
-.wh_publication_toc .topicref .wh-tooltip a {
+.wh-toc-tooltip  a {
   color: @tooltipColor;
   text-decoration: underline;
 }
 
 /* Tooltip arrow. */
 
-[data-tooltip-position="left"] .topicref .wh-tooltip::before {
+[data-tooltip-position="left"] .topicref .wh-tooltip::before,
+[data-tooltip-position="left"] .wh-toc-tooltip::before {
   border-left-color: @tooltipBgr;
 }
 
-[data-tooltip-position="right"] .topicref .wh-tooltip::before {
+[data-tooltip-position="right"] .topicref .wh-tooltip::before,
+[data-tooltip-position="right"] .wh-toc-tooltip::before {
   border-right-color: @tooltipBgr;
 }
 
-[data-tooltip-position="bottom"] .topicref .wh-tooltip::before {
+[data-tooltip-position="bottom"] .topicref .wh-tooltip::before,
+[data-tooltip-position="bottom"] .wh-toc-tooltip::before {
   border-bottom-color: @tooltipBgr;
 }
 
-[data-tooltip-position="top"] .topicref .wh-tooltip::before {
+[data-tooltip-position="top"] .topicref .wh-tooltip::before,
+[data-tooltip-position="top"] .wh-toc-tooltip::before {
   border-top-color: @tooltipBgr;
 }
 

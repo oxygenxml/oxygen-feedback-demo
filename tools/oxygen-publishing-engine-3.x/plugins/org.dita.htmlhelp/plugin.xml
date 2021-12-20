@@ -6,7 +6,7 @@ Copyright 2011 Jarno Elovirta
 
 See the accompanying LICENSE file for applicable license.
 -->
-<plugin id="org.dita.htmlhelp" version="3.6.0">
+<plugin id="org.dita.htmlhelp" version="3.6.1">
   <!-- extension points -->
   <extension-point id="dita.xsl.htmlhelp.map2hhp" name="HTML Help project XSLT import"/>
   <extension-point id="dita.xsl.htmlhelp.map2hhc" name="HTML Help content XSLT import"/>

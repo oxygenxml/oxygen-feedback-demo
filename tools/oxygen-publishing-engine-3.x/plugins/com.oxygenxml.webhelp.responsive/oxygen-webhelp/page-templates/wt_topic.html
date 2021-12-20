@@ -1,8 +1,8 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:whc="http://www.oxygenxml.com/webhelp/components" whc:version="22.0">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:whc="http://www.oxygenxml.com/webhelp/components" whc:version="24.0">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
         
         <whc:page_libraries page="topic"/>
         <!-- Skin resources -->
@@ -12,6 +12,7 @@
             <!-- EXM-36950 - Expand the args.hdf parameter here -->
         </whc:include_html>
         <whc:include_html href="${webhelp.fragment.head}"/>
+        <whc:include_html href="${webhelp.fragment.head.topic.page}"/>
     </head>
 
     <body class="wh_topic_page">
@@ -68,8 +69,8 @@
                         <!-- Expand/Collapse publishing TOC 
                              The menu button for mobile devices is copied in the output only when the publication TOC is available
                         -->
-                        <button type="button" data-target="#wh_publication_toc" id="wh_toc_button"
-                            data-toggle="collapse" class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false"
+                        <button type="button" id="wh_toc_button"
+                            class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false"
                             aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc">
                             <span class="navbar-toggler-icon"></span>
                         </button>
@@ -86,7 +87,7 @@
                     <whc:webhelp_publication_toc data-tooltip-position="${webhelp.publication.toc.tooltip.position}">
                         <whc:include_html href="${webhelp.fragment.before.publication.toc}"/>
                         <nav id="wh_publication_toc" 
-                            class="collapse col-lg-3 col-md-3 col-sm-12 d-md-block d-print-none"
+                            class="col-lg-3 col-md-3 col-sm-12 d-md-block d-sm-none d-print-none"
                             aria-label="Table of Contents Container">
                             <whc:component_content/>
                         </nav>
@@ -94,13 +95,22 @@
                     </whc:webhelp_publication_toc>
                     
                     <div id="wh_topic_body" class="col-lg-7 col-md-9 col-sm-12">
+                        <button id="wh_close_publication_toc_button" class="close-toc-button d-none" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc" aria-expanded="true" >
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"/>     
+                            </span>
+                        </button>
+                        <button id="wh_close_topic_toc_button" class="close-toc-button d-none" aria-label="Toggle topic table of content" aria-controls="wh_topic_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"/>     
+                            </span>
+                        </button>
                         <whc:include_html href="${webhelp.fragment.before.topic.content}"/>
                         <whc:webhelp_topic_content class="body"/>
                         <whc:include_html href="${webhelp.fragment.after.topic.content}"/>
                         <whc:webhelp_child_links class="d-print-none"/>
                         <whc:webhelp_related_links class="d-print-none"/>
                         <whc:include_html href="${webhelp.fragment.before.feedback}"/>
-                        <whc:webhelp_feedback class="d-print-none"/>
                         <whc:include_html href="${webhelp.fragment.feedback}"/>
                         <whc:include_html href="${webhelp.fragment.after.feedback}"/>
                     </div>
@@ -128,7 +138,7 @@
         <div id="modal_img_large" class="modal">
             <span class="close oxy-icon oxy-icon-remove"></span>
             <!-- Modal Content (The Image) -->
-            <img class="modal-content" id="modal-img" alt=""/>
+            <div id="modal_img_container"/>
             <!-- Modal Caption (Image Text) -->
             <div id="caption"></div>
         </div>

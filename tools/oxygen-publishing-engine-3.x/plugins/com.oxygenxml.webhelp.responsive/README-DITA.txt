@@ -1,9 +1,9 @@
-Oxygen Webhelp Responsive Plugin 23.1, build 2021030218 
+Oxygen Webhelp Responsive Plugin 24.0, build 2021121611 
 
 INTRODUCTION
 =============
 
-This directory contains the Oxygen Webhelp Responsive plugin version 23.1 for DITA Open Toolkit. The Webhelp Responsive output files are exactly the same as for the DITA Webhelp Responsive transformations executed inside the Oxygen XML Editor 23.1 application. The plugin must be first integrated in the DITA Open Toolkit for adding the following transformation types to the DITA Open Toolkit:
+This directory contains the Oxygen Webhelp Responsive plugin version 24.0 for DITA Open Toolkit. The Webhelp Responsive output files are exactly the same as for the DITA Webhelp Responsive transformations executed inside the Oxygen XML Editor 24.0 application. The plugin must be first integrated in the DITA Open Toolkit for adding the following transformation types to the DITA Open Toolkit:
 
 webhelp-responsive  - The Responsive Webhelp transformation for desktop output
 

@@ -28,11 +28,19 @@
 
         <xsl:choose>
             <xsl:when test="not($image-size = '-1,-1')">
-                <xsl:variable name="width"
-                    select="round(number(substring-before($image-size, ',')) * number(.) div 100)"/>
+                <xsl:variable name="width-in-pixel">
+                    <xsl:call-template name="length-to-pixels">
+                        <xsl:with-param name="dimen" select="substring-before($image-size, ',')"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="height-in-pixel">
+                    <xsl:call-template name="length-to-pixels">
+                        <xsl:with-param name="dimen" select="substring-after($image-size, ',')"/>
+                    </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="width" select="floor(number($width-in-pixel) * number(.) div 100)"/>
                 <xsl:attribute name="width" select="$width"/>
-                <xsl:variable name="height"
-                    select="round(number(substring-after($image-size, ',')) * number(.) div 100)"/>
+                <xsl:variable name="height" select="floor(number($height-in-pixel) * number(.) div 100)"/>
                 <xsl:attribute name="height" select="$height"/>
             </xsl:when>
             <xsl:otherwise>

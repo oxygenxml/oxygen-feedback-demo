@@ -17,8 +17,9 @@
     <xsl:param name="css.params"/>
     <xsl:param name="hide.frontpage.toc.index.glossary" select="'no'"/>
     <xsl:param name="defaultLanguage" select="'en'"/>
+    
+    <xsl:variable name="numbering-sections" select="contains($css.params, 'numbering-sections=yes')" as="xs:boolean"/>
 
-     
     <xsl:include href="merged-namespace-decls.xsl"/>
     <xsl:include href="merged-filtering.xsl"/>    
     <xsl:include href="merged-toc.xsl"/>
@@ -32,6 +33,7 @@
     <xsl:include href="merged-links.xsl"/>
     <xsl:include href="merged-whitespaces.xsl"/>
     <xsl:include href="merged-topics.xsl"/>
+    <xsl:include href="merged-sections.xsl"/>
     <xsl:include href="merged-figures.xsl"/>
     <xsl:include href="merged-titles.xsl"/>
     

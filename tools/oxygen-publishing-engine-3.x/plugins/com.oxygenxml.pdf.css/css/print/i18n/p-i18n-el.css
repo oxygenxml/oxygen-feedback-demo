@@ -91,7 +91,7 @@ I18N file for el
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(el):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(el):after(2) {
     content: " " "";
 }
 

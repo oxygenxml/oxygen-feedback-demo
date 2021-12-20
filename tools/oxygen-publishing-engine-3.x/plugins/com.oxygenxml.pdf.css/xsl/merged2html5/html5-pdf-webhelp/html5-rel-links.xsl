@@ -8,11 +8,11 @@
   xmlns:relpath="http://dita2indesign/functions/relpath"
   exclude-result-prefixes="xs table dita-ot related-links ditamsg relpath"
   >
-
  
   <xsl:key name="omit-from-unordered-links" match="*[@importance='required' and (not(@role) or @role='sibling' or @role='friend' or @role='cousin')]" use="1" />
-  
- 
+
+  <xsl:param name="args.rellinks.group.mode" select="'single-group'"/>
+
   <!-- EXM-17960 PATCH FOR DITA-OT 2.0 -->
   <!--main template for setting up all links after the body - applied to the related-links container-->
   <xsl:template match="*[contains(@class, ' topic/related-links ')]" name="topic.related-links" >
@@ -172,46 +172,92 @@
   <xsl:template match="*[contains(@class, ' topic/link ')][@type='concept']" mode="related-links:get-group"
     name="related-links:group.concept"
     as="xs:string">
-    <xsl:call-template name="related-links:group."/>
+    <xsl:choose>
+      <xsl:when test="$args.rellinks.group.mode='single-group'">
+        <xsl:call-template name="related-links:group."/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- Priority of concept is the same as no-name group. -->
   <xsl:template match="*[contains(@class, ' topic/link ')][@type='concept']" mode="related-links:get-group-priority"
     name="related-links:group-priority.concept"
     as="xs:integer">
-    <xsl:call-template name="related-links:group-priority."/>
+    <xsl:choose>
+      <xsl:when test="$args.rellinks.group.mode='single-group'">
+        <xsl:call-template name="related-links:group-priority."/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- Wrapper for concepts: "Related information" in a <div>. -->
   <xsl:template match="*[contains(@class, ' topic/link ')][@type='concept']" mode="related-links:result-group"
     name="related-links:result.concept" as="element()">
     <xsl:param name="links" as="node()*"/>
-    <xsl:call-template name="related-links:group-result.">
-      <xsl:with-param name="links" select="$links"/>
-    </xsl:call-template>
+    <xsl:choose>
+      <xsl:when test="$args.rellinks.group.mode='single-group'">
+        <xsl:call-template name="related-links:group-result.">
+          <xsl:with-param name="links" select="$links"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match>
+          <xsl:with-param name="links" select="$links"/>
+        </xsl:next-match>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- Tasks have the same group as Topics. -->
   <xsl:template match="*[contains(@class, ' topic/link ')][@type='task']" mode="related-links:get-group"
     name="related-links:group.task"
     as="xs:string">
-    <xsl:call-template name="related-links:group."/>
+    <xsl:choose>
+      <xsl:when test="$args.rellinks.group.mode='single-group'">
+        <xsl:call-template name="related-links:group."/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- Priority of task is the same as no-name group. -->
   <xsl:template match="*[contains(@class, ' topic/link ')][@type='task']" mode="related-links:get-group-priority"
     name="related-links:group-priority.task"
     as="xs:integer">
-    <xsl:call-template name="related-links:group-priority."/>
+    <xsl:choose>
+      <xsl:when test="$args.rellinks.group.mode='single-group'">
+        <xsl:call-template name="related-links:group-priority."/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
   <!-- Wrapper for tasks: "Related information" in a <div>. -->
   <xsl:template match="*[contains(@class, ' topic/link ')][@type='task']" mode="related-links:result-group"
     name="related-links:result.task" as="element()">
     <xsl:param name="links" as="node()*"/>
-    <xsl:call-template name="related-links:group-result.">
-      <xsl:with-param name="links" select="$links"/>
-    </xsl:call-template>
+    <xsl:choose>
+      <xsl:when test="$args.rellinks.group.mode='single-group'">
+        <xsl:call-template name="related-links:group-result.">
+          <xsl:with-param name="links" select="$links"/>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:next-match>
+          <xsl:with-param name="links" select="$links"/>
+        </xsl:next-match>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
   
 </xsl:stylesheet>

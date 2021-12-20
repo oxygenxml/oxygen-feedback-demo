@@ -93,7 +93,7 @@ I18N file for fr
 			  			
 			  				
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(fr):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(fr):after(2) {
     content: " " "(suite)";
 }
 

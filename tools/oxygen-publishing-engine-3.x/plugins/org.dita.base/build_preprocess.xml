@@ -15,7 +15,7 @@ See the accompanying LICENSE file for applicable license.
     </and>
   </condition>
 
-  <target name="preprocess" depends="preprocess.init,ditaval-merge,gen-list,debug-filter,mapref,branch-filter,keyref,copy-to,conrefpush,conref,profile,topic-fragment,chunk,move-meta-entries,maplink,topicpull,clean-map,clean-preprocess,copy-files" description="Preprocessing ended"/>
+  <target name="preprocess" depends="com.oxygenxml.cleanOutput,preprocess.init,ditaval-merge,gen-list,debug-filter,mapref,branch-filter,keyref,copy-to,conrefpush,conref,profile,topic-fragment,chunk,move-meta-entries,maplink,topicpull,clean-map,clean-preprocess,copy-files" description="Preprocessing ended"/>
   
   <target name="preprocess.init">
     <dita-ot-fail id="DOTA002F">

@@ -91,7 +91,7 @@ I18N file for sr-latn-rs
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(sr-latn-rs):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(sr-latn-rs):after(2) {
     content: " " "";
 }
 

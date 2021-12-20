@@ -135,8 +135,8 @@
 }
 @media oxygen-high-contrast-black, oxygen-dark-theme {
   *[class~="topic/pre"] {
-    color: black !important;
-    background-color: #FFE080 !important;
+    color: #e5e5e5 !important;
+    background-color: #515151 !important;
   }
 }
 *[class~="topic/indextermref"] {
@@ -161,8 +161,9 @@ border-top-color: #e5e500;
 @media oxygen-high-contrast-black, oxygen-dark-theme {
   *[class~="topic/prolog"],
   *[class~="map/topicmeta"] {
-    color: black !important;
-    background-color: #FFE080 !important;
+    color: #e5e5e5 !important;
+    background-color: #776e4e !important;
+    border-color: #a79e7c !important;
   }
 }
 

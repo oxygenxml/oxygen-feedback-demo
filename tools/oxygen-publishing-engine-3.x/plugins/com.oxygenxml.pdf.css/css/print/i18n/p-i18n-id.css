@@ -91,7 +91,7 @@ I18N file for id
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(id):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(id):after(2) {
     content: " " "";
 }
 

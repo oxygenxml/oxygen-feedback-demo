@@ -19,26 +19,12 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     <!-- Extension of DITA output files for example .html -->
     <xsl:param name="OUT_EXT" select="'.html'"/>
     
-    <!-- productID param in Webhelp-Feedback system. Used only in Webhelp-Feedback transform. -->  
-    <xsl:param name="WEBHELP_PRODUCT_ID" select="''"/>
     
-    <!-- version number param in Webhelp-Feedback system. Used only in Webhelp-Feedback transform. -->  
-    <xsl:param name="WEBHELP_PRODUCT_VERSION" select="''"/>  
     
     <xsl:output method="xml" indent="yes"/>
     
     <xsl:template match="/">
         <map>
-            <xsl:if test="string-length($WEBHELP_PRODUCT_ID) > 0">
-                <xsl:attribute name="productID">
-                    <xsl:value-of select="$WEBHELP_PRODUCT_ID"/>
-                </xsl:attribute>
-            </xsl:if>
-            <xsl:if test="string-length($WEBHELP_PRODUCT_VERSION) > 0">
-                <xsl:attribute name="productVersion">
-                    <xsl:value-of select="$WEBHELP_PRODUCT_VERSION"/>
-                </xsl:attribute>
-            </xsl:if>
             <xsl:apply-templates/>
         </map>
     </xsl:template>

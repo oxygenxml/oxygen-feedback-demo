@@ -6,7 +6,7 @@ Copyright 2016 Jarno Elovirta
 See the accompanying LICENSE file for applicable license.
 --><project xmlns:dita="http://dita-ot.sourceforge.net" xmlns:if="ant:if" xmlns:unless="ant:unless" name="ditaot-preprocess2">
 
-  <target name="preprocess2" description="Preprocess" depends="preprocess2.init,ditaval-merge,preprocess2.maps,preprocess2.topics,map-clean-map,clean-preprocess,copy-files2">
+  <target name="preprocess2" description="Preprocess" depends="com.oxygenxml.cleanOutput,preprocess2.init,ditaval-merge,preprocess2.maps,preprocess2.topics,map-clean-map,clean-preprocess,copy-files2">
     <dirname property="_dita.map.output.dir" file="${dita.output.dir}/${user.input.file}"/>
     <dirname property="_dita.map.temp.dir" file="${dita.temp.dir}/${user.input.file}"/>
     <property name="uplevels" value=""/>
@@ -17,7 +17,7 @@ See the accompanying LICENSE file for applicable license.
 
   <target name="preprocess2.topics" depends="topic-reader,                   topic-branch-filter,                   topic-keyref,                   topic-copy-to,                   topic-conrefpush,                   topic-conref,                   topic-profile,                   preprocess2.topic-fragment,                   topic-chunk,                   topic-move-meta-entries,                   topic-maplink,                   topic-topicpull"/>
 
-  <target name="preprocess2-topic" description="Preprocess topic" depends="preprocess2.init,ditaval-merge,topic-reader,topic-conrefpush,topic-conref,topic-profile,preprocess2.topic-fragment,topic-move-meta-entries,topic-topicpull,clean-preprocess,copy-files2">
+  <target name="preprocess2-topic" description="Preprocess topic" depends="com.oxygenxml.cleanOutput,preprocess2.init,ditaval-merge,topic-reader,topic-conrefpush,topic-conref,topic-profile,preprocess2.topic-fragment,topic-move-meta-entries,topic-topicpull,clean-preprocess,copy-files2">
     <dirname property="_dita.map.output.dir" file="${dita.output.dir}/${user.input.file}"/>
     <dirname property="_dita.map.temp.dir" file="${dita.temp.dir}/${user.input.file}"/>
     <property name="uplevels" value=""/>

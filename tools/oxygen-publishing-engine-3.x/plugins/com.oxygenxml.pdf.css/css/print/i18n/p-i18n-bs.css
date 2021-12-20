@@ -91,7 +91,7 @@ I18N file for bs
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(bs):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(bs):after(2) {
     content: " " "";
 }
 

@@ -20,6 +20,7 @@
             'webhelp.show.publication.toc',
             'webhelp.publication.toc.links',
             'webhelp.show.top.menu',
+            'webhelp.top.menu.activated.on.click',
             'webhelp.show.related.links',
             'webhelp.merge.nested.topics.related.links',
             'webhelp.show.child.links',
@@ -41,9 +42,6 @@
             'webhelp.language',
             (: Property set by the publishing template task. (This is not a scenario parameter) :)
             'webhelp.js.module.rel.path',
-            (: Feedback parameters :)
-            'webhelp.product.id',
-            'webhelp.product.version',
             'webhelp.show.full.size.image',
             'webhelp.enable.search.kuromoji.js'
             )"/>

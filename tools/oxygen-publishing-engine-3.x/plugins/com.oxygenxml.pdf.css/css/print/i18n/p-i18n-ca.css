@@ -91,7 +91,7 @@ I18N file for ca
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(ca):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(ca):after(2) {
     content: " " "";
 }
 

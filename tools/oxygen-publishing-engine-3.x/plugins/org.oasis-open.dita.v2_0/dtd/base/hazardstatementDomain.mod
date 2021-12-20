@@ -77,6 +77,9 @@
               "href
                           CDATA
                                     #IMPLIED
+               format
+                          CDATA
+                                    #IMPLIED
                scope
                           (external |
                            local |
@@ -84,9 +87,6 @@
                            -dita-use-conref-target)
                                     #IMPLIED
                keyref
-                          CDATA
-                                    #IMPLIED
-               longdescref
                           CDATA
                                     #IMPLIED
                height

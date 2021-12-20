@@ -59,7 +59,7 @@ if "%_JAVACMD%" == "" set _JAVACMD=java.exe
 :runAnt
 
 rem The oxygen dost patches jar contains a class that is used to launch Ant. 
-set DOST_PATCHES_CP=%DITA_HOME%\target\classes;%DITA_HOME%\plugins\com.oxygenxml.dost.patches\lib\*;%DITA_HOME%\lib\*
+set DOST_PATCHES_CP=%DITA_HOME%\target\classes;%DITA_HOME%\plugins\com.oxygenxml.dost.patches\lib\*;%DITA_HOME%\lib\*;%DITA_HOME%\lib\saxon\*;
 
 "%_JAVACMD%" %ANT_OPTS% -Djava.awt.headless=true -classpath "%DITA_HOME%\lib\ant-launcher.jar;%DITA_HOME%\config" "-Dant.home=%DITA_HOME%"  "-Ddita.dir=%DITA_HOME%" org.apache.tools.ant.launch.Launcher %ANT_ARGS% -cp "%DOST_PATCHES_CP%;%CLASSPATH%" %DITA_CMD_LINE_ARGS% -buildfile "%DITA_HOME%\build.xml" -main "org.dita.dost.invoker.MainWithCPWildcardExpansion"
 rem Check the error code of the Ant build

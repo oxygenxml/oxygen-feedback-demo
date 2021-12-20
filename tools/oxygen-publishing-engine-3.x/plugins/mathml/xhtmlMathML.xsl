@@ -7,9 +7,8 @@
     MathML and SVG with <unknown> (#35) " in DITA 1.1 -->
   <xsl:template match="*[contains(@class,' math-d/math ') 
     or (contains(@class, ' mathml-d/mathml ') and ancestor::*[@ditaarch:DITAArchVersion='1.2'])]" >
-    <!-- EXM-35210 IBM uses MathML specialization without using DITA 1.3. 
-      When DITA 1.3 plugins are used we already have plugins for handling the mathml equations.-->
-    <!-- Oxygen patch add-on for EXM-11363, show in the XHTML output the embeded MathML formulas-->
+    <!-- Handle multiple forms of the class attribute for the mathml elements.-->
+    <!-- Show in the XHTML output the embeded MathML formulas.-->
     <xsl:apply-templates select="mml:math" xmlns:mml="http://www.w3.org/1998/Math/MathML" mode="copyMathML"/>
     <xsl:apply-templates select="*[contains(@class,' topic/object ')][@type='DITA-foreign']"/>
   </xsl:template>

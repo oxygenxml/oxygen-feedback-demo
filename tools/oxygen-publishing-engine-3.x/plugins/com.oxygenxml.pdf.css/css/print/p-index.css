@@ -8,11 +8,11 @@
 
 
 /* 
-      Make invisible the metadata prolog from the topics.
-      Cannot hide it directly (display:none) because Prince XML
-	  would ignore the indexterms from it.
-      So we are making it transparent, and of 0 size. 
-  */
+  Make invisible the metadata prolog from the topics.
+  Cannot hide it directly (display:none) because Prince XML
+  would ignore the indexterms from it.
+  So we are making it transparent, and of 0 size. 
+*/
 *[class ~= "topic/prolog"] {
     border: none;
     display: block;
@@ -34,18 +34,20 @@
 	/* In Chemistry we can hide it entirely. */
     *[class ~= "topic/prolog"] {
         display: none;
+        page-break-after: avoid;
     }
 }
 
 /* Make invisible the indexterms in the content and the anchor 
    targets moved from prolog to the topic title. */
 *[class ~= "topic/topic"] *[class ~= "index/entry"],
-*[class ~= "topic/title"] *[class ~= "index/refid"]  {
-	display:inline;
+*[class ~= "topic/topic"] *[class ~= "index/refid"] {
+    display:inline;
     background-color: transparent;
     color: transparent;
     max-width: 2px;
     font-size: 0px;
+    vertical-align: super;    
 }
 
 /*

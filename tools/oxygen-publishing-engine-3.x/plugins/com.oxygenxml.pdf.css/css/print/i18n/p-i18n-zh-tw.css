@@ -91,7 +91,7 @@ I18N file for zh-tw
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(zh-tw):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(zh-tw):after(2) {
     content: " " "";
 }
 

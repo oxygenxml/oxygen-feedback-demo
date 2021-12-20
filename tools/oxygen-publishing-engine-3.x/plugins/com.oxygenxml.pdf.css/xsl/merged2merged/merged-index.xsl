@@ -6,15 +6,13 @@
     xmlns:saxon="http://saxon.sf.net/"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" 
     exclude-result-prefixes="#all">
+
     <!--
-    	
-    	
         Index fixes.
 		
         Adds an id for each indexterm.
         In the group of indexterms make sure there are pointers back to the indexterms from the content.
         Prince needs this in order to create the index links.
-		
     -->
     
     <!-- If the index structure is empty, do not copy it to the output. -->
@@ -118,15 +116,33 @@
     <xsl:template match="opentopic-index:index.groups//opentopic-index:see-also-childs//opentopic-index:refID" priority="2"/>
     
   <!-- 
-  
-    Copy the ref ids (targets) before the title, so the links from the index will point to the topic. 
+    Copy the ref ids (targets) inside the title, so the links from the index will point to it. 
     In this way the prolog may be safely hidden from CSS.
-    
   -->  
   <xsl:template match="*[contains(@class, ' topic/topic ')]/*[contains(@class, ' topic/title ')]"  priority="5">
-    <xsl:apply-templates select="following-sibling::*[contains(@class, ' topic/prolog ')]//opentopic-index:refID"/>
-    <xsl:next-match/>
+    <xsl:variable name="title">
+        <xsl:next-match/>
+    </xsl:variable>
+    
+    <xsl:apply-templates select="$title" mode="inject-index-refids">
+      <xsl:with-param name="refids" select="following-sibling::*[contains(@class, ' topic/prolog ')]//opentopic-index:refID" tunnel="yes"/>
+    </xsl:apply-templates>
   </xsl:template>
   
-    
+	<xsl:template match="node() | @*" mode="inject-index-refids">
+		<xsl:copy>
+			<xsl:apply-templates select="node() | @*" mode="inject-index-refids"/>
+		</xsl:copy>
+	</xsl:template>
+  
+  <xsl:template match="*[contains(@class, ' topic/title ')]"  mode="inject-index-refids">
+    <xsl:param name="refids" tunnel="yes"/> 
+    <xsl:copy>
+      <xsl:copy-of select="@*"/>
+      <xsl:apply-templates select="$refids" mode="#default"/>
+      <xsl:apply-templates mode="#current"/>
+    </xsl:copy>
+  </xsl:template>
+	
+	
 </xsl:stylesheet>

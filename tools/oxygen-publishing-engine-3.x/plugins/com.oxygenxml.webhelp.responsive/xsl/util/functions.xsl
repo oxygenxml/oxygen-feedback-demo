@@ -9,7 +9,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
     xmlns:oxygen="http://www.oxygenxml.com/functions"
      xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="oxygen xs"
+    exclude-result-prefixes="oxygen xs toc"
     version="2.0"
     xmlns:d="http://docbook.org/ns/docbook"
     xmlns:toc="http://www.oxygenxml.com/ns/webhelp/toc"

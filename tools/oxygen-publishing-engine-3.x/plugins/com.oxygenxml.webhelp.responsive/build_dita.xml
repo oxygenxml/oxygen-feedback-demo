@@ -29,9 +29,12 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   </target>
   
   <!-- Targets used to inialize the WebHelp Responsive build -->
-  <target name="whr-init" depends="log-whr-version, build-init, whr-init-classpath, whr-init-publishing-template, whr-init-properties, whr-init-collection-type-prop, whr-check-feedback-params"/>
+  <target name="whr-init" depends="init-whr-version, build-init, whr-init-classpath, whr-init-publishing-template, whr-init-properties, whr-init-collection-type-prop"/>
 
-  <target name="log-whr-version">
+  <target name="init-whr-version">
+    <!-- WebHelp version & build number. -->
+    <property name="webhelp.version" value="24.0"/>
+    <property name="webhelp.build.number" value="2021121611"/>
     <echo>Oxygen XML WebHelp ${webhelp.version} build ${webhelp.build.number}</echo>
   </target>
   
@@ -106,18 +109,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     
     <!-- Test if custom resources directory exists -->
     <available file="${webhelp.custom.resources}" property="webhelp.custom.resources.present"/>
-    
-    <!-- WebHelp version & build number. -->
-    <property name="webhelp.version" value="23.1"/>
-    <property name="webhelp.build.number" value="2021030218"/>
-    
-    <!-- Condition to enable the Feedback feature. --> 
-    <condition property="webhelp.feedback.enabled">
-      <and>
-        <isset property="webhelp.product.id"/>
-        <isset property="webhelp.product.version"/>
-      </and>
-    </condition>
     
     <!--
       ==========================================
@@ -277,44 +268,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   	  <set-system-property name="webhelp.default.collection.type.sequence.prop" value="yes"/>
   </target>
     
-  <!--
-    Test if feedback parameters(product ID and version) are valid.
-  -->
-  <target name="whr-check-feedback-params" if="webhelp.feedback.enabled">    
-    <!-- Test if  -->
-    <macrodef name="checkSpecialCharacter">
-      <attribute name="char"/>
-      <sequential>
-        <fail message="Special character '@{char}' must not be used in the product ID: ${webhelp.product.id}">
-          <condition>
-            <contains string="${webhelp.product.id}" substring="@{char}"/>
-          </condition>
-        </fail>
-        <fail message="Special character '@{char}' must not be used in the product version: ${webhelp.product.version}">
-          <condition>
-            <contains string="${webhelp.product.version}" substring="@{char}"/>
-          </condition>
-        </fail>
-      </sequential>
-    </macrodef>
-    
-    <!-- Check if special characters are used: &lt; &gt; / \ &apos; ( ) { } = ; * % + &amp; -->
-    <checkSpecialCharacter char="&lt;"/>
-    <checkSpecialCharacter char="&gt;"/>
-    <checkSpecialCharacter char="/"/>
-    <checkSpecialCharacter char="\"/>
-    <checkSpecialCharacter char="'"/>
-    <checkSpecialCharacter char="("/>
-    <checkSpecialCharacter char=")"/>
-    <checkSpecialCharacter char="{"/>
-    <checkSpecialCharacter char="}"/>
-    <checkSpecialCharacter char="="/>
-    <checkSpecialCharacter char=";"/>
-    <checkSpecialCharacter char="*"/>
-    <checkSpecialCharacter char="%"/>
-    <checkSpecialCharacter char="+"/>
-    <checkSpecialCharacter char="&amp;"/>
-  </target>  
   
   <!--
 		Copy favicon in the output directory.
@@ -389,7 +342,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       <resources>
         <javaresource name="responsive/searchEngineJS/stemmers/en_stemmer.js" classpathref="wh_classpath"/>
         <javaresource name="responsive/searchEngineJS/stemmers/fr_stemmer.js" classpathref="wh_classpath"/>
-        <javaresource name="responsive/searchEngineJS/stemmers/index.html" classpathref="wh_classpath"/>
         <javaresource name="responsive/searchEngineJS/stemmers/de_stemmer.js" classpathref="wh_classpath"/>
         <javaresource name="responsive/searchEngineJS/stemmers/stemmer.js" classpathref="wh_classpath"/>
       </resources>
@@ -443,6 +395,10 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       </and>
     </condition>
     
+  	<tstamp>
+  	     <format property="timestamp" pattern="yyyyMMddHHmmss"/>
+  	</tstamp>
+  	
     <copy todir="${output.dir}/oxygen-webhelp" overwrite="true" encoding="ISO-8859-1">
       <fileset dir="${webhelp.responsive.dir}/oxygen-webhelp">
         <include name="**/*"/>
@@ -454,8 +410,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       	<exclude name="app/search/searchHistoryItems.js" if="${webhelp.custom.search.engine.enabled}"/>
       	<exclude name="page-templates/**"/>
         <exclude name="page-templates-fragments/**"/>
-        <exclude name="resources/**"/>
-        <exclude name="feedback/**"/>
+        <exclude name="resources/**"/>        
       	<exclude name="feedback.block.level.elements.txt"/>
       	<exclude name="feedback.block.level.elements.to.exclude.txt"/>
       	<exclude name="search.index.elements.to.exclude.txt"/>
@@ -465,50 +420,12 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         <filter token="PRODUCT_VERSION" value="${webhelp.product.version}"/>
         <filter token="FOLDER_OUTPUT_PATH" value="${corrected.output.dir}"/>
         <filter token="WEBHELP_PAGE_DIRECTION" value="${webhelp.page.direction}"/>
+      	<filter token="WEBHELP_BUILD_ID" value="${webhelp.build.number}"/>
+      	<filter token="TIMESTAMP" value="${timestamp}"/>
       </filterset>
     </copy>
     <copy file="${webhelp.responsive.dir}/license-3rd-party.txt" todir="${output.dir}"/>
   	
-  	<tstamp>
-  	     <format property="timestamp" pattern="yyyyMMddHHmmss"/>
-  	</tstamp>
-  	<replace file="${output.dir}/oxygen-webhelp/app/config.js" token="@@TIMESTAMP@@" value="${timestamp}"/>
-  	<replace file="${output.dir}/oxygen-webhelp/app/config.js" token="2021030218" value="${webhelp.build.number}"/>
-  	
-  </target>
-  
-  
-  <target name="whr-copy-feedback-resources" if="${webhelp.feedback.enabled}">
-    <copy todir="${output.dir}/oxygen-webhelp" overwrite="true" encoding="UTF-8">
-      <fileset dir="${webhelp.responsive.dir}/oxygen-webhelp">
-        <include name="feedback/**/*" if="webhelp.feedback.enabled"/>
-        <exclude name="feedback/feedback.xml"/>
-        <exclude name="feedback/resources/img/*"/>
-        <exclude name="feedback/install/img/*"/>
-      	<exclude name="feedback/resources/bootstrap/fonts/*"/>
-      </fileset>
-      <filterset begintoken="@" endtoken="@">
-        <filter token="PRODUCT_ID" value="${webhelp.product.id}"/>
-        <filter token="PRODUCT_VERSION" value="${webhelp.product.version}"/>
-        <filter token="FOLDER_OUTPUT_PATH" value="${corrected.output.dir}"/>
-        <filter token="WEBHELP_PAGE_DIRECTION" value="${webhelp.page.direction}"/>
-        <filter token="LANGUAGE" value="${webhelp.language}"/>
-      </filterset>
-    </copy>
-    <copy todir="${output.dir}/oxygen-webhelp" overwrite="true">
-      <fileset dir="${webhelp.responsive.dir}/oxygen-webhelp">
-        <include name="feedback/install/img/*" if="webhelp.feedback.enabled"/>
-        <include name="feedback/resources/img/*" if="webhelp.feedback.enabled"/>
-      	<include name="feedback/resources/bootstrap/fonts/*" if="webhelp.feedback.enabled"/>
-      </fileset>
-    </copy>
-    <!-- Overwrite topic-page.js and config.js to include feedback module -->
-    <copy todir="${output.dir}/oxygen-webhelp/app" overwrite="true">
-      <fileset dir="${webhelp.responsive.dir}/oxygen-webhelp/feedback/resources/js">
-        <include name="config.js" if="webhelp.feedback.enabled"/>
-        <include name="topic-page.js" if="webhelp.feedback.enabled"/>
-      </fileset>
-    </copy>
   </target>
   
   <!--
@@ -526,7 +443,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   	<pipeline>
     <xslt in="${webhelp.responsive.parameters.file}" out="${properties.json.file}" style="${webhelp.responsive.dir}/xsl/options/jsonProperties.xsl" reloadstylesheet="${webhelp.reload.stylesheet}">
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -620,7 +537,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       <param name="OUT_EXT" expression="${out.ext}"/>
       <mapper type="regexp" from="^(.*?)$$" to="\1.indexterms"/>
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -635,7 +552,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       <param name="WEBHELP_PARAMETERS_URL" expression="${webhelp.responsive.parameters.file.url}"/>
       
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -659,7 +576,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         <ditafileset format="dita" processingRole="normal"/>
         <param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
         
-        <xmlcatalog>
+        <xmlcatalog classpath="">
           <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
           <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
         </xmlcatalog>	
@@ -674,7 +591,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         <ditafileset format="dita" processingRole="normal"/>
         <param name="show.changes.and.comments" expression="${webhelp.show.changes.and.comments}"/>
         
-        <xmlcatalog>
+        <xmlcatalog classpath="">
           <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
           <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
         </xmlcatalog>	
@@ -727,7 +644,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
             
       
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -775,7 +692,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       
       
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -823,7 +740,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       
       
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -862,7 +779,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       <param name="WEBHELP_VERSION" expression="${webhelp.version}" if:set="webhelp.version"/>
       <param name="WEBHELP_BUILD_NUMBER" expression="${webhelp.build.number}" if:set="webhelp.build.number"/>
       <param name="WEBHELP_TRIAL_LICENSE" expression="${webhelp.trial.license}" if:set="webhelp.trial.license"/>
-      <param name="WEBHELP_FEEDBACK_ENABLED" expression="${webhelp.feedback.enabled}" if:set="webhelp.feedback.enabled"/>
       
       <param name="WEBHELP_DITAMAP_URL" expression="${org.dita-ot.html.map.url}"/>
       <param name="WEBHELP_PARAMETERS_URL" expression="${webhelp.responsive.parameters.file.url}"/>
@@ -874,7 +790,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       
       
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -903,7 +819,11 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     <makeurl file="${dita.input.valfile}" property="dita.input.valfile.url" validate="no"/>
     <makeurl property="webhelp.template.file.path.url" file="${webhelp.template.file.path}"/>
     
-    <makeurl file="${args.input}" property="args.input.url" validate="no"/>
+  	<!-- Test if args.input is already URL -->
+  	<condition property="args.input.url" value="${args.input}">
+  		<matches pattern="^file\:/" string="${args.input}"/>
+  	</condition>
+    <makeurl file="${args.input}" property="args.input.url" validate="no" unless:set="args.input.url"/>
     
     <sequential>
       <pipeline>
@@ -938,8 +858,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
           <param name="WEBHELP_FOOTER_FILE" expression="${webhelp.footer.file}" if:set="webhelp.footer.file"/>
           <param name="WEBHELP_TRIAL_LICENSE" expression="${webhelp.trial.license}" if:set="webhelp.trial.license"/>
           <param name="WEBHELP_SEARCH_SCRIPT" expression="${webhelp.google.search.script.url}" if:set="webhelp.google.search.script.url"/>
-          <param name="WEBHELP_PRODUCT_ID" expression="${webhelp.product.id}" if:set="webhelp.product.id"/>
-          <param name="WEBHELP_PRODUCT_VERSION" expression="${webhelp.product.version}" if:set="webhelp.product.version"/>
           <param name="WEBHELP_VERSION" expression="${webhelp.version}" if:set="webhelp.version"/>
           <param name="WEBHELP_BUILD_NUMBER" expression="${webhelp.build.number}" if:set="webhelp.build.number"/>
           <param name="INDEX_XML_FILEPATH" expression="${output.dir}/index.xml"/>
@@ -963,6 +881,11 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
           <param name="DATA_OFBID_ELEMENTS_TO_EXCLUDE" expression="${webhelp.feedback.block.level.comments.elements.to.exclude}" if:set="webhelp.feedback.block.level.comments.elements.to.exclude"/>
         	
           <param name="DITAMAP_URL" expression="${args.input.url}"/>
+          
+          <param name="args.rellinks.group.mode" expression="${webhelp.rellinks.group.mode}" if:set="webhelp.rellinks.group.mode"/>
+          
+          <param name="figure.title.placement" expression="${webhelp.figure.title.placement}" if:set="webhelp.figure.title.placement"/>
+          <param name="table.title.placement" expression="${webhelp.table.title.placement}" if:set="webhelp.table.title.placement"/>
           
           
     
@@ -1001,7 +924,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
           
 <!--          -->
           
-          <xmlcatalog>
+          <xmlcatalog classpath="">
             <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
             <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
           </xmlcatalog>	
@@ -1019,11 +942,8 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
    	<pipeline>
     <xslt in="${dita.temp.dir}/${user.input.file}" out="${output.dir}/context-help-map.xml" style="${webhelp.responsive.dir}/xsl/contextHelp/contextHelpMapDita.xsl" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}">
       <param name="OUT_EXT" expression="${out.ext}"/>
-      <param name="WEBHELP_PRODUCT_ID" expression="${webhelp.product.id}" if:set="webhelp.product.id"/>
-      <param name="WEBHELP_PRODUCT_VERSION" expression="${webhelp.product.version}" if:set="webhelp.product.version"/>
       
-      
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -1034,7 +954,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
    	<pipeline>
     <xslt in="${output.dir}/context-help-map.xml" out="${output.dir}/oxygen-webhelp/app/context-help/context-help-map.js" style="${webhelp.responsive.dir}/xsl/contextHelp/contextHelpMapDitaJS.xsl" classpathref="dost.class.path" reloadstylesheet="${webhelp.reload.stylesheet}">
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -1067,7 +987,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       
       <outputproperty name="method" value="xhtml"/>
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -1096,7 +1016,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       -->
       
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -1122,7 +1042,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
       <param name="WEBHELP_PRIORITY" expression="${webhelp.sitemap.priority}" if:set="webhelp.sitemap.priority"/>
       
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	
@@ -1130,7 +1050,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 	</pipeline>
   </target>
 
-  <target name="whr-copy-resources" depends="        whr-copy-logo-image,        whr-copy-favicon,        whr-copy-custom-resources,        whr-copy-common-resources,        whr-copy-feedback-resources,        whr-copy-template-resources"/>
+  <target name="whr-copy-resources" depends="        whr-copy-logo-image,        whr-copy-favicon,        whr-copy-custom-resources,        whr-copy-common-resources,        whr-copy-template-resources"/>
 
   <!-- Copy additional template resources. -->
   <target name="whr-copy-template-resources">    
@@ -1151,7 +1071,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
 
       <param name="OUT_EXTENSION" expression="${out.ext}"/>
       
-      <xmlcatalog>
+      <xmlcatalog classpath="">
         <catalogpath path="${xsl.extensions.xml.catalog.file.path}"/>
         <catalogpath path="${dita.plugin.org.dita.base.dir}/catalog-dita.xml"/>
       </xmlcatalog>	

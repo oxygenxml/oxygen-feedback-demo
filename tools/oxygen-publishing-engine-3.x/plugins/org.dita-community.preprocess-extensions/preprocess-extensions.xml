@@ -145,7 +145,7 @@
   </target>-->
   
   <!-- THis is the same for OT 2.1 and 2.2 -->
-  <target name="preprocess-ot2.2" if="isOTNew" depends="preprocess.init,gen-list,debug-filter,mapref,branch-filter,copy-files,keyref,conrefpush,conref,profile,topic-fragment,move-meta-entries,chunk,maplink,topicpull,clean-map" description="Preprocessing ended"/>
+  <target name="preprocess-ot2.2" if="isOTNew" depends="com.oxygenxml.cleanOutput,preprocess.init,gen-list,debug-filter,mapref,branch-filter,copy-files,keyref,conrefpush,conref,profile,topic-fragment,move-meta-entries,chunk,maplink,topicpull,clean-map" description="Preprocessing ended"/>
   
   
 

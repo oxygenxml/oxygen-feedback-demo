@@ -38,7 +38,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
   </xsl:template>
 
   <xsl:template match="html:html" mode="copy_template">
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="@*" mode="#current"/>
       <xsl:attribute name="lang" select="oxygen:getParameter('webhelp.language')"/>
       <xsl:attribute name="dir" select="oxygen:getParameter('webhelp.page.direction')"/>
@@ -150,7 +150,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     <xsl:param name="title"/>
     <xsl:param name="cTopic"/>  
     
-    <xsl:copy>
+    <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="node() | @*" mode="copy_tile_template">
         <xsl:with-param name="title" select="$title"/>
         <xsl:with-param name="cTopic" select="$cTopic"/>          
@@ -253,7 +253,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         <xsl:call-template name="generateComponentClassAttribute">
           <xsl:with-param name="compClass" select="$class"></xsl:with-param>
         </xsl:call-template>
-        <xsl:copy-of select="@* except (@class | @wh-toc-id | @xtrf | @xtrc)"/>
+        <xsl:copy-of select="@* except (@class | @href | @collection-type | @wh-toc-id | @xtrf | @xtrc)"/>
         <xsl:apply-templates select="$cTopic/toc:shortdesc"/>
       </div>
     </xsl:if>
@@ -320,12 +320,11 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         <xsl:variable name="entriesID" select="concat(@wh-toc-id, '-entries')"/>
         <div class=" wh_main_page_toc_accordion_header ">          
           <span role="heading" aria-level="1" id="{$headingID}">
-            <span role="button" aria-expanded="false" class="header-button" aria-controls="{$entriesID}" tabindex="0">
-              <xsl:call-template name="createTOCContent">
-                <xsl:with-param name="cTopic" select="."/>
-                <xsl:with-param name="title" select="$title"/>
-              </xsl:call-template>
-            </span>
+            <span role="button" aria-expanded="false" class="header-button" aria-controls="{$entriesID}" tabindex="0" />
+            <xsl:call-template name="createTOCContent">
+              <xsl:with-param name="cTopic" select="."/>
+              <xsl:with-param name="title" select="$title"/>
+            </xsl:call-template>
           </span>
           <xsl:call-template name="generateTopicShortDesc">
             <xsl:with-param name="cTopic" select="."/>

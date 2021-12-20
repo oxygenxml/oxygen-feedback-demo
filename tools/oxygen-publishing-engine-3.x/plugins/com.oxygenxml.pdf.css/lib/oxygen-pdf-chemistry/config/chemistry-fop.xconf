@@ -18,7 +18,7 @@
   <source-resolution>${PARAM_IMAGE_RESOLUTION_DPI}</source-resolution>
 
   <!-- Target resolution in dpi (dots/pixels per inch) for specifying the target resolution for generated bitmaps, FOP default: 96.
-  	   Using a larger value in Chemistry to improve the rastered sections from the SVG.
+       Using a larger value in Chemistry to improve the rastered sections from the SVG.
        If you change it, use just the number, like 72, without the "dpi" units.
   -->
   <target-resolution>600</target-resolution>
@@ -29,7 +29,6 @@
   ${PARAM_HYPH_DIR}
 
   <renderers>
-
     <renderer mime="application/pdf">
       ${PARAM_PDF_VERSION}
       <!--
@@ -47,6 +46,9 @@
         <!-- automatically detect operating system installed fonts, but also solves references between the font files. -->
         <auto-detect/>
       </fonts>
+      
+     ${PARAM_ENCRYPTION_PARAMS}
+      
     </renderer>
   </renderers>
 
@@ -54,5 +56,8 @@
   <fonts>
     <substitutions> ${PARAM_FONT_SUBSTITUTIONS} </substitutions>
   </fonts>
-
+  
+  <use-cache>true</use-cache>
+  <cache-file>${CACHE_FILE}</cache-file>
+  
 </fop>

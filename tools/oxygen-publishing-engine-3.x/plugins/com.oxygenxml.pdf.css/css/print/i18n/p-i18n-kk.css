@@ -91,7 +91,7 @@ I18N file for kk
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(kk):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(kk):after(2) {
     content: " " "";
 }
 

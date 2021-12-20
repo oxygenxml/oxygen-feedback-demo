@@ -31,6 +31,7 @@ body{
     border:none;
     border-radius:0;
     margin:0;
+    background: white;
 }
 a,
 a:hover,
@@ -68,7 +69,8 @@ a:hover{
 .wh_top_menu ul ul {
     background-color: #f4f4f4;
 }
-.wh_top_menu ul li:hover {
+.wh_top_menu ul li:hover,
+.wh_top_menu.activated-on-click ul li.active {
     background-color: #f4f4f4;
 }
 .wh_top_menu ul ul li a:hover {
@@ -76,6 +78,17 @@ a:hover{
 }
 .wh_top_menu ul ul li {
     border-top-color: #e4e4e4;
+}
+
+.wh_top_menu:not(.activated-on-click) ul:hover li,
+.wh_top_menu:not(.activated-on-click) ul li:hover {
+    /* WH-2521 Change the background color imediatelly when the current menu item (li) or other menu item is hovered. */
+    transition: none; 
+}
+
+.wh_top_menu:not(.activated-on-click) ul li {
+    /* WH-2521 Delay the background color change on hover off. */
+    transition: background-color 0.2s 1s;
 }
 
 /*
@@ -201,6 +214,7 @@ Example:
  */
 .wh_search_input{
     margin:2em 0;
+    background: white;
 }
 .wh_welcome:not(:empty){
     font-size: 2.5em;
@@ -276,8 +290,9 @@ Example:
 }
 .wh_publication_toc .active > .topicref a {
     color: #5185cb;
+    font-weight: normal;
 }
-.wh_publication_toc span, .wh_publication_toc a, .wh_publication_toc a:visited, .wh_publication_toc a:hover {
+.wh_publication_toc div, .wh_publication_toc a, .wh_publication_toc a:visited, .wh_publication_toc a:hover {
     color: #7b7a7a;
 }
 .wh_publication_toc a:hover {

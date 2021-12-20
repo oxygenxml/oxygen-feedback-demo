@@ -23,7 +23,7 @@ body{
  *  
  */
 .navbar{
-    background: none;
+    background: white;
     border: none;
     margin: 0;
     box-shadow: none;
@@ -138,6 +138,7 @@ a:hover{
 .wh_tools{
     border-bottom:1px solid silver;
     margin-bottom:0.5em;
+    background: white;
 }
  
 .wh_print_link,
@@ -346,31 +347,35 @@ Example:
 
 /* Publication TOC tooltip */
 .wh_breadcrumb .topicref .wh-tooltip,
-.wh_publication_toc .topicref .wh-tooltip {
+.wh-toc-tooltip {
     background-color: #99cc00;
     color: #fff;
 }
 .wh_breadcrumb .topicref .wh-tooltip a,
-.wh_publication_toc .topicref .wh-tooltip a {
+.wh-toc-tooltip a {
     color: #fff;
     text-decoration: underline;
 }
 
 /* Tooltip arrow. */
 
-[data-tooltip-position="left"] .topicref .wh-tooltip::before {
+[data-tooltip-position="left"] .topicref .wh-tooltip::before,
+[data-tooltip-position="left"] .wh-toc-tooltip::before {
     border-left-color: #99cc00;
 }
 
-[data-tooltip-position="right"] .topicref .wh-tooltip::before {
+[data-tooltip-position="right"] .topicref .wh-tooltip::before,
+[data-tooltip-position="right"] .wh-toc-tooltip::before {
     border-right-color: #99cc00;
 }
 
-[data-tooltip-position="bottom"] .topicref .wh-tooltip::before {
+[data-tooltip-position="bottom"] .topicref .wh-tooltip::before,
+[data-tooltip-position="bottom"] .wh-toc-tooltip::before {
     border-bottom-color: #99cc00;
 }
 
-[data-tooltip-position="top"] .topicref .wh-tooltip::before {
+[data-tooltip-position="top"] .topicref .wh-tooltip::before,
+[data-tooltip-position="top"] .wh-toc-tooltip::before {
     border-top-color: #99cc00;
 }
 

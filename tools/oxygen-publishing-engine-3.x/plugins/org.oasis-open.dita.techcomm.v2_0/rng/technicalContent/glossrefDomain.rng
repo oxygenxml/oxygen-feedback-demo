@@ -76,9 +76,6 @@ PUBLIC "-//OASIS//ELEMENTS DITA 2.0 Glossary Reference Domain//EN"
         </optional>
         <attribute name="keys"/>
         <optional>
-          <attribute name="copy-to"/>
-        </optional>
-        <optional>
           <attribute name="collection-type">
             <choice>
               <value>choice</value>
@@ -98,15 +95,6 @@ PUBLIC "-//OASIS//ELEMENTS DITA 2.0 Glossary Reference Domain//EN"
               <value>external</value>
               <value>local</value>
               <value>peer</value>
-              <value>-dita-use-conref-target</value>
-            </choice>
-          </attribute>
-        </optional>
-        <optional>
-          <attribute name="locktitle">
-            <choice>
-              <value>no</value>
-              <value>yes</value>
               <value>-dita-use-conref-target</value>
             </choice>
           </attribute>

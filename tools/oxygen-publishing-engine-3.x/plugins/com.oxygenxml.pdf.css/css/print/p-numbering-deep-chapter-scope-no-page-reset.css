@@ -1,8 +1,8 @@
 /*
  * ======================================================
  * 
- * Page, Tables, Figures and Sections numbering, all reset at the Chapter scope.
- 
+ * Tables, Figures and Sections numbering, all reset at the Chapter scope. Page is not reset.
+ *
  * Similar to the deep numbering, but resets the counters at chapter scope and prefixes 
  * all the table and figure titles and references by the chapter counter.
  * 
@@ -10,6 +10,7 @@
  * 
  * ======================================================
  */
-*[class ~= "map/map"][numbering^='deep-chapter-scope-no-page-reset'] *[class ~= "topic/topic"][is-chapter]{
+
+*[class ~= "map/map"][numbering ^= 'deep-chapter-scope-no-page-reset'] *[class ~= "topic/topic"][is-chapter] {
   counter-reset: section1 tablecount figcount !important;
-}  
+}

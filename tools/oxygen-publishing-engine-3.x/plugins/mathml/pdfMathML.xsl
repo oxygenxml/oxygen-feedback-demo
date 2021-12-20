@@ -9,8 +9,7 @@
 
   <xsl:template match="*[contains(@class,' math-d/math ') 
     or (contains(@class, ' mathml-d/mathml ') and ancestor::*[@ditaarch:DITAArchVersion='1.2'])]">
-    <!-- EXM-35210 IBM uses MathML specialization without using DITA 1.3. 
-      When DITA 1.3 plugins are used we already have plugins for handling the mathml equations.-->
+    <!-- Handle multiple forms of the class attribute for the mathml elements.-->
       <fo:instream-foreign-object>
         <xsl:copy-of select="child::mml:math" xmlns:mml="http://www.w3.org/1998/Math/MathML"/>
       </fo:instream-foreign-object>

@@ -31,7 +31,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     -->
     <xsl:template match="body" mode="copy_template">
         <xsl:param name="ditaot_topicContent" tunnel="yes"/>
-        <xsl:copy>
+        <xsl:copy copy-namespaces="no">
             <xsl:choose>
                 <xsl:when test="exists($ditaot_topicContent)">
                     <!-- body element from dita-ot document -->
@@ -55,7 +55,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     <!-- WH-1859: Update the amount of Bootstrap grid columns assigned to the topic content. The Publication TOC or the Topic TOC  might not be generated. -->
     <xsl:template match="div[contains(@id, 'wh_topic_container')]" mode="copy_template">
       <xsl:variable name="contentArea">
-        <xsl:copy>
+        <xsl:copy copy-namespaces="no">
           <xsl:apply-templates select="@* | node()" mode="#current"/>
         </xsl:copy>
       </xsl:variable>
@@ -70,10 +70,20 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         </xsl:copy>
     </xsl:template>
     
-    <xsl:template match="button[@id='wh_toc_button']" mode="fix-content-width">
+    <xsl:template match="button[@id=('wh_toc_button', 'wh_close_publication_toc_button')]" mode="fix-content-width">
         <xsl:param name="contentArea" tunnel="yes"/>
         <xsl:variable name="publicationToc" select="$contentArea//div[contains(@class, 'wh_publication_toc')]"/>
         <xsl:if test="exists($publicationToc)">
+            <xsl:copy>
+                <xsl:apply-templates select="node() | @*" mode="#current"/>
+            </xsl:copy>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="button[@id='wh_close_topic_toc_button']" mode="fix-content-width">
+        <xsl:param name="contentArea" tunnel="yes"/>
+        <xsl:variable name="topicToc" select="$contentArea//div[contains(@class, 'wh_topic_toc')]"/>
+        <xsl:if test="exists($topicToc)">
             <xsl:copy>
                 <xsl:apply-templates select="node() | @*" mode="#current"/>
             </xsl:copy>
@@ -345,8 +355,9 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
             <xsl:variable name="sideToc">
                 <xsl:call-template name="generateSideToc"/>
             </xsl:variable>
+            
             <!-- If the side toc has only one item, do not generate it -->
-            <xsl:if test="count($sideToc/ul/descendant::li) > 1">
+            <xsl:if test="count($sideToc/div/ul/descendant::li) > 1">
                 <xsl:variable name="publication_toc_content">
                     <div>
                         <xsl:call-template name="generateComponentClassAttribute">
@@ -369,6 +380,10 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
                                                 
                         <xsl:copy-of select="$sideToc"/>
                     </div>
+                </xsl:variable>
+                
+                <xsl:variable name="publication_toc_content">
+                    <xsl:apply-templates select="$publication_toc_content" mode="fixSideToc"/>    
                 </xsl:variable>
                 
                 <xsl:call-template name="outputComponentContent">
@@ -436,7 +451,9 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         priority="10" mode="generate-topic-toc">
         <xsl:if test="@id">
             <li class="topic-item">
-                <xsl:apply-templates mode="generate-topic-toc" select="*[contains(@class, 'topictitle')]"/>
+                <xsl:apply-templates mode="generate-topic-toc" select="*[contains(@class, 'topictitle')]">
+                    <xsl:with-param name="isListItemChild" select="true()"/>
+                </xsl:apply-templates>
                 <xsl:variable name="children">
                     <ul>
                         <xsl:apply-templates mode="generate-topic-toc" select="*[not(contains(@class, 'topictitle'))]"/>
@@ -459,8 +476,9 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     <xsl:template match="*[contains(@class, 'section')][*[contains(@class, 'sectiontitle')]]" priority="12" mode="generate-topic-toc">
         <xsl:if test="@id">
             <li class="section-item">
-                <xsl:apply-templates mode="generate-topic-toc"
-                    select="*[contains(@class, 'sectiontitle')]"/>
+                <xsl:apply-templates mode="generate-topic-toc" select="*[contains(@class, 'sectiontitle')]">
+                    <xsl:with-param name="isListItemChild" select="true()"/>
+                </xsl:apply-templates>
                 <xsl:variable name="children">
                     <ul>
                         <xsl:apply-templates mode="generate-topic-toc"
@@ -474,16 +492,30 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         </xsl:if>
     </xsl:template>
     <xsl:template match="*[contains(@class, 'sectiontitle')]" mode="generate-topic-toc" priority="8">
+        <xsl:param name = "isListItemChild" />
         <xsl:if test="../@id">
-            <div class="section-title">
-                <xsl:variable name="nodeId" select="../@id"/>
-                <!--<xsl:variable name="parrentId" select="../@id"/>-->
+            <xsl:variable name="nodeId" select="../@id"/>
+            <!--<xsl:variable name="parrentId" select="../@id"/>-->
+            <xsl:variable name="elementContent">
                 <a href="#{$nodeId}" data-tocid="{$nodeId}">
-                   <xsl:apply-templates mode="copy-topic-title"/>
+                    <xsl:apply-templates mode="copy-topic-title"/>
                 </a>
-            </div>
+            </xsl:variable>
+            <xsl:choose>
+                <xsl:when test="$isListItemChild">
+                    <div class="section-title">
+                        <xsl:copy-of select="$elementContent"/>
+                    </div>
+                </xsl:when>
+                <xsl:otherwise>
+                    <li class="section-title">
+                        <xsl:copy-of select="$elementContent"/>
+                    </li>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
     </xsl:template>
+    
     <xsl:template match="*" mode="generate-topic-toc" priority="0">
         <xsl:apply-templates mode="#current"/>
     </xsl:template>
@@ -549,6 +581,19 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
                 <xsl:variable name="sidetoc" select="doc($sidetocFileUri)"/>
                 <xsl:apply-templates select="$sidetoc" mode="copy-sidetoc"/>
             </xsl:if>
+    </xsl:template>
+    
+    <!-- 
+        Remove temporary div from Side TOC.
+    -->
+    <xsl:template match="node() | @*" mode="fixSideToc">
+        <xsl:copy>
+            <xsl:apply-templates select="node() | @*" mode="fixSideToc"/>
+        </xsl:copy>
+    </xsl:template>
+    
+    <xsl:template match="div[@data-type='temporary']" mode="fixSideToc">
+        <xsl:apply-templates mode="fixSideToc" />
     </xsl:template>
     
     <!-- 
@@ -786,7 +831,7 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
     <xsl:template match="html:html" mode="copy_template">
         <xsl:param name="ditaot_topicContent" tunnel="yes"/>
         
-        <xsl:copy>
+        <xsl:copy copy-namespaces="no">
             <xsl:choose>
                 <xsl:when test="exists($ditaot_topicContent/html:html)">
                     <!-- EXM-36308 - Merge attributes -->
@@ -805,13 +850,6 @@ Copyright (c) 1998-2021 Syncro Soft SRL, Romania.  All rights reserved.
         </xsl:copy>
     </xsl:template>
 
-    <!-- Expand 'webhelp_feedback' place holder. -->
-    <xsl:template match="whc:webhelp_feedback" mode="copy_template">
-        <xsl:if test="string-length($WEBHELP_PRODUCT_ID)>0 and string-length($WEBHELP_PRODUCT_VERSION)>0">
-            <xsl:variable name="feedbackFile" select="doc('../../oxygen-webhelp/feedback/feedback.xml')"/>
-            <xsl:apply-templates select="$feedbackFile" mode="#current" />
-        </xsl:if>
-    </xsl:template>
 
     <!-- Filter the link to parent -->
     <xsl:template match="span[@id = 'topic_navigation_links']/span[contains(@class, 'navparent')]"

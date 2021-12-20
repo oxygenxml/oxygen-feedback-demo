@@ -112,7 +112,8 @@ a:hover {
     font-weight: bold;
   }
   /* Menu bar */
-  .wh_top_menu > ul > li:hover > .topicref > a {
+  .wh_top_menu > ul > li:hover > .topicref > a,
+  .wh_top_menu.activated-on-click > ul > li.active > .topicref > a {
     background-color: #445058;
     color: #7a8186;
   }
@@ -126,7 +127,7 @@ a:hover {
     border: none;
     background-color: #61a8df;
   }
-  .wh_top_menu ul li:hover ul a {
+  .wh_top_menu ul ul a {
     color: #293136;
     transition: background-color 0.25s ease-out 0s, color 0.3s ease-out 0s;
   }
@@ -295,6 +296,7 @@ Example:
   align-items: center;
   color: #3a444a;
   text-align: center;
+  background: #293136;
 }
 .wh_main_page_search {
   background-color: #3a444a;
@@ -470,10 +472,11 @@ Example:
 .wh_publication_toc > ul {
   padding-left: 0;
 }
-.wh_publication_toc .active > span.topicref,
-.wh_publication_toc .active > span.topicref a {
+.wh_publication_toc .active > div.topicref,
+.wh_publication_toc .active > div.topicref a {
   color: #61a8df;
   text-decoration: underline;
+  font-weight: normal;
 }
 .wh_publication_toc span,
 .wh_publication_toc a,
@@ -493,12 +496,12 @@ Example:
 }
 /* Publication TOC tooltip */
 .wh_breadcrumb .topicref .wh-tooltip,
-.wh_publication_toc .topicref .wh-tooltip {
+.wh-toc-tooltip {
   background-color: #61a8df;
   color: #ffffff;
 }
 .wh_breadcrumb .topicref .wh-tooltip a,
-.wh_publication_toc .topicref .wh-tooltip a {
+.wh-toc-tooltip a {
   color: #ffffff;
   text-decoration: underline;
 }
@@ -508,16 +511,20 @@ Example:
   color: #333;
 }
 /* Tooltip arrow. */
-[data-tooltip-position="left"] .topicref .wh-tooltip::before {
+[data-tooltip-position="left"] .topicref .wh-tooltip::before,
+[data-tooltip-position="left"] .wh-toc-tooltip::before {
   border-left-color: #61a8df;
 }
-[data-tooltip-position="right"] .topicref .wh-tooltip::before {
+[data-tooltip-position="right"] .topicref .wh-tooltip::before,
+[data-tooltip-position="right"] .wh-toc-tooltip::before {
   border-right-color: #61a8df;
 }
-[data-tooltip-position="bottom"] .topicref .wh-tooltip::before {
+[data-tooltip-position="bottom"] .topicref .wh-tooltip::before,
+[data-tooltip-position="bottom"] .wh-toc-tooltip::before {
   border-bottom-color: #61a8df;
 }
-[data-tooltip-position="top"] .topicref .wh-tooltip::before {
+[data-tooltip-position="top"] .topicref .wh-tooltip::before,
+[data-tooltip-position="top"] .wh-toc-tooltip::before {
   border-top-color: #61a8df;
 }
 /*
@@ -650,34 +657,5 @@ Example:
 }
 .wh_index_terms #indexList {
   padding: 0;
-}
-/**
- *  WebHelp Feedback Section
- */
-#wh_feedback,
-#comments,
-#adminUsers,
-#adminMenu,
-#editUser {
-  color: #293136;
-}
-/*.realperson-text
-{
-  color: #fff;
-}*/
-input[type=button],
-input[type=submit],
-input[type=password] {
-  border: 1px solid #ccc;
-}
-/**
-  * Set version
-  */
-.v_true:hover,
-.v_false:hover {
-  background-color: #98C1D6;
-}
-.v_true {
-  background-color: #6c7b6c;
 }
 

@@ -91,7 +91,7 @@ I18N file for ro
 				  
 					  	
 	
-*[class~="topic/table"] > *[class~="topic/title"][is-repeated]:lang(ro):after(2) {
+*[class~="topic/table"] > *[class~="topic/title"][data-is-repeated]:lang(ro):after(2) {
     content: " " "";
 }
 
